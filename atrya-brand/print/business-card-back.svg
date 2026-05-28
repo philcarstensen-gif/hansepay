@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 807 504" width="807" height="504">
+  <defs>
+    <linearGradient id="bcbBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04060e"/>
+      <stop offset="100%" stop-color="#070b18"/>
+    </linearGradient>
+    <radialGradient id="bcbGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4FA8FF" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#04060e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Card background -->
+  <rect width="807" height="504" rx="18" fill="url(#bcbBg)"/>
+  <rect width="807" height="504" rx="18" fill="url(#bcbGlow)"/>
+
+  <!-- Subtle hex corner decorations -->
+  <g opacity="0.08" fill="none" stroke="#4FA8FF">
+    <g transform="translate(-20, -20) scale(3.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.4"/></g>
+    <g transform="translate(680, -20) scale(3.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.4"/></g>
+    <g transform="translate(-20, 390) scale(3.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.4"/></g>
+    <g transform="translate(680, 390) scale(3.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.4"/></g>
+  </g>
+
+  <!-- Large centered hex + diamond icon -->
+  <!-- Scale 6, center at (20,20)*6=120, translate = 403-120=283, 252-120=132 -->
+  <g transform="translate(283, 132) scale(6)">
+    <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#e2eaf8" stroke-width="1.6"/>
+    <polygon points="20,13 27,20 20,27 13,20" fill="#e2eaf8"/>
+  </g>
+
+  <!-- Top/bottom thin accent lines -->
+  <rect x="0" y="0" width="807" height="3" rx="1.5" fill="#4FA8FF" fill-opacity="0.5"/>
+  <rect x="0" y="501" width="807" height="3" rx="1.5" fill="#4FA8FF" fill-opacity="0.25"/>
+</svg>

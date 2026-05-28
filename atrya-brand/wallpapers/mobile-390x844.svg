@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 844" width="390" height="844">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&amp;family=Inter:wght@300;400;500&amp;display=swap');
+      .mob-brand   { font-family: 'Syne', sans-serif; font-weight: 500; font-size: 48px; fill: #e2eaf8; letter-spacing: -0.03em; text-anchor: middle; }
+      .mob-tagline { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 13px; fill: rgba(226,234,248,0.60); letter-spacing: 0.08em; text-transform: uppercase; text-anchor: middle; }
+      .mob-url     { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 12px; fill: #4FA8FF; letter-spacing: 0.08em; text-transform: uppercase; text-anchor: middle; }
+    </style>
+    <linearGradient id="mobBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#04060e"/>
+      <stop offset="100%" stop-color="#070b18"/>
+    </linearGradient>
+    <radialGradient id="mobGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4FA8FF" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#04060e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="390" height="844" fill="url(#mobBg)"/>
+  <rect width="390" height="844" fill="url(#mobGlow)"/>
+
+  <!-- Subtle circle pattern -->
+  <g fill="none" stroke="#4FA8FF" stroke-opacity="0.06">
+    <circle cx="65" cy="300" r="40" stroke-width="1"/><circle cx="125" cy="300" r="40" stroke-width="1"/>
+    <circle cx="185" cy="300" r="40" stroke-width="1"/><circle cx="245" cy="300" r="40" stroke-width="1"/>
+    <circle cx="305" cy="300" r="40" stroke-width="1"/><circle cx="365" cy="300" r="40" stroke-width="1"/>
+    <circle cx="65" cy="380" r="40" stroke-width="1"/><circle cx="125" cy="380" r="40" stroke-width="1"/>
+    <circle cx="185" cy="380" r="40" stroke-width="1"/><circle cx="245" cy="380" r="40" stroke-width="1"/>
+    <circle cx="305" cy="380" r="40" stroke-width="1"/><circle cx="365" cy="380" r="40" stroke-width="1"/>
+    <circle cx="65" cy="460" r="40" stroke-width="1"/><circle cx="125" cy="460" r="40" stroke-width="1"/>
+    <circle cx="185" cy="460" r="40" stroke-width="1"/><circle cx="245" cy="460" r="40" stroke-width="1"/>
+    <circle cx="305" cy="460" r="40" stroke-width="1"/><circle cx="365" cy="460" r="40" stroke-width="1"/>
+    <circle cx="65" cy="540" r="40" stroke-width="1"/><circle cx="125" cy="540" r="40" stroke-width="1"/>
+    <circle cx="185" cy="540" r="40" stroke-width="1"/><circle cx="245" cy="540" r="40" stroke-width="1"/>
+    <circle cx="305" cy="540" r="40" stroke-width="1"/><circle cx="365" cy="540" r="40" stroke-width="1"/>
+  </g>
+
+  <!-- Mark: scale 4, center at 195. translate = 195-80=115 -->
+  <g transform="translate(115, 80) scale(4)">
+    <path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke="#e2eaf8" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+    <path d="M20 13L27 20L20 27L13 20Z" fill="#e2eaf8"/>
+  </g>
+
+  <text x="195" y="258" class="mob-brand">Atrya</text>
+
+  <text x="195" y="748" class="mob-tagline">Payment logic. Settlement.</text>
+  <text x="195" y="770" class="mob-tagline">Unified.</text>
+  <text x="195" y="808" class="mob-url">atrya.io</text>
+</svg>

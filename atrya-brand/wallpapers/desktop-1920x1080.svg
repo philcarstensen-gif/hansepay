@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&amp;family=Inter:wght@300;400;500&amp;display=swap');
+      .wp-brand   { font-family: 'Syne', sans-serif; font-weight: 500; font-size: 88px; fill: #e2eaf8; letter-spacing: -0.03em; text-anchor: middle; }
+      .wp-tagline { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 22px; fill: rgba(226,234,248,0.50); letter-spacing: 0.08em; text-transform: uppercase; text-anchor: middle; }
+    </style>
+    <linearGradient id="wpBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04060e"/>
+      <stop offset="100%" stop-color="#070b18"/>
+    </linearGradient>
+    <radialGradient id="wpGlTL" cx="0%" cy="0%" r="55%">
+      <stop offset="0%" stop-color="#4FA8FF" stop-opacity="0.13"/>
+      <stop offset="100%" stop-color="#04060e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="wpGlBR" cx="100%" cy="100%" r="55%">
+      <stop offset="0%" stop-color="#4FA8FF" stop-opacity="0.11"/>
+      <stop offset="100%" stop-color="#04060e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="wpGlC" cx="50%" cy="50%" r="30%">
+      <stop offset="0%" stop-color="#4FA8FF" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#04060e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#wpBg)"/>
+  <rect width="1920" height="1080" fill="url(#wpGlTL)"/>
+  <rect width="1920" height="1080" fill="url(#wpGlBR)"/>
+  <rect width="1920" height="1080" fill="url(#wpGlC)"/>
+
+  <!-- Hex grid pattern -->
+  <g fill="none" stroke="#4FA8FF" stroke-opacity="0.04">
+    <g transform="translate(40, 20) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(280, 20) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(520, 20) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(760, 20) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1000, 20) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1240, 20) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1480, 20) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1720, 20) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(160, 176) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(400, 176) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(640, 176) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(880, 176) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1120, 176) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1360, 176) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1600, 176) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1840, 176) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(40, 332) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(280, 332) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(520, 332) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(760, 332) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1000, 332) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1240, 332) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1480, 332) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1720, 332) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(160, 488) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(400, 488) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(640, 488) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(880, 488) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1120, 488) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1360, 488) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1600, 488) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1840, 488) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(40, 644) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(280, 644) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(520, 644) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(760, 644) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1000, 644) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1240, 644) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1480, 644) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1720, 644) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(160, 800) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(400, 800) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(640, 800) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(880, 800) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1120, 800) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1360, 800) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1600, 800) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1840, 800) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(40, 956) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(280, 956) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(520, 956) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(760, 956) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1000, 956) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1240, 956) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1480, 956) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+    <g transform="translate(1720, 956) scale(6)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1" stroke-linejoin="round"/></g>
+  </g>
+
+  <!-- Center mark: scale 7, translate = 960-140=820, 540-140=400 -->
+  <g transform="translate(820, 400) scale(7)">
+    <path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke="#e2eaf8" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+    <path d="M20 13L27 20L20 27L13 20Z" fill="#e2eaf8"/>
+  </g>
+
+  <text x="960" y="700" class="wp-brand">Atrya</text>
+  <text x="960" y="744" class="wp-tagline">Payment logic. Settlement. Unified.</text>
+</svg>

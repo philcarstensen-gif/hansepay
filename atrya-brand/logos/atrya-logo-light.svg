@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 60" width="240" height="60">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&amp;family=Inter:wght@300;400;500&amp;display=swap');</style>
+  </defs>
+  <rect width="240" height="60" fill="#f0f4fc"/>
+  <g transform="translate(12, 10)">
+    <path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke="#0c1628" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+    <path d="M20 13L27 20L20 27L13 20Z" fill="#0c1628"/>
+  </g>
+  <text x="62" y="39" font-family="Syne, sans-serif" font-weight="600" font-size="26" fill="#0c1628" letter-spacing="-0.65">Atrya</text>
+</svg>

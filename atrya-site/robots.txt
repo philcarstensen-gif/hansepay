@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Disallow: /atrya-brand/
+
+Sitemap: https://atrya.io/sitemap.xml

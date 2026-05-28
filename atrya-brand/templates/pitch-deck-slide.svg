@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&amp;family=Inter:wght@300;400;500&amp;display=swap');
+      .pd-logo     { font-family:'Syne',sans-serif;font-weight:600;font-size:22px;fill:#e2eaf8;letter-spacing:-0.025em; }
+      .pd-title    { font-family:'Syne',sans-serif;font-weight:500;font-size:56px;fill:#e2eaf8;letter-spacing:-0.03em; }
+      .pd-body     { font-family:'Inter',sans-serif;font-weight:300;font-size:22px;fill:rgba(226,234,248,0.65); }
+      .pd-bullet   { font-family:'Inter',sans-serif;font-weight:300;font-size:20px;fill:rgba(226,234,248,0.75); }
+      .pd-footer   { font-family:'Inter',sans-serif;font-weight:300;font-size:13px;fill:rgba(226,234,248,0.35);letter-spacing:0.04em; }
+      .pd-page     { font-family:'Syne',sans-serif;font-weight:500;font-size:14px;fill:#4FA8FF;letter-spacing:0.06em; }
+      .placeholder { font-family:'Inter',sans-serif;font-weight:300;font-size:16px;fill:rgba(226,234,248,0.22);font-style:italic; }
+    </style>
+    <linearGradient id="pdBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04060e"/>
+      <stop offset="100%" stop-color="#070b18"/>
+    </linearGradient>
+    <linearGradient id="headerBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#070b18"/>
+      <stop offset="100%" stop-color="#04060e"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Slide background -->
+  <rect width="1920" height="1080" fill="url(#pdBg)"/>
+
+  <!-- Very subtle hex background (right side) -->
+  <g fill="none" stroke="#4FA8FF" stroke-opacity="0.04">
+    <g transform="translate(1320, 100) scale(7)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1"/></g>
+    <g transform="translate(1580, 300) scale(5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1"/></g>
+    <g transform="translate(1440, 600) scale(6)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1"/></g>
+    <g transform="translate(1700, 700) scale(4)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1"/></g>
+  </g>
+
+  <!-- HEADER BAR -->
+  <rect x="0" y="0" width="1920" height="80" fill="url(#headerBar)"/>
+  <rect x="0" y="80" width="1920" height="1.5" fill="rgba(79,168,255,0.25)"/>
+  <!-- Header left accent -->
+  <rect x="0" y="0" width="4" height="80" fill="#4FA8FF"/>
+
+  <!-- Header: Logo -->
+  <g transform="translate(28, 20) scale(1)">
+    <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#e2eaf8" stroke-width="1.6"/>
+    <polygon points="20,13 27,20 20,27 13,20" fill="#e2eaf8"/>
+  </g>
+  <text x="80" y="50" class="pd-logo">Atrya</text>
+
+  <!-- Header: Slide label (right) -->
+  <text x="1888" y="46" class="pd-footer" text-anchor="end">CONFIDENTIAL · CAPLEND TECHNOLOGIES GMBH · 2026</text>
+
+  <!-- CONTENT AREA -->
+  <!-- Section label / eyebrow -->
+  <rect x="60" y="144" width="48" height="3" fill="#4FA8FF" rx="1.5"/>
+  <text x="60" y="130" style="font-family:'Inter',Arial,sans-serif;font-size:13px;fill:#4FA8FF;letter-spacing:3px;font-weight:500;">SLIDE TITLE</text>
+
+  <!-- Main title placeholder -->
+  <text x="60" y="240" class="pd-title">Your Headline Goes Here</text>
+
+  <!-- Subtitle -->
+  <text x="60" y="296" class="pd-body">Supporting statement or subtitle text in one line.</text>
+
+  <!-- Content columns -->
+  <!-- Column 1 -->
+  <rect x="60" y="340" width="520" height="2" fill="rgba(79,168,255,0.20)"/>
+  <text x="60" y="380" class="placeholder">— Bullet point or key insight here</text>
+  <text x="60" y="418" class="placeholder">— Supporting detail or data point</text>
+  <text x="60" y="456" class="placeholder">— Third point or call to action</text>
+  <text x="60" y="494" class="placeholder">— Additional context or note</text>
+
+  <!-- Column 2 -->
+  <rect x="640" y="340" width="520" height="2" fill="rgba(79,168,255,0.20)"/>
+  <text x="640" y="380" class="placeholder">— Second column content area</text>
+  <text x="640" y="418" class="placeholder">— Data, statistics, or metrics</text>
+  <text x="640" y="456" class="placeholder">— Visual or chart area below</text>
+
+  <!-- Chart placeholder box -->
+  <rect x="640" y="510" width="500" height="340" rx="6" fill="rgba(79,168,255,0.04)" stroke="rgba(79,168,255,0.12)" stroke-width="1" stroke-dasharray="6,4"/>
+  <text x="890" y="690" class="placeholder" text-anchor="middle">[ Chart / Visual / Data ]</text>
+
+  <!-- Content box right column -->
+  <rect x="1200" y="130" width="660" height="810" rx="8" fill="rgba(79,168,255,0.03)" stroke="rgba(79,168,255,0.09)" stroke-width="1"/>
+  <text x="1530" y="550" class="placeholder" text-anchor="middle">[ Visual / Image / Diagram Area ]</text>
+  <!-- Subtle icon in right panel -->
+  <g transform="translate(1450, 300) scale(5)" opacity="0.06">
+    <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#4FA8FF" stroke-width="1.6"/>
+    <polygon points="20,13 27,20 20,27 13,20" fill="#4FA8FF"/>
+  </g>
+
+  <!-- FOOTER BAR -->
+  <rect x="0" y="1040" width="1920" height="40" fill="rgba(4,6,14,0.8)"/>
+  <rect x="0" y="1040" width="1920" height="1" fill="rgba(79,168,255,0.15)"/>
+
+  <text x="60" y="1066" class="pd-footer">© 2026 Caplend Technologies GmbH · atrya.io · Confidential</text>
+  <text x="1860" y="1066" class="pd-page" text-anchor="end">01</text>
+</svg>

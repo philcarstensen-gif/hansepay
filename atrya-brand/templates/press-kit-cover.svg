@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&amp;family=Inter:wght@300;400;500&amp;display=swap');
+      .pk-presskit  { font-family:'Syne',sans-serif;font-weight:500;font-size:80px;fill:#e2eaf8;letter-spacing:-0.02em; }
+      .pk-brand     { font-family:'Syne',sans-serif;font-weight:600;font-size:52px;fill:#4FA8FF;letter-spacing:-0.025em; }
+      .pk-year      { font-family:'Syne',sans-serif;font-weight:500;font-size:22px;fill:rgba(226,234,248,0.35);letter-spacing:0.1em; }
+      .pk-sub       { font-family:'Inter',sans-serif;font-weight:300;font-size:16px;fill:rgba(226,234,248,0.55);letter-spacing:0.1em; }
+      .pk-contact   { font-family:'Inter',sans-serif;font-weight:300;font-size:14px;fill:rgba(226,234,248,0.50);letter-spacing:0.02em; }
+      .pk-contact-a { font-family:'Inter',sans-serif;font-weight:300;font-size:14px;fill:#4FA8FF;letter-spacing:0.02em; }
+    </style>
+    <linearGradient id="pkBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04060e"/>
+      <stop offset="100%" stop-color="#070b18"/>
+    </linearGradient>
+    <radialGradient id="pkGl1" cx="20%" cy="80%" r="50%">
+      <stop offset="0%" stop-color="#4FA8FF" stop-opacity="0.13"/>
+      <stop offset="100%" stop-color="#04060e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="pkGl2" cx="85%" cy="20%" r="40%">
+      <stop offset="0%" stop-color="#4FA8FF" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#04060e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="800" fill="url(#pkBg)"/>
+  <rect width="1200" height="800" fill="url(#pkGl1)"/>
+  <rect width="1200" height="800" fill="url(#pkGl2)"/>
+
+  <!-- Left accent bar -->
+  <rect x="0" y="0" width="6" height="800" fill="#4FA8FF"/>
+
+  <!-- Decorative hex pattern background (right) -->
+  <g fill="none" stroke="#4FA8FF" stroke-opacity="0.06">
+    <g transform="translate(760, 40) scale(8)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1"/></g>
+    <g transform="translate(980, 300) scale(6)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1"/></g>
+    <g transform="translate(880, 560) scale(5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1"/></g>
+    <g transform="translate(1060, 120) scale(4)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1"/></g>
+    <g transform="translate(1100, 550) scale(3)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1"/></g>
+  </g>
+
+  <!-- Top section: Logo -->
+  <g transform="translate(60, 60) scale(2.2)">
+    <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#e2eaf8" stroke-width="1.6"/>
+    <polygon points="20,13 27,20 20,27 13,20" fill="#e2eaf8"/>
+  </g>
+  <text x="160" y="114" style="font-family:'Syne',sans-serif;font-weight:600;font-size:32px;fill:#e2eaf8;letter-spacing:-0.025em;">Atrya</text>
+  <text x="160" y="138" style="font-family:'Inter',Arial,sans-serif;font-size:12px;fill:#4FA8FF;letter-spacing:2px;">CAPLEND TECHNOLOGIES GMBH</text>
+
+  <!-- Horizontal rule -->
+  <line x1="60" y1="175" x2="700" y2="175" stroke="rgba(79,168,255,0.15)" stroke-width="1"/>
+
+  <!-- PRESS KIT heading -->
+  <text x="60" y="340" class="pk-presskit">PRESS</text>
+  <text x="60" y="440" class="pk-presskit">KIT</text>
+
+  <!-- Brand sub-name -->
+  <text x="62" y="508" class="pk-brand">Atrya</text>
+
+  <!-- Year -->
+  <text x="65" y="548" class="pk-year">2026</text>
+
+  <!-- Tagline -->
+  <text x="60" y="608" class="pk-sub">PAYMENT LOGIC. SETTLEMENT. UNIFIED.</text>
+
+  <!-- Horizontal rule -->
+  <line x1="60" y1="640" x2="700" y2="640" stroke="rgba(79,168,255,0.15)" stroke-width="1"/>
+
+  <!-- Contact section -->
+  <text x="60" y="672" class="pk-contact">Media Enquiries:</text>
+  <text x="60" y="696" class="pk-contact-a">hello@atrya.io</text>
+  <text x="60" y="720" class="pk-contact-a">atrya.io</text>
+
+  <!-- Bottom-right: company footer -->
+  <text x="1140" y="765" class="pk-contact" text-anchor="end">Caplend Technologies GmbH</text>
+  <text x="1140" y="784" class="pk-contact" text-anchor="end">Stadtdeich 2-4, 20097 Hamburg, Germany</text>
+
+  <!-- Bottom border line -->
+  <rect x="0" y="796" width="1200" height="4" fill="#4FA8FF" fill-opacity="0.3"/>
+</svg>

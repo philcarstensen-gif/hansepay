@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" width="200" height="50">
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&amp;family=Inter:wght@300;400;500&amp;display=swap');</style>
+  </defs>
+  <rect width="200" height="50" fill="#04060e"/>
+  <text x="100" y="34" font-family="Syne, sans-serif" font-weight="600" font-size="30" fill="#e2eaf8" letter-spacing="-0.75" text-anchor="middle">Atrya</text>
+</svg>

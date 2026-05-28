@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&amp;family=Inter:wght@300;400;500&amp;display=swap');
+      .zm-brand   { font-family: 'Syne', sans-serif; font-weight: 500; font-size: 48px; fill: #e2eaf8; letter-spacing: -0.03em; }
+      .zm-url     { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 16px; fill: #4FA8FF; letter-spacing: 0.08em; text-transform: uppercase; }
+      .zm-tagline { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 13px; fill: rgba(226,234,248,0.50); }
+    </style>
+    <linearGradient id="zmLeftBg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#070b18"/>
+      <stop offset="100%" stop-color="#04060e"/>
+    </linearGradient>
+    <linearGradient id="zmRightBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04060e"/>
+      <stop offset="100%" stop-color="#070b18"/>
+    </linearGradient>
+    <linearGradient id="lightStreak1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4FA8FF" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#4FA8FF" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#4FA8FF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="lightStreak2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4FA8FF" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#4FA8FF" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#4FA8FF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#zmRightBg)"/>
+  <rect x="0" y="0" width="560" height="1080" fill="url(#zmLeftBg)"/>
+  <line x1="560" y1="0" x2="560" y2="1080" stroke="rgba(79,168,255,0.18)" stroke-width="1"/>
+  <rect x="0" y="0" width="560" height="3" fill="#4FA8FF" fill-opacity="0.45"/>
+  <rect x="0" y="1077" width="560" height="3" fill="#4FA8FF" fill-opacity="0.45"/>
+
+  <!-- Logo in left panel -->
+  <g transform="translate(60, 380) scale(3.5)">
+    <path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke="#e2eaf8" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+    <path d="M20 13L27 20L20 27L13 20Z" fill="#e2eaf8"/>
+  </g>
+  <text x="60" y="556" class="zm-brand">Atrya</text>
+  <rect x="60" y="572" width="48" height="1.5" fill="#4FA8FF" fill-opacity="0.5" rx="1"/>
+  <text x="60" y="607" class="zm-tagline">Payment logic. Settlement. Unified.</text>
+  <text x="60" y="646" class="zm-url">atrya.io</text>
+
+  <!-- Right panel -->
+  <rect x="560" y="0" width="1360" height="1080" fill="url(#lightStreak1)"/>
+  <rect x="560" y="0" width="1360" height="1080" fill="url(#lightStreak2)"/>
+
+  <!-- Hex grid right -->
+  <g fill="none" stroke="#4FA8FF" stroke-opacity="0.045">
+    <g transform="translate(600, 20) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(820, 20) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1040, 20) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1260, 20) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1480, 20) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1700, 20) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(710, 184) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(930, 184) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1150, 184) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1370, 184) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1590, 184) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1810, 184) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(600, 348) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(820, 348) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1040, 348) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1260, 348) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1480, 348) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1700, 348) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(710, 512) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(930, 512) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1150, 512) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1370, 512) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1590, 512) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1810, 512) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(600, 676) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(820, 676) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1040, 676) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1260, 676) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1480, 676) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1700, 676) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(710, 840) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(930, 840) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1150, 840) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1370, 840) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1590, 840) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+    <g transform="translate(1810, 840) scale(5.5)"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.1" stroke-linejoin="round"/></g>
+  </g>
+
+  <!-- Highlighted mark center-right accent -->
+  <g transform="translate(1100, 340) scale(8)" opacity="0.09">
+    <path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke="#4FA8FF" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+    <path d="M20 13L27 20L20 27L13 20Z" fill="#4FA8FF" fill-opacity="0.4"/>
+  </g>
+</svg>

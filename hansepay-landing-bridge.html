@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HansePay — Cross-border payments, reimagined.</title>
+<meta name="description" content="Global payment infrastructure for modern business. Mid-market rates, BaFin-regulated, dedicated expert service." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Libre+Baskerville:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+<style>
+/* ── TOKENS ───────────────────────────────────── */
+:root {
+  --n900:#060D1A; --n800:#0B1929; --n700:#0F2540; --n600:#163659;
+  --n500:#1E4E80; --n400:#2E6BAD; --n300:#3B7BC4; --n200:#8DBDE6;
+  --n100:#C4DDEF; --n050:#EBF4FB; --off:#F5F1EA;
+  --ink:#0B1929; --ink2:#3D5A73; --ink3:#7A9AB0;
+  --font-ui:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-display:Georgia,'Times New Roman',serif;
+  --font-logo:'Libre Baskerville',Georgia,serif;
+  --r-pill:100px; --r-lg:16px; --r-md:10px; --r-sm:6px;
+}
+
+/* ── RESET ────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-ui);color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.container{max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,80px)}
+
+/* ── TYPE ─────────────────────────────────────── */
+.eyebrow{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--n300)}
+.section-head{font-family:var(--font-display);font-size:clamp(30px,3.5vw,46px);font-weight:400;line-height:1.08;letter-spacing:-.02em;color:var(--n800)}
+.section-head em{font-style:italic;color:var(--n400)}
+.lede{font-size:16px;font-weight:300;color:var(--ink2);line-height:1.65}
+
+/* ── BUTTONS ──────────────────────────────────── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:var(--r-pill);font-family:var(--font-ui);font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .18s ease;text-decoration:none;white-space:nowrap}
+.btn-primary{background:var(--n500);color:#fff}.btn-primary:hover{background:var(--n600)}
+.btn-ghost-white{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.7)}.btn-ghost-white:hover{background:rgba(255,255,255,.1)}
+.btn-ghost-navy{background:transparent;color:var(--n600);border:1.5px solid rgba(11,25,41,.2)}.btn-ghost-navy:hover{background:var(--n050)}
+.btn-white-fill{background:#fff;color:var(--n500)}.btn-white-fill:hover{background:var(--n050)}
+
+/* ── NAV ──────────────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 clamp(20px,5vw,80px);height:64px;display:flex;align-items:center;transition:background .25s,box-shadow .25s}
+nav.scrolled{background:rgba(247,248,252,.97);box-shadow:0 1px 0 rgba(11,25,41,.08);backdrop-filter:blur(8px)}
+.nav-inner{max-width:1200px;margin:0 auto;width:100%;display:flex;align-items:center;gap:32px}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.nav-logo img{height:28px;width:28px;object-fit:contain}
+.nav-logo-text{font-family:var(--font-logo);font-size:19px;font-weight:400;letter-spacing:-.02em;color:var(--n800);line-height:1}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none;margin-left:8px;flex:1}
+.nav-link{font-size:14px;font-weight:500;color:var(--n700);transition:color .15s;white-space:nowrap}
+.nav-link:hover{color:var(--n500)}
+.nav-spacer{flex:1}
+.nav-cta{background:var(--n500);color:#fff;border:1.5px solid var(--n500);padding:8px 20px;font-size:13px}
+.nav-cta:hover{background:var(--n600)}
+@media(max-width:768px){.nav-links{display:none}}
+
+/* ── HERO ─────────────────────────────────────── */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;background:#f7f8fc}
+.hero::before{content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(30,78,128,.04) 1px,transparent 1px);
+  background-size:32px 32px}
+.hero-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;min-height:100vh;padding:88px 0 64px;gap:40px}
+@media(max-width:900px){.hero-layout{grid-template-columns:1fr}.hero-bridge-col{display:none}}
+.hero-content{position:relative;z-index:2}
+.hero-chip{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:var(--r-pill);background:rgba(11,25,41,.055);border:1px solid rgba(11,25,41,.10);font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--n500);margin-bottom:28px}
+.hero-chip-dot{width:5px;height:5px;border-radius:50%;background:var(--n400);flex-shrink:0}
+.hero-headline{font-family:var(--font-display);font-size:clamp(44px,5.4vw,80px);font-weight:400;line-height:1.04;letter-spacing:-.03em;color:var(--n800);margin-bottom:22px}
+.hero-headline em{font-style:italic;color:var(--n400)}
+.hero-sub{font-size:clamp(15px,1.4vw,17px);font-weight:300;color:var(--ink2);line-height:1.7;max-width:440px;margin-bottom:36px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:40px}
+.hero-proof{display:flex;flex-wrap:wrap;align-items:center;gap:24px}
+.hero-proof-item{font-size:12px;font-weight:500;color:var(--ink3);display:flex;align-items:center;gap:6px}
+.hero-proof-val{font-size:16px;font-weight:600;color:var(--n700);letter-spacing:-.02em}
+.hero-proof-sep{width:1px;height:28px;background:rgba(11,25,41,.12);flex-shrink:0}
+/* Bridge column */
+.hero-bridge-col{position:relative;display:flex;align-items:center;justify-content:center;height:100%}
+#bridge-canvas{display:block;width:100%;aspect-ratio:5/6;max-height:560px;border-radius:20px;
+  box-shadow:0 48px 96px rgba(6,13,26,0.20),0 12px 28px rgba(6,13,26,0.10)}
+/* ── TRUST STRIP ──────────────────────────────── */
+.trust-strip{background:var(--n800);padding:20px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.trust-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:center}
+.trust-item{display:flex;align-items:center;gap:10px;padding:10px 32px;border-right:1px solid rgba(255,255,255,.1)}
+.trust-item:last-child{border-right:none}
+.trust-item svg{width:18px;height:18px;flex-shrink:0;color:var(--n200)}
+.trust-txt-main{font-size:13px;font-weight:600;color:#fff}
+.trust-txt-sub{font-size:11px;color:rgba(255,255,255,.45)}
+@media(max-width:768px){.trust-item{padding:10px 16px}.trust-txt-sub{display:none}}
+
+/* ── SECTIONS ─────────────────────────────────── */
+.section{padding:96px 0}
+.section-sm{padding:72px 0}
+
+/* ── FEATURES ─────────────────────────────────── */
+.section-intro{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;margin-bottom:64px}
+@media(max-width:768px){.section-intro{grid-template-columns:1fr;gap:24px}}
+.section-label{margin-bottom:12px}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(11,25,41,.06);border-radius:var(--r-lg);overflow:hidden}
+@media(max-width:900px){.features-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.features-grid{grid-template-columns:1fr}}
+.feat-card{background:#fff;padding:40px;display:flex;flex-direction:column;gap:16px;transition:background .2s}
+.feat-card:hover{background:var(--n050)}
+.feat-card:hover .feat-icon-wrap{background:var(--n500)}
+.feat-card:hover .feat-icon{color:#fff}
+.feat-icon-wrap{width:44px;height:44px;border-radius:var(--r-md);background:var(--n050);display:flex;align-items:center;justify-content:center;transition:background .2s;flex-shrink:0}
+.feat-icon{width:20px;height:20px;color:var(--n400);transition:color .2s}
+.feat-title{font-family:var(--font-display);font-size:18px;font-weight:400;color:var(--n800);letter-spacing:-.01em}
+.feat-desc{font-size:14px;color:var(--ink2);line-height:1.6;flex:1}
+.feat-link{font-size:13px;font-weight:600;color:var(--n400);display:inline-flex;align-items:center;gap:4px;margin-top:auto;padding-top:4px}
+.feat-link:hover{color:var(--n500)}
+.feat-link svg{width:14px;height:14px}
+
+/* ── HOW IT WORKS ─────────────────────────────── */
+.how-section{background:var(--off)}
+.how-intro{text-align:center;max-width:600px;margin:0 auto 64px}
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative}
+.how-grid::before{content:'';position:absolute;top:28px;left:calc(12.5% + 20px);right:calc(12.5% + 20px);height:1px;background:linear-gradient(90deg,var(--n200),var(--n300),var(--n200));z-index:0}
+@media(max-width:900px){.how-grid{grid-template-columns:1fr 1fr}.how-grid::before{display:none}}
+@media(max-width:560px){.how-grid{grid-template-columns:1fr}}
+.how-step{position:relative;z-index:1;text-align:center;padding:40px 20px}
+.how-num{width:56px;height:56px;border-radius:50%;background:#fff;border:2px solid var(--n100);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-family:var(--font-display);font-style:italic;font-size:22px;font-weight:400;color:var(--n400);box-shadow:0 4px 16px rgba(11,25,41,.06)}
+.how-title{font-size:15px;font-weight:600;color:var(--n800);margin-bottom:8px}
+.how-desc{font-size:13px;color:var(--ink2);line-height:1.6}
+
+/* ── CALCULATOR ───────────────────────────────── */
+.calc-section{background:#FAFAFA;border-top:1px solid rgba(11,25,41,.06);border-bottom:1px solid rgba(11,25,41,.06)}
+.calc-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:96px;align-items:start}
+@media(max-width:900px){.calc-layout{grid-template-columns:1fr;gap:48px}}
+.calc-intro{padding-top:8px}
+.calc-bullets{margin-top:48px;display:flex;flex-direction:column;gap:20px}
+.calc-bullet{display:flex;align-items:flex-start;gap:16px}
+.calc-bullet-icon{width:36px;height:36px;border-radius:50%;background:var(--n050);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.calc-bullet-icon svg{width:16px;height:16px;color:var(--n400)}
+.calc-bullet-title{font-weight:600;font-size:14px;color:var(--n800)}
+.calc-bullet-desc{font-size:13px;color:var(--ink2);margin-top:2px}
+.calc-card{background:#fff;border:1px solid rgba(11,25,41,.08);border-radius:var(--r-lg);padding:40px;box-shadow:0 4px 32px rgba(11,25,41,.06)}
+.calc-row{margin-bottom:24px}
+.calc-lbl{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:13px;font-weight:600;color:var(--n800)}
+.calc-input-wrap{position:relative}
+.calc-prefix{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;font-weight:600;color:var(--ink3);pointer-events:none}
+.calc-input{width:100%;padding:12px 14px 12px 36px;border:1.5px solid rgba(11,25,41,.1);border-radius:var(--r-sm);font-family:var(--font-ui);font-size:18px;font-weight:500;color:var(--n800);background:#fff;outline:none;transition:border-color .15s;appearance:none}
+.calc-input:focus{border-color:var(--n300)}
+.calc-select-wrap{position:relative}
+.calc-select{width:100%;padding:12px 36px 12px 14px;border:1.5px solid rgba(11,25,41,.1);border-radius:var(--r-sm);font-family:var(--font-ui);font-size:15px;font-weight:500;color:var(--n800);background:#fff;outline:none;appearance:none;cursor:pointer;transition:border-color .15s}
+.calc-select:focus{border-color:var(--n300)}
+.calc-arrow{position:absolute;right:12px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--ink3)}
+.calc-divider{height:1px;background:rgba(11,25,41,.06);margin:24px 0}
+.calc-result{background:linear-gradient(135deg,var(--n700) 0%,var(--n500) 100%);border-radius:var(--r-md);padding:24px 28px;color:#fff}
+.calc-result-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.calc-result-row:last-of-type{margin-bottom:0}
+.calc-result-lbl{font-size:11px;font-weight:500;color:rgba(255,255,255,.6);letter-spacing:.06em;text-transform:uppercase}
+.calc-result-val{font-family:var(--font-display);font-size:20px;color:#fff}
+.calc-saving{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.15);display:flex;justify-content:space-between;align-items:center}
+.calc-saving-lbl{font-size:12px;font-weight:700;color:var(--n100);text-transform:uppercase;letter-spacing:.08em}
+.calc-saving-val{font-family:var(--font-display);font-style:italic;font-size:30px;color:#fff}
+.calc-disclaimer{font-size:11px;color:var(--ink3);margin-top:16px;line-height:1.55}
+
+/* ── SEGMENTS ─────────────────────────────────── */
+.seg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:900px){.seg-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.seg-grid{grid-template-columns:1fr}}
+.seg-card{border:1px solid rgba(11,25,41,.07);border-radius:var(--r-lg);overflow:hidden;transition:box-shadow .2s,transform .2s;display:block;color:inherit;text-decoration:none}
+.seg-card:hover{box-shadow:0 8px 32px rgba(11,25,41,.1);transform:translateY(-3px)}
+.seg-img{height:140px;display:flex;align-items:flex-end;padding:16px;position:relative}
+.seg-icon{width:32px;height:32px;color:rgba(255,255,255,.45)}
+.seg-body{padding:24px}
+.seg-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--n400);background:var(--n050);padding:3px 8px;border-radius:var(--r-pill);margin-bottom:10px}
+.seg-title{font-family:var(--font-display);font-size:17px;font-weight:400;color:var(--n800);margin-bottom:6px;letter-spacing:-.01em}
+.seg-desc{font-size:13px;color:var(--ink2);line-height:1.6}
+
+/* ── ABOUT ────────────────────────────────────── */
+.about-section{background:var(--n800);position:relative;overflow:hidden}
+.about-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 10% 40%,rgba(46,107,173,.35) 0%,transparent 55%);pointer-events:none}
+.about-layout{display:grid;grid-template-columns:1.1fr 1fr;gap:96px;align-items:center;position:relative;z-index:1}
+@media(max-width:900px){.about-layout{grid-template-columns:1fr;gap:48px}}
+.about-eyebrow{color:var(--n200)}
+.about-head{font-family:var(--font-display);font-size:clamp(32px,4vw,52px);font-weight:400;line-height:1.06;letter-spacing:-.025em;color:#fff;margin:16px 0 24px}
+.about-head em{font-style:italic;color:var(--n200)}
+.about-body{font-size:16px;font-weight:300;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:40px}
+.cred-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:var(--r-lg);overflow:hidden}
+.cred-item{padding:24px 28px;display:flex;gap:20px;align-items:flex-start;border-bottom:1px solid rgba(255,255,255,.07)}
+.cred-item:last-child{border-bottom:none}
+.cred-icon-wrap{width:40px;height:40px;border-radius:var(--r-md);background:rgba(59,123,196,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.cred-icon{width:18px;height:18px;color:var(--n200)}
+.cred-title{font-size:15px;font-weight:600;color:#fff;margin-bottom:4px}
+.cred-desc{font-size:13px;color:rgba(255,255,255,.5);line-height:1.55}
+
+/* ── INSIGHTS ─────────────────────────────────── */
+.insights-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:16px}
+.ins-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:900px){.ins-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.ins-grid{grid-template-columns:1fr}}
+.ins-card{border:1px solid rgba(11,25,41,.07);border-radius:var(--r-lg);overflow:hidden;transition:box-shadow .2s,transform .2s}
+.ins-card:hover{box-shadow:0 8px 32px rgba(11,25,41,.08);transform:translateY(-2px)}
+.ins-thumb{height:140px;position:relative;overflow:hidden;display:flex;align-items:center;padding:20px}
+.ins-thumb-bar{position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--n400),var(--n200))}
+.ins-thumb-text{font-family:var(--font-display);font-style:italic;font-size:26px;color:var(--n300);line-height:1.1;max-width:200px}
+.ins-body{padding:24px}
+.ins-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:var(--r-pill);background:var(--n050);color:var(--n400);margin-bottom:10px}
+.ins-title{font-family:var(--font-display);font-size:16px;font-weight:400;color:var(--n800);line-height:1.35;margin-bottom:8px;letter-spacing:-.01em}
+.ins-meta{font-size:11px;color:var(--ink3)}
+
+/* ── CTA BAND ─────────────────────────────────── */
+.cta-band{padding:128px 0;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 18% 40%,#0F2540 0%,transparent 55%),radial-gradient(ellipse at 82% 25%,#2E6BAD 0%,transparent 50%),#060D1A}
+.cta-band::after{content:'';position:absolute;inset:0;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");pointer-events:none}
+.cta-inner{position:relative;z-index:1;max-width:680px;margin:0 auto}
+.cta-eyebrow{color:var(--n200);margin-bottom:20px}
+.cta-head{font-family:var(--font-display);font-size:clamp(32px,4vw,52px);font-weight:400;line-height:1.1;letter-spacing:-.025em;color:#fff;margin-bottom:20px}
+.cta-head em{font-style:italic;color:var(--n100)}
+.cta-sub{font-size:16px;font-weight:300;color:rgba(255,255,255,.65);line-height:1.65;margin-bottom:48px}
+.cta-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+
+/* ── FOOTER ───────────────────────────────────── */
+footer{background:#0A0A0A;padding:96px 0 48px}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:64px;margin-bottom:80px}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:48px}}
+@media(max-width:560px){.footer-grid{grid-template-columns:1fr}}
+.footer-logo{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.footer-logo img{height:28px;width:28px;object-fit:contain}
+.footer-logo-text{font-family:var(--font-logo);font-size:18px;font-weight:400;color:#fff;letter-spacing:-.02em}
+.footer-tagline{font-size:13px;color:rgba(255,255,255,.45);line-height:1.6;max-width:240px;margin-bottom:12px}
+.footer-legal{font-size:11px;color:rgba(255,255,255,.25);line-height:1.6}
+.footer-col-title{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:20px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-link{font-size:13px;color:rgba(255,255,255,.45);transition:color .15s}.footer-link:hover{color:rgba(255,255,255,.9)}
+.footer-hr{height:1px;background:rgba(255,255,255,.07);margin-bottom:28px}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.25)}
+.bafin-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,.35);padding:5px 12px;border:1px solid rgba(255,255,255,.1);border-radius:var(--r-pill)}
+.bafin-badge svg{width:12px;height:12px;color:var(--n200)}
+
+/* ── REVEAL ───────────────────────────────────── */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:none}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="assets/hansepay-mark-uploaded.png" alt="HansePay" />
+      <span class="nav-logo-text">HansePay</span>
+    </a>
+    <ul class="nav-links">
+      <li><a class="nav-link" href="#product">Product</a></li>
+      <li><a class="nav-link" href="#calculator">Calculator</a></li>
+      <li><a class="nav-link" href="#solutions">Solutions</a></li>
+      <li><a class="nav-link" href="#about">About</a></li>
+      <li><a class="nav-link" href="#insights">Insights</a></li>
+    </ul>
+    <div class="nav-spacer"></div>
+    <a href="#contact" class="btn nav-cta">Open an account</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container" style="width:100%">
+    <div class="hero-layout">
+      <!-- Left: copy -->
+      <div class="hero-content">
+        <div class="hero-chip"><span class="hero-chip-dot"></span>Commercial FX &middot; Hamburg</div>
+        <h1 class="hero-headline">Cross-border<br>payments, <em>reimagined.</em></h1>
+        <p class="hero-sub">Global payment infrastructure for modern business. HansePay gives corporate and institutional clients precise, regulated cross-border execution at mid-market rates.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Open an account</a>
+          <a href="#contact" class="btn btn-ghost-navy">Talk to our team</a>
+        </div>
+        <div class="hero-proof">
+          <div class="hero-proof-item"><span class="hero-proof-val">35+</span>Currencies</div>
+          <div class="hero-proof-sep"></div>
+          <div class="hero-proof-item"><span class="hero-proof-val">Mid-market</span>Rate guaranteed</div>
+          <div class="hero-proof-sep"></div>
+          <div class="hero-proof-item"><span class="hero-proof-val">BaFin</span>Regulated</div>
+        </div>
+      </div>
+      <!-- Right: bridge illustration -->
+      <div class="hero-bridge-col">
+        <canvas id="bridge-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="container">
+    <div class="trust-inner">
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div><div class="trust-txt-main">BaFin Regulated</div><div class="trust-txt-sub">EU-licensed E-Money Institution</div></div>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <div><div class="trust-txt-main">Mid-Market Rate</div><div class="trust-txt-sub">No hidden markups</div></div>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <div><div class="trust-txt-main">Live Pricing</div><div class="trust-txt-sub">Real-time rates around the clock</div></div>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div><div class="trust-txt-main">Dedicated Expert</div><div class="trust-txt-sub">Direct contacts, no call centre</div></div>
+      </div>
+      <div class="trust-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <div><div class="trust-txt-main">Hamburg, since 2023</div><div class="trust-txt-sub">Backed by Innovationsstarter Fonds HH</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="section" id="product" style="background:#fff">
+  <div class="container">
+    <div class="section-intro">
+      <div>
+        <div class="section-label"><span class="eyebrow reveal">The Product</span></div>
+        <h2 class="section-head reveal d1">Everything you need for <em>international payments.</em></h2>
+      </div>
+      <p class="lede reveal d2">From one-off transfers to complex FX hedging — HansePay provides the infrastructure that mid-sized businesses have been waiting for.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feat-card reveal">
+        <div class="feat-icon-wrap"><svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="feat-title">International Payments</div>
+        <div class="feat-desc">Transfers in 35+ currencies — direct and without bank detours. Transparent settlement, fully trackable transactions.</div>
+        <a href="#" class="feat-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="feat-card reveal d1">
+        <div class="feat-icon-wrap"><svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <div class="feat-title">Rate Hedging (Forward)</div>
+        <div class="feat-desc">Lock in today's rate for future payments. No FX risk, predictable costs — ideal for recurring foreign liabilities.</div>
+        <a href="#" class="feat-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="feat-card reveal d2">
+        <div class="feat-icon-wrap"><svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <div class="feat-title">Spot FX</div>
+        <div class="feat-desc">Immediate execution at the live mid-market rate. What you see is what you pay — no spread, no fine print.</div>
+        <a href="#" class="feat-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="feat-card reveal d3">
+        <div class="feat-icon-wrap"><svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div>
+        <div class="feat-title">Bulk Payments</div>
+        <div class="feat-desc">Hundreds of international payments at the click of a button — via CSV upload or API. For businesses with regular overseas supplier or payroll payments.</div>
+        <a href="#" class="feat-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="feat-card reveal d4">
+        <div class="feat-icon-wrap"><svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <div class="feat-title">Personal FX Expert</div>
+        <div class="feat-desc">No call centre. One direct contact who knows your business and proactively advises you on market movements.</div>
+        <a href="#" class="feat-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="feat-card reveal d5">
+        <div class="feat-icon-wrap"><svg class="feat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <div class="feat-title">API Integration</div>
+        <div class="feat-desc">Direct integration into ERP, accounting software or proprietary systems. Full documentation, sandbox access and dev support included.</div>
+        <a href="#" class="feat-link">Learn more <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how-section">
+  <div class="container">
+    <div class="how-intro">
+      <span class="eyebrow reveal">How it works</span>
+      <h2 class="section-head reveal d1" style="margin-top:12px">In four steps to your <em>first payment.</em></h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-step reveal"><div class="how-num">1</div><div class="how-title">Open an account</div><div class="how-desc">Online application in under 10 minutes. No paperwork, no bank appointments — digital ID verification included.</div></div>
+      <div class="how-step reveal d1"><div class="how-num">2</div><div class="how-title">Request a rate</div><div class="how-desc">Live rate in the dashboard or directly from your expert. Transparent, real-time, no surprises.</div></div>
+      <div class="how-step reveal d2"><div class="how-num">3</div><div class="how-title">Trigger a payment</div><div class="how-desc">Confirm with one click or automate via API. Recipient validation and IBAN check included.</div></div>
+      <div class="how-step reveal d3"><div class="how-num">4</div><div class="how-title">Real-time tracking</div><div class="how-desc">Every transaction fully traceable. Automatic confirmation and booking receipt by email.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="section calc-section" id="calculator">
+  <div class="container">
+    <div class="calc-layout">
+      <div class="calc-intro">
+        <span class="eyebrow reveal">Calculator</span>
+        <h2 class="section-head reveal d1" style="margin-top:12px">How much is your bank <em>really</em> costing you?</h2>
+        <p class="lede reveal d2" style="margin-top:20px">Banks charge an average of 2–4% on the exchange rate — on €500k annual volume that's up to €20,000 in hidden costs. Calculate your potential savings in 30 seconds.</p>
+        <div class="calc-bullets">
+          <div class="calc-bullet reveal d3">
+            <div class="calc-bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><div class="calc-bullet-title">No hidden markups</div><div class="calc-bullet-desc">We charge only a transparent transaction fee.</div></div>
+          </div>
+          <div class="calc-bullet reveal d4">
+            <div class="calc-bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><div class="calc-bullet-title">Mid-market rate guaranteed</div><div class="calc-bullet-desc">The real market price — no bank spread.</div></div>
+          </div>
+          <div class="calc-bullet reveal d5">
+            <div class="calc-bullet-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><div class="calc-bullet-title">Conservative estimate</div><div class="calc-bullet-desc">Realistic benchmarks from the German business banking sector.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="calc-card reveal">
+        <div class="calc-row">
+          <div class="calc-lbl"><span>Annual FX volume</span></div>
+          <div class="calc-input-wrap"><span class="calc-prefix">€</span><input type="number" class="calc-input" id="vol" value="250000" min="10000" max="50000000" step="10000" /></div>
+        </div>
+        <div class="calc-row">
+          <div class="calc-lbl"><span>Target currency</span></div>
+          <div class="calc-select-wrap">
+            <select class="calc-select" id="cur">
+              <option value="USD">US Dollar (USD)</option>
+              <option value="GBP">British Pound (GBP)</option>
+              <option value="CHF">Swiss Franc (CHF)</option>
+              <option value="JPY">Japanese Yen (JPY)</option>
+              <option value="CNY">Chinese Yuan (CNY)</option>
+              <option value="PLN">Polish Zloty (PLN)</option>
+            </select>
+            <svg class="calc-arrow" style="width:16px;height:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="calc-row">
+          <div class="calc-lbl"><span>Current banking provider</span></div>
+          <div class="calc-select-wrap">
+            <select class="calc-select" id="bank">
+              <option value="2.5">Typical Hausbank (≈ 2.5%)</option>
+              <option value="3.5">Large commercial bank (≈ 3.5%)</option>
+              <option value="1.5">Online bank (≈ 1.5%)</option>
+              <option value="4.0">Regional bank (≈ 4.0%)</option>
+            </select>
+            <svg class="calc-arrow" style="width:16px;height:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="calc-divider"></div>
+        <div class="calc-result">
+          <div class="calc-result-row"><span class="calc-result-lbl">Bank costs per year</span><span class="calc-result-val" id="r-bank">€6,250</span></div>
+          <div class="calc-result-row"><span class="calc-result-lbl">HansePay costs per year</span><span class="calc-result-val" id="r-hp">€1,250</span></div>
+          <div class="calc-saving"><span class="calc-saving-lbl">Your savings</span><span class="calc-saving-val" id="r-save">€5,000</span></div>
+        </div>
+        <p class="calc-disclaimer">Estimate based on typical bank margins in the German business banking sector (BIS, 2024). HansePay at 0.5% transaction fee. Individual pricing on request.</p>
+        <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:20px">Request a precise quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTIONS -->
+<section class="section" id="solutions" style="background:#fff">
+  <div class="container">
+    <div style="max-width:560px;margin-bottom:56px">
+      <span class="eyebrow reveal">For whom</span>
+      <h2 class="section-head reveal d1" style="margin-top:12px">Solutions for <em>every industry.</em></h2>
+      <p class="lede reveal d2" style="margin-top:16px">Whether import, export, e-commerce or professional services — we understand the specific requirements of your sector.</p>
+    </div>
+    <div class="seg-grid">
+      <a href="#" class="seg-card reveal">
+        <div class="seg-img" style="background:linear-gradient(135deg,#1E4E80,#2E6BAD)"><svg class="seg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="seg-body"><span class="seg-tag">Import & Manufacturing</span><div class="seg-title">Importers & Manufacturers</div><div class="seg-desc">Raw material procurement, supplier invoices, component sourcing — plannable and cost-optimised.</div></div>
+      </a>
+      <a href="#" class="seg-card reveal d1">
+        <div class="seg-img" style="background:linear-gradient(135deg,#163659,#1E4E80)"><svg class="seg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></div>
+        <div class="seg-body"><span class="seg-tag">E-Commerce</span><div class="seg-title">Online Retailers</div><div class="seg-desc">Payments to international marketplaces, suppliers and payment providers without exchange rate surprises.</div></div>
+      </a>
+      <a href="#" class="seg-card reveal d2">
+        <div class="seg-img" style="background:linear-gradient(135deg,#0F2540,#163659)"><svg class="seg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
+        <div class="seg-body"><span class="seg-tag">Logistics & Freight</span><div class="seg-title">Logistics & Freight</div><div class="seg-desc">Port fees, freight invoices, international subcontractors — all currencies, one platform.</div></div>
+      </a>
+      <a href="#" class="seg-card reveal d3">
+        <div class="seg-img" style="background:linear-gradient(135deg,#2E6BAD,#3B7BC4)"><svg class="seg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div class="seg-body"><span class="seg-tag">Professional Services</span><div class="seg-title">Service Firms & Agencies</div><div class="seg-desc">International projects, foreign fees, remote teams — simple and compliant billing.</div></div>
+      </a>
+      <a href="#" class="seg-card reveal d4">
+        <div class="seg-img" style="background:linear-gradient(135deg,#1E4E80,#0F2540)"><svg class="seg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="seg-body"><span class="seg-tag">Mid & Large Corporate</span><div class="seg-title">Mid-Sized Corporates</div><div class="seg-desc">Complex FX structures, treasury integration, bespoke hedging strategies for larger volumes.</div></div>
+      </a>
+      <a href="#" class="seg-card reveal d5">
+        <div class="seg-img" style="background:linear-gradient(135deg,#163659,#2E6BAD)"><svg class="seg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="seg-body"><span class="seg-tag">Small Business</span><div class="seg-title">Small Business & Freelancers</div><div class="seg-desc">Easy onboarding, fair pricing — even for smaller volumes. Grow with us.</div></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section about-section" id="about">
+  <div class="container">
+    <div class="about-layout">
+      <div>
+        <span class="eyebrow about-eyebrow reveal">About HansePay</span>
+        <h2 class="about-head reveal d1">The European alternative for <em>mid-sized businesses.</em></h2>
+        <p class="about-body reveal d2">Founded in 2023 in Hamburg — Germany's gateway to the world — HansePay bridges the gap between complex institutional FX platforms and the inadequate foreign exchange offerings of retail banks. BaFin-regulated, publicly backed by Hamburg's innovation fund, advised by senior institutional experts.</p>
+        <a href="#" class="btn btn-ghost-white reveal d3">Learn more about us</a>
+      </div>
+      <div class="cred-card reveal d1">
+        <div class="cred-item">
+          <div class="cred-icon-wrap"><svg class="cred-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+          <div><div class="cred-title">BaFin Licensed</div><div class="cred-desc">EU-regulated E-Money Institution under MiCAR. Direct German supervisory oversight by BaFin.</div></div>
+        </div>
+        <div class="cred-item">
+          <div class="cred-icon-wrap"><svg class="cred-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><div class="cred-title">Made in Hamburg</div><div class="cred-desc">Headquartered in Germany's gateway to the world, since 2023. Backed by Innovationsstarter Fonds Hamburg.</div></div>
+        </div>
+        <div class="cred-item">
+          <div class="cred-icon-wrap"><svg class="cred-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div><div class="cred-title">Institutional Expertise</div><div class="cred-desc">Founded and advised by experienced FX and finance professionals with backgrounds at leading institutional firms.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section class="section" id="insights" style="background:#fff">
+  <div class="container">
+    <div class="insights-header">
+      <div>
+        <span class="eyebrow reveal">Market Insights</span>
+        <h2 class="section-head reveal d1" style="margin-top:12px">Market views from <em>our desk.</em></h2>
+      </div>
+      <a href="#" class="btn btn-ghost-navy reveal d2">All insights</a>
+    </div>
+    <div class="ins-grid">
+      <div class="ins-card reveal">
+        <div class="ins-thumb" style="background:linear-gradient(135deg,var(--n050),#dce8f5)"><div class="ins-thumb-text">EUR/USD</div><div class="ins-thumb-bar"></div></div>
+        <div class="ins-body"><span class="ins-tag">Weekly Forecast</span><div class="ins-title">EUR/USD Outlook, April 2026</div><div class="ins-meta">Apr 21, 2026 · 4 min read</div></div>
+      </div>
+      <div class="ins-card reveal d1">
+        <div class="ins-thumb" style="background:linear-gradient(135deg,#dce8f5,var(--n050))"><div class="ins-thumb-text">FX Cost in 2026</div><div class="ins-thumb-bar"></div></div>
+        <div class="ins-body"><span class="ins-tag">Strategy</span><div class="ins-title">How corporates should think about FX cost in 2026</div><div class="ins-meta">Apr 18, 2026 · 6 min read</div></div>
+      </div>
+      <div class="ins-card reveal d2">
+        <div class="ins-thumb" style="background:linear-gradient(135deg,var(--n100),var(--n050))"><div class="ins-thumb-text">Active FX Risk</div><div class="ins-thumb-bar"></div></div>
+        <div class="ins-body"><span class="ins-tag">Deep Dive</span><div class="ins-title">The case for active FX risk management</div><div class="ins-meta">Apr 14, 2026 · 8 min read</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band" id="contact">
+  <div class="container">
+    <div class="cta-inner">
+      <div><span class="eyebrow cta-eyebrow">Get started</span></div>
+      <h2 class="cta-head" style="margin-top:16px">Ready for a real <em>FX team?</em></h2>
+      <p class="cta-sub">Open an account in minutes or speak directly with a foreign exchange specialist. No minimum volumes, no contract lock-in.</p>
+      <div class="cta-actions">
+        <a href="#" class="btn btn-white-fill">Open a business account</a>
+        <a href="#" class="btn btn-ghost-white">Talk to a specialist</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <img src="assets/hansepay-mark-uploaded-white.png" alt="HansePay" />
+          <span class="footer-logo-text">HansePay</span>
+        </div>
+        <p class="footer-tagline">Commercial FX, made in Hamburg.</p>
+        <p class="footer-legal">© 2026 Caplend Technologies GmbH<br>HansePay is a brand of Caplend Technologies GmbH</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Product</div>
+        <ul class="footer-links">
+          <li><a class="footer-link" href="#">Payments</a></li>
+          <li><a class="footer-link" href="#">Rate Hedging</a></li>
+          <li><a class="footer-link" href="#">Spot FX</a></li>
+          <li><a class="footer-link" href="#">Bulk Payments</a></li>
+          <li><a class="footer-link" href="#">API</a></li>
+          <li><a class="footer-link" href="#">Security</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a class="footer-link" href="#">About</a></li>
+          <li><a class="footer-link" href="#">Team</a></li>
+          <li><a class="footer-link" href="#">Insights</a></li>
+          <li><a class="footer-link" href="#">Careers</a></li>
+          <li><a class="footer-link" href="#">Contact</a></li>
+          <li><a class="footer-link" href="#">Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <ul class="footer-links">
+          <li><a class="footer-link" href="#">Imprint</a></li>
+          <li><a class="footer-link" href="#">Privacy</a></li>
+          <li><a class="footer-link" href="#">Terms</a></li>
+          <li><a class="footer-link" href="#">Complaints</a></li>
+          <li><a class="footer-link" href="#">Regulatory</a></li>
+          <li><a class="footer-link" href="#">Licences</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-hr"></div>
+    <div class="footer-bottom">
+      <span class="footer-copy">HansePay · Hamburg, Germany · Regulated by BaFin</span>
+      <span class="bafin-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>BaFin-regulated · EU E-Money Institution</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── NAV SCROLL ──────────────────────────── */
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20), {passive:true});
+
+/* ── CALCULATOR ──────────────────────────── */
+const fmt = n => new Intl.NumberFormat('en-GB',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n);
+function calcUpdate() {
+  const vol = parseFloat(document.getElementById('vol').value)||0;
+  const br = parseFloat(document.getElementById('bank').value)/100;
+  const bc = vol*br, hc = vol*0.005, sv = bc-hc;
+  document.getElementById('r-bank').textContent = fmt(bc);
+  document.getElementById('r-hp').textContent = fmt(hc);
+  document.getElementById('r-save').textContent = fmt(sv);
+}
+['vol','cur','bank'].forEach(id => document.getElementById(id).addEventListener('input', calcUpdate));
+calcUpdate();
+
+/* ── SCROLL REVEAL ───────────────────────── */
+const io = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }), {threshold:0.05});
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+/* ── SMOOTH SCROLL ───────────────────────── */
+document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+  const t = document.querySelector(a.getAttribute('href'));
+  if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+}));
+
+/* ── BRIDGE CANVAS ───────────────────────── */
+/* Suspension bridge: catenary main cables + hangers + single traveling light pulse */
+(function() {
+  var canvas = document.getElementById('bridge-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var DPR = window.devicePixelRatio || 1;
+  var W, H;
+  var G = null;
+  var cablePts = [];
+  var spanPts  = [];   // main-span only, between towers
+  var hangers  = [];
+  var pulseT   = 0;    // 0..1 position of pulse leading edge along span
+  var lastTs   = null;
+
+  /* ── sizing ── */
+  function size() {
+    W = canvas.offsetWidth;
+    H = canvas.offsetHeight;
+    if (!W || !H) return false;
+    canvas.width  = Math.round(W * DPR);
+    canvas.height = Math.round(H * DPR);
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    return true;
+  }
+
+  /* ── parabola for main span ── */
+  function spanY(x, lx, rx, tTop, dip) {
+    var mid = (lx + rx) / 2;
+    var a   = (tTop - dip) / Math.pow(lx - mid, 2);
+    return a * Math.pow(x - mid, 2) + dip;
+  }
+
+  /* ── build geometry ── */
+  function build() {
+    cablePts = []; spanPts = []; hangers = [];
+
+    var deck  = H * 0.70;
+    var lx    = W * 0.24;
+    var rx    = W * 0.76;
+    var tTop  = H * 0.06;
+    var dip   = H * 0.43;
+    var lA    = { x: W * 0.02, y: H * 0.58 };
+    var rA    = { x: W * 0.98, y: H * 0.58 };
+
+    G = { deck, lx, rx, tTop, dip, lA, rA };
+
+    for (var i = 0; i <= 160; i++) {
+      var u = i / 160;
+      var x = lA.x + (rA.x - lA.x) * u;
+      var y;
+      if (x <= lx) {
+        var bt = (x - lA.x) / (lx - lA.x);
+        y = lA.y + (tTop - lA.y) * bt;
+      } else if (x >= rx) {
+        var bt2 = (x - rx) / (rA.x - rx);
+        y = tTop + (rA.y - tTop) * bt2;
+      } else {
+        y = spanY(x, lx, rx, tTop, dip);
+      }
+      cablePts.push({ x: x, y: y });
+      if (x >= lx - 1 && x <= rx + 1) spanPts.push({ x: x, y: y });
+    }
+
+    for (var hx = lx; hx <= rx + 1; hx += 26) {
+      hangers.push({ x: hx, top: spanY(hx, lx, rx, tTop, dip), bot: deck });
+    }
+  }
+
+  /* ── draw frame ── */
+  function draw(ts) {
+    if (!G) { requestAnimationFrame(draw); return; }
+    if (!lastTs) lastTs = ts;
+    var dt = Math.min((ts - lastTs) / 1000, 0.05);
+    lastTs = ts;
+
+    ctx.clearRect(0, 0, W, H);
+
+    var d = G.deck, lx = G.lx, rx = G.rx, tTop = G.tTop;
+    var lA = G.lA, rA = G.rA;
+
+    /* ── Dark navy background — matches globe aesthetic ── */
+    var bg = ctx.createRadialGradient(W * 0.38, H * 0.30, 0, W * 0.5, H * 0.5, Math.max(W, H) * 0.75);
+    bg.addColorStop(0,   '#132844');
+    bg.addColorStop(0.5, '#0C1D34');
+    bg.addColorStop(1,   '#060D1A');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    /* Subtle dot-grid texture — same language as globe continents */
+    var DS = Math.round(W / 18); /* dot spacing scales with canvas width */
+    ctx.fillStyle = 'rgba(141,189,230,0.055)';
+    for (var gy = DS / 2; gy < H; gy += DS) {
+      for (var gx = DS / 2; gx < W; gx += DS) {
+        ctx.beginPath(); ctx.arc(gx, gy, 1, 0, Math.PI * 2); ctx.fill();
+      }
+    }
+
+    /* ── Advance pulse (two opposing, 6s cycle) ── */
+    pulseT = (pulseT + dt / 6) % 1;
+    var WINDOW = 0.20;
+    var n = spanPts.length;
+    var hA = Math.floor(pulseT * n);
+    var tA = Math.max(0, hA - Math.floor(n * WINDOW));
+    var pB = (pulseT + 0.5) % 1;
+    var hB = Math.floor(pB * n);
+    var tB = Math.max(0, hB - Math.floor(n * WINDOW));
+
+    /* ── Hangers — brand blue, glow gold when pulse passes ── */
+    hangers.forEach(function(h) {
+      var hPos = (h.x - lx) / (rx - lx);
+      var cA = (tA + hA) / 2 / n, cB = (tB + hB) / 2 / n;
+      var dA = Math.abs(hPos - cA), dB = Math.abs(hPos - cB);
+      var inf = Math.max(
+        Math.max(0, 1 - dA / (WINDOW * 0.8)),
+        Math.max(0, 1 - dB / (WINDOW * 0.8))
+      );
+      if (inf > 0.05) {
+        ctx.lineWidth = 0.6 + inf * 1.4;
+        ctx.strokeStyle = 'rgba(201,169,97,' + (0.25 + inf * 0.65) + ')';
+      } else {
+        ctx.lineWidth = 0.6;
+        ctx.strokeStyle = 'rgba(141,189,230,0.22)';
+      }
+      ctx.beginPath(); ctx.moveTo(h.x, h.top); ctx.lineTo(h.x, h.bot); ctx.stroke();
+    });
+
+    /* ── Main cables — brand blue on dark bg ── */
+    [[0, 1.8, 0.72], [3.5, 0.9, 0.28]].forEach(function(cfg) {
+      var offset = cfg[0], lw = cfg[1], op = cfg[2];
+      ctx.lineWidth = lw;
+      ctx.strokeStyle = 'rgba(141,189,230,' + op + ')';
+      ctx.beginPath();
+      cablePts.forEach(function(p, i) {
+        i === 0 ? ctx.moveTo(p.x, p.y + offset) : ctx.lineTo(p.x, p.y + offset);
+      });
+      ctx.stroke();
+    });
+
+    /* ── Gold pulse overlay on cable ── */
+    function drawPulseSeg(seg) {
+      if (seg.length < 2) return;
+      ctx.save(); ctx.lineCap = 'round';
+      ctx.shadowColor = 'rgba(201,169,97,0.80)'; ctx.shadowBlur = 24;
+      ctx.strokeStyle = 'rgba(201,169,97,0.75)'; ctx.lineWidth = 4.5;
+      ctx.beginPath();
+      seg.forEach(function(p, i) { i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y); });
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+      ctx.strokeStyle = '#C9A961'; ctx.lineWidth = 2;
+      ctx.beginPath();
+      seg.forEach(function(p, i) { i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y); });
+      ctx.stroke();
+      ctx.restore();
+    }
+    drawPulseSeg(spanPts.slice(tA, hA + 1));
+    var segB = spanPts.slice(n - hB - 1, n - tB).reverse();
+    drawPulseSeg(segB);
+
+    /* ── Deck ── */
+    ctx.lineWidth = 2.2; ctx.strokeStyle = 'rgba(141,189,230,0.65)';
+    ctx.beginPath(); ctx.moveTo(lA.x, d); ctx.lineTo(rA.x, d); ctx.stroke();
+    ctx.lineWidth = 0.8; ctx.strokeStyle = 'rgba(141,189,230,0.20)';
+    ctx.beginPath(); ctx.moveTo(lA.x, d - 9); ctx.lineTo(rA.x, d - 9); ctx.stroke();
+    /* Deck underside glow */
+    var dg = ctx.createLinearGradient(0, d, 0, d + 18);
+    dg.addColorStop(0, 'rgba(141,189,230,0.08)');
+    dg.addColorStop(1, 'rgba(141,189,230,0)');
+    ctx.fillStyle = dg;
+    ctx.fillRect(lA.x, d, rA.x - lA.x, 18);
+
+    /* ── Towers — tapered, brand blue ── */
+    var tw = 5;
+    ctx.fillStyle = 'rgba(141,189,230,0.75)';
+    [lx, rx].forEach(function(tx) {
+      ctx.beginPath();
+      ctx.moveTo(tx - tw, d + 6);
+      ctx.lineTo(tx - 1.4, tTop);
+      ctx.lineTo(tx + 1.4, tTop);
+      ctx.lineTo(tx + tw, d + 6);
+      ctx.fill();
+    });
+
+    /* Tower portal crossbeams */
+    var beam1 = tTop + (d - tTop) * 0.24;
+    var beam2 = tTop + (d - tTop) * 0.52;
+    [beam1, beam2].forEach(function(by, bi) {
+      var w = bi === 0 ? 14 : 11;
+      ctx.lineWidth = bi === 0 ? 1.8 : 1.2;
+      ctx.strokeStyle = 'rgba(141,189,230,' + (bi === 0 ? 0.65 : 0.42) + ')';
+      ctx.beginPath(); ctx.moveTo(lx - w, by); ctx.lineTo(lx + w, by); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(rx - w, by); ctx.lineTo(rx + w, by); ctx.stroke();
+      ctx.lineWidth = 0.7; ctx.strokeStyle = 'rgba(141,189,230,0.20)';
+      ctx.beginPath(); ctx.moveTo(lx - w, by); ctx.lineTo(lx - 1.5, by - 10); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(lx + w, by); ctx.lineTo(lx + 1.5, by - 10); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(rx - w, by); ctx.lineTo(rx - 1.5, by - 10); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(rx + w, by); ctx.lineTo(rx + 1.5, by - 10); ctx.stroke();
+    });
+
+    /* Tower crown caps + gold beacon */
+    [lx, rx].forEach(function(tx) {
+      ctx.fillStyle = 'rgba(141,189,230,0.72)';
+      ctx.fillRect(tx - 3.5, tTop - 6, 7, 6);
+      ctx.beginPath(); ctx.arc(tx, tTop - 8, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = '#C9A961'; ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  function init() {
+    if (!size()) { requestAnimationFrame(init); return; }
+    build();
+    requestAnimationFrame(draw);
+  }
+
+  var rTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(rTimer);
+    rTimer = setTimeout(function() { if (size()) build(); }, 150);
+  });
+  requestAnimationFrame(init);
+})();
+</script>

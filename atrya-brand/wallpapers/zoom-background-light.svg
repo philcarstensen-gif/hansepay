@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&amp;family=Inter:wght@300;400;500&amp;display=swap');
+      .zml-brand { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 52px; fill: #0c1628; letter-spacing: -0.025em; }
+      .zml-url { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 18px; fill: #1a8ee0; letter-spacing: 0.04em; }
+      .zml-tagline { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 14px; fill: rgba(12,22,40,0.55); letter-spacing: 0.06em; }
+    </style>
+    <linearGradient id="zmlLeftBg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f0f4fc"/>
+      <stop offset="100%" stop-color="#e6ecf8"/>
+    </linearGradient>
+    <linearGradient id="zmlRightBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e6ecf8"/>
+      <stop offset="100%" stop-color="#f0f4fc"/>
+    </linearGradient>
+    <linearGradient id="zmlStreak" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a8ee0" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#1a8ee0" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#1a8ee0" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Full background -->
+  <rect width="1920" height="1080" fill="url(#zmlRightBg)"/>
+
+  <!-- Left panel (lighter) -->
+  <rect x="0" y="0" width="560" height="1080" fill="url(#zmlLeftBg)"/>
+  <line x1="560" y1="0" x2="560" y2="1080" stroke="rgba(26,142,224,0.25)" stroke-width="1"/>
+  <rect x="0" y="0" width="560" height="3" fill="#1a8ee0" fill-opacity="0.5"/>
+  <rect x="0" y="1077" width="560" height="3" fill="#1a8ee0" fill-opacity="0.5"/>
+
+  <!-- Logo in left panel -->
+  <g transform="translate(60, 380) scale(3.5)">
+    <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#0c1628" stroke-width="1.6"/>
+    <polygon points="20,13 27,20 20,27 13,20" fill="#0c1628"/>
+  </g>
+  <text x="60" y="560" class="zml-brand">Atrya</text>
+  <rect x="60" y="575" width="60" height="2" fill="#1a8ee0" fill-opacity="0.5" rx="1"/>
+  <text x="60" y="610" class="zml-tagline">Payment logic. Settlement. Unified.</text>
+  <text x="60" y="650" class="zml-url">atrya.io</text>
+
+  <!-- Right panel light streaks -->
+  <rect x="560" y="0" width="1360" height="1080" fill="url(#zmlStreak)"/>
+
+  <!-- Hex grid on right (very subtle) -->
+  <g fill="none" stroke="#1a8ee0" stroke-opacity="0.07">
+    <g transform="translate(600, 20) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(820, 20) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1040, 20) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1260, 20) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1480, 20) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1700, 20) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(710, 184) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(930, 184) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1150, 184) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1370, 184) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1590, 184) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1810, 184) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(600, 348) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(820, 348) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1040, 348) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1260, 348) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1480, 348) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1700, 348) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(710, 512) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(930, 512) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1150, 512) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1370, 512) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1590, 512) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1810, 512) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(600, 676) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(820, 676) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1040, 676) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1260, 676) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1480, 676) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1700, 676) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(710, 840) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(930, 840) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1150, 840) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1370, 840) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1590, 840) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+    <g transform="translate(1810, 840) scale(5.5)"><polygon points="36,20 28,6 12,6 4,20 12,34 28,34" stroke-width="1.1"/></g>
+  </g>
+
+  <!-- Accent hex center-right -->
+  <g transform="translate(1100, 340) scale(8)" opacity="0.10">
+    <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#1a8ee0" stroke-width="1.2"/>
+    <polygon points="20,13 27,20 20,27 13,20" fill="#1a8ee0" fill-opacity="0.4"/>
+  </g>
+</svg>

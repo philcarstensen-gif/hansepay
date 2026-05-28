@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Chain PNG Export — Atrya</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04060e;--bg2:#070b18;
+  --text:#e2eaf8;--mid:rgba(226,234,248,.76);--dim:rgba(226,234,248,.40);--faint:rgba(226,234,248,.20);
+  --line:rgba(255,255,255,.07);--lineb:rgba(255,255,255,.12);--ac:#4FA8FF;--acg:rgba(79,168,255,.10);
+}
+[data-theme="light"]{
+  --bg:#f0f4fc;--bg2:#e6ecf8;
+  --text:#0c1628;--mid:rgba(12,22,40,.54);--dim:rgba(12,22,40,.32);--faint:rgba(12,22,40,.18);
+  --line:rgba(12,22,40,.08);--lineb:rgba(12,22,40,.15);
+  --ac:#1a8ee0;--acg:rgba(26,142,224,.08);
+  color-scheme:light;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;font-weight:300;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6;min-height:100vh}
+
+nav{position:sticky;top:0;z-index:100;padding:20px 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(4,6,14,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+[data-theme="light"] nav{background:rgba(240,244,252,.92);border-color:rgba(12,22,40,.09)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:'Syne',sans-serif;font-size:22px;font-weight:600;color:var(--text);letter-spacing:-.025em}
+.logo svg{width:28px;height:28px;flex-shrink:0}
+.nav-r{display:flex;align-items:center;gap:24px}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:13px;color:var(--dim);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-btn{padding:7px 16px;border:1px solid var(--line);border-radius:6px;font-size:13px;color:var(--text);text-decoration:none;white-space:nowrap;transition:border-color .2s,background .2s}
+.nav-btn:hover{border-color:rgba(79,168,255,.4);background:var(--acg)}
+.theme-toggle{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--dim);transition:color .2s,border-color .2s}
+.theme-toggle:hover{color:var(--text)}
+.theme-toggle svg{width:16px;height:16px}
+.icon-sun{display:none}.icon-moon{display:block}
+[data-theme="light"] .icon-sun{display:block}[data-theme="light"] .icon-moon{display:none}
+
+.wrap{max-width:1100px;margin:0 auto;padding:60px 40px 120px}
+h1{font-family:'Syne',sans-serif;font-weight:500;font-size:32px;letter-spacing:-0.03em;margin-bottom:8px}
+.subtitle{font-size:14px;color:var(--dim);margin-bottom:48px;line-height:1.6}
+
+.controls{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:40px;padding:24px;background:var(--acg);border:1px solid var(--line);border-radius:12px;align-items:flex-end}
+.control-group{display:flex;flex-direction:column;gap:6px}
+.control-group label{font-size:10px;font-weight:500;color:var(--ac);letter-spacing:0.1em;text-transform:uppercase}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{padding:7px 14px;border-radius:6px;border:1px solid rgba(79,168,255,.25);background:rgba(79,168,255,.06);color:var(--mid);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
+.btn:hover{background:rgba(79,168,255,.14);border-color:rgba(79,168,255,.45);color:var(--text)}
+.btn.active{background:rgba(79,168,255,.18);border-color:var(--ac);color:var(--ac)}
+.btn-primary{padding:11px 26px;border-radius:7px;background:var(--ac);border:none;color:#04060e;font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;letter-spacing:.5px;transition:opacity .15s;white-space:nowrap}
+.btn-primary:hover{opacity:.85}
+
+.export-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px}
+.export-card{background:var(--acg);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.canvas-wrap{position:relative;display:flex;align-items:center;justify-content:center;padding:12px}
+.canvas-wrap.dark-bg{background:#04060e}
+.canvas-wrap.light-bg{background:#f0f4fc}
+.canvas-wrap.transparent-bg{background:repeating-conic-gradient(#1a1f2e 0% 25%,#101420 0% 50%) 0 0/20px 20px}
+[data-theme="light"] .canvas-wrap.transparent-bg{background:repeating-conic-gradient(#d0d8e8 0% 25%,#e8edf8 0% 50%) 0 0/20px 20px}
+.export-card canvas{display:block;border-radius:6px}
+.card-footer{padding:16px 20px;border-top:1px solid var(--line)}
+.card-label{font-size:11px;font-weight:500;color:var(--ac);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px}
+.card-spec{font-size:11px;color:var(--dim);margin-bottom:12px}
+.dl-row{display:flex;gap:8px;flex-wrap:wrap}
+.dl-btn{padding:6px 12px;border-radius:5px;border:1px solid rgba(79,168,255,.25);background:transparent;color:var(--ac);font-size:11px;font-weight:500;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
+.dl-btn:hover{background:var(--acg);border-color:var(--ac)}
+
+.spinner{font-size:12px;color:var(--dim);padding:8px 0;display:none}
+.spinner.show{display:block}
+
+footer{border-top:1px solid var(--line);padding:40px 56px;display:grid;grid-template-columns:1.2fr 1fr 1fr 1.4fr;align-items:start;gap:40px}
+.ft-brand{display:flex;flex-direction:column;gap:8px}
+.fl{font-family:'Syne',sans-serif;font-size:14.5px;font-weight:600;color:var(--dim)}
+.fc{font-size:12px;color:var(--faint);line-height:1.6}
+.ft-col{display:flex;flex-direction:column;gap:10px}
+.ft-col-label{font-size:10px;font-weight:500;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+.flinks{display:flex;flex-direction:column;gap:9px}
+.flinks a{font-size:12.5px;color:var(--faint);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--dim)}
+.ft-bottom{grid-column:1/-1;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.ft-copy{font-size:11.5px;color:var(--faint)}
+
+@media(max-width:768px){
+  nav{padding:16px 20px}
+  .nav-links{display:none}
+  .nav-btn{display:none}
+  footer{padding:36px 20px;grid-template-columns:1fr 1fr}
+  .ft-brand,.ft-bottom,.ft-get-in-touch{grid-column:1/-1}
+}
+@media(max-width:600px){
+  .wrap{padding:40px 20px 80px}
+  footer{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="../index.html">
+    <svg viewBox="0 0 100 100" fill="none" width="28" height="28" style="flex-shrink:0">
+      <defs>
+        <linearGradient id="ce-lg" x1="10" y1="6" x2="90" y2="94" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#c2d2e4"/><stop offset="52%" stop-color="#5a7092"/><stop offset="100%" stop-color="#101828"/>
+        </linearGradient>
+      </defs>
+      <path fill="url(#ce-lg)" d="M11.9,47 L11.9,33 Q11.9,28 16.2,25.5 L45.7,8.5 Q50,6 54.3,8.5 L83.8,25.5 Q88.1,28 88.1,33 L88.1,47 C74,47 63,22 50,22 C37,22 26,47 11.9,47Z"/>
+      <path fill="url(#ce-lg)" d="M11.9,53 L11.9,67 Q11.9,72 16.2,74.5 L45.7,91.5 Q50,94 54.3,91.5 L83.8,74.5 Q88.1,72 88.1,67 L88.1,53 C74,53 63,78 50,78 C37,78 26,53 11.9,53Z"/>
+    </svg>
+    Atrya
+  </a>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li><a href="../index.html#usecases">Use Cases</a></li>
+      <li><a href="../index.html#vision">Vision</a></li>
+      <li><a href="../index.html#about">About</a></li>
+    </ul>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+    <a class="nav-btn" href="../waitlist.html">Join Beta</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <h1>Chain Renders</h1>
+  <p class="subtitle">
+    Photorealistic exports of the Atrya chain in assembled, transitional, and scattered states.<br>
+    Choose size and background, then download individual frames or all at once.
+  </p>
+
+  <div class="controls">
+    <div class="control-group">
+      <label>Export Size</label>
+      <div class="btn-row" id="size-btns">
+        <button class="btn active" onclick="setRes(this,512)">512 px</button>
+        <button class="btn" onclick="setRes(this,1024)">1024 px</button>
+        <button class="btn" onclick="setRes(this,2048)">2048 px</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>Background</label>
+      <div class="btn-row" id="bg-btns">
+        <button class="btn active" onclick="setBg(this,'dark')">Dark</button>
+        <button class="btn" onclick="setBg(this,'light')">Light</button>
+        <button class="btn" onclick="setBg(this,'transparent')">Transparent</button>
+      </div>
+    </div>
+    <div class="control-group" style="margin-left:auto">
+      <label>&nbsp;</label>
+      <div class="btn-row">
+        <button class="btn-primary" onclick="downloadAll()">↓ Download All (5 PNGs)</button>
+      </div>
+    </div>
+  </div>
+  <div class="spinner" id="spinner">Rendering…</div>
+
+  <div class="export-grid" id="export-grid"></div>
+</div>
+
+<footer>
+  <div class="ft-brand">
+    <svg viewBox="0 0 100 100" fill="none" width="44" height="44" aria-hidden="true" style="margin-bottom:4px">
+      <defs><linearGradient id="ft-ce-lg" x1="10" y1="6" x2="90" y2="94" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#c2d2e4"/><stop offset="52%" stop-color="#5a7092"/><stop offset="100%" stop-color="#101828"/></linearGradient></defs>
+      <path fill="url(#ft-ce-lg)" d="M11.9,47 L11.9,33 Q11.9,28 16.2,25.5 L45.7,8.5 Q50,6 54.3,8.5 L83.8,25.5 Q88.1,28 88.1,33 L88.1,47 C74,47 63,22 50,22 C37,22 26,47 11.9,47Z"/>
+      <path fill="url(#ft-ce-lg)" d="M11.9,53 L11.9,67 Q11.9,72 16.2,74.5 L45.7,91.5 Q50,94 54.3,91.5 L83.8,74.5 Q88.1,72 88.1,67 L88.1,53 C74,53 63,78 50,78 C37,78 26,53 11.9,53Z"/>
+    </svg>
+    <span class="fl">Atrya</span>
+    <span class="fc">Europe's first regulated on-chain FX facility.<br>Building programmable money infrastructure.</span>
+  </div>
+  <div class="ft-col">
+    <span class="ft-col-label">Product</span>
+    <div class="flinks">
+      <a href="../index.html#usecases">Use Cases</a>
+      <a href="../index.html#platform">Platform</a>
+    </div>
+  </div>
+  <div class="ft-col">
+    <span class="ft-col-label">Company</span>
+    <div class="flinks">
+      <a href="../index.html#vision">Vision</a>
+      <a href="../index.html#about">About</a>
+      <a href="../imprint.html">Imprint</a>
+    </div>
+  </div>
+  <div class="ft-col ft-get-in-touch">
+    <span class="ft-col-label">Get In Touch</span>
+    <div class="flinks">
+      <a href="mailto:hello@atrya.io">hello@atrya.io</a>
+      <a href="https://www.linkedin.com/company/atrya-infrastructure" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
+  </div>
+  <div class="ft-bottom">
+    <span class="ft-copy">© 2026 Caplend Technologies GmbH · HRB 185277 Amtsgericht Hamburg</span>
+    <div class="flinks" style="flex-direction:row;gap:20px"><a href="../cookie-policy.html">Cookies</a><a href="../imprint.html">Imprint</a></div>
+  </div>
+</footer>
+
+<script>
+/* ─── CHAIN PARAMETERS — mirrors index.html exactly ─── */
+const N=6, S=1.55;
+
+const TANGLE=[
+  [ 1.10,  2.20,  0.40,  0.40,  0.55,  0.30],
+  [-1.20,  1.20, -0.35,  1.57+0.55,  0.25, -0.25],
+  [ 0.85,  0.20,  0.55, -0.30,  0.85,  0.45],
+  [-0.90, -0.80, -0.50,  1.57-0.45, -0.20,  0.30],
+  [ 1.05, -1.80,  0.35,  0.45, -0.55, -0.35],
+  [-0.75, -2.70, -0.25,  1.57+0.30,  0.45, -0.20],
+];
+
+const CHAIN=Array.from({length:N},(_,i)=>[
+  0,(i-(N-1)/2)*S,0,
+  0,
+  i%2===0?0:Math.PI/2,
+  0,
+]);
+
+function lerp(a,b,t){return a+(b-a)*t;}
+
+/* ─── RENDER STATES ─── */
+const STATES=[
+  {
+    id:'assembled',
+    label:'Chain — Assembled',
+    spec:'Hero / final state',
+    rotY:0.30, rotZ:0.10,
+    build(links){
+      links.forEach((m,i)=>{
+        const [cx,cy,cz,rx,ry,rz]=CHAIN[i];
+        m.position.set(cx,cy,cz);
+        m.rotation.set(rx,ry,rz);
+      });
+    }
+  },
+  {
+    id:'assembled-angle',
+    label:'Chain — Assembled Angle',
+    spec:'45° side view',
+    rotY:0.30+0.78, rotZ:0.10,
+    build(links){
+      links.forEach((m,i)=>{
+        const [cx,cy,cz,rx,ry,rz]=CHAIN[i];
+        m.position.set(cx,cy,cz);
+        m.rotation.set(rx,ry,rz);
+      });
+    }
+  },
+  {
+    id:'transition-25',
+    label:'Chain — Transition 25%',
+    spec:'Early bridge morph',
+    rotY:0.36, rotZ:0.13,
+    build(links){
+      const t=0.25;
+      links.forEach((m,i)=>{
+        const [tx,ty,tz,trx,try_,trz]=TANGLE[i];
+        const [cx,cy,cz,rx,ry,rz]=CHAIN[i];
+        m.position.set(lerp(cx,tx,t),lerp(cy,ty,t),lerp(cz,tz,t));
+        m.rotation.set(lerp(rx,trx,t),lerp(ry,try_,t),lerp(rz,trz,t));
+      });
+    }
+  },
+  {
+    id:'transition-65',
+    label:'Chain — Transition 65%',
+    spec:'Mid-bridge morph',
+    rotY:0.44, rotZ:0.17,
+    build(links){
+      const t=0.65;
+      links.forEach((m,i)=>{
+        const [tx,ty,tz,trx,try_,trz]=TANGLE[i];
+        const [cx,cy,cz,rx,ry,rz]=CHAIN[i];
+        m.position.set(lerp(cx,tx,t),lerp(cy,ty,t),lerp(cz,tz,t));
+        m.rotation.set(lerp(rx,trx,t),lerp(ry,try_,t),lerp(rz,trz,t));
+      });
+    }
+  },
+  {
+    id:'scattered',
+    label:'Chain — Scattered',
+    spec:'Tangle / start of scroll',
+    rotY:0.72, rotZ:0.22,
+    build(links){
+      links.forEach((m,i)=>{
+        const [tx,ty,tz,trx,try_,trz]=TANGLE[i];
+        m.position.set(tx,ty,tz);
+        m.rotation.set(trx,try_,trz);
+      });
+    }
+  },
+];
+
+/* ─── CHAIN-LINK GEOMETRY — matches index.html exactly ─── */
+function makeChainLinkGeo(){
+  const hw=0.34,hh=1.00,cr=0.30;
+  const iw=0.20,ih=0.84,ir=0.14;
+  const D=0.22;
+  const s=new THREE.Shape();
+  s.moveTo(-hw+cr,hh); s.lineTo(hw-cr,hh);
+  s.absarc(hw-cr,hh-cr,cr,Math.PI/2,0,true);
+  s.lineTo(hw,-hh+cr);
+  s.absarc(hw-cr,-hh+cr,cr,0,-Math.PI/2,true);
+  s.lineTo(-hw+cr,-hh);
+  s.absarc(-hw+cr,-hh+cr,cr,-Math.PI/2,Math.PI,true);
+  s.lineTo(-hw,hh-cr);
+  s.absarc(-hw+cr,hh-cr,cr,Math.PI,Math.PI/2,true);
+  const h=new THREE.Path();
+  h.moveTo(iw,ih-ir);
+  h.absarc(iw-ir,ih-ir,ir,0,Math.PI/2,false);
+  h.lineTo(-iw+ir,ih);
+  h.absarc(-iw+ir,ih-ir,ir,Math.PI/2,Math.PI,false);
+  h.lineTo(-iw,-ih+ir);
+  h.absarc(-iw+ir,-ih+ir,ir,Math.PI,3*Math.PI/2,false);
+  h.lineTo(iw-ir,-ih);
+  h.absarc(iw-ir,-ih+ir,ir,3*Math.PI/2,2*Math.PI,false);
+  h.lineTo(iw,ih-ir);
+  s.holes.push(h);
+  const geo=new THREE.ExtrudeGeometry(s,{depth:D,bevelEnabled:true,bevelThickness:0.10,bevelSize:0.09,bevelSegments:20,curveSegments:72});
+  geo.center();
+  return geo;
+}
+
+/* ─── ENV MAP — built once, shared across renders ─── */
+let _envMap=null;
+function buildEnvMap(renderer){
+  if(_envMap) return _envMap;
+  const pmrem=new THREE.PMREMGenerator(renderer);
+  pmrem.compileEquirectangularShader();
+  const EW=256,EH=128;
+  const ed=new Float32Array(EW*EH*4);
+  for(let y=0;y<EH;y++){for(let x=0;x<EW;x++){
+    const i=(y*EW+x)*4;
+    const u=x/EW,v=y/EH;
+    let r=0.006,g=0.007,b=0.018;
+    const spot=(cu,cv,R,sr,sg,sb,pw)=>{
+      const du=Math.min(Math.abs(u-cu),1-Math.abs(u-cu));
+      const dv=v-cv;
+      const f=Math.max(0,1-Math.sqrt(du*du+dv*dv)/R)**pw;
+      r+=sr*f;g+=sg*f;b+=sb*f;
+    };
+    spot(0.65,0.14,0.18, 9,9,9,4);
+    spot(0.50,0.02,0.12, 11,11,11,5);
+    spot(0.80,0.38,0.18, 5,5.2,5.6,3);
+    spot(0.08,0.44,0.22, 0.4,0.9,2.2,2);
+    spot(0.92,0.44,0.22, 0.4,0.9,2.2,2);
+    spot(0.30,0.72,0.22, 0.1,0.2,0.8,2);
+    ed[i]=r;ed[i+1]=g;ed[i+2]=b;ed[i+3]=1;
+  }}
+  const et=new THREE.DataTexture(ed,EW,EH,THREE.RGBAFormat,THREE.FloatType);
+  et.mapping=THREE.EquirectangularReflectionMapping;
+  et.needsUpdate=true;
+  _envMap=pmrem.fromEquirectangular(et).texture;
+  et.dispose();pmrem.dispose();
+  return _envMap;
+}
+
+/* ─── STATE ─── */
+let currentRes=512;
+let currentBg='dark';
+
+function setRes(btn,res){
+  document.querySelectorAll('#size-btns .btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentRes=res;
+  renderAll();
+}
+function setBg(btn,bg){
+  document.querySelectorAll('#bg-btns .btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentBg=bg;
+  renderAll();
+}
+
+/* ─── OFFSCREEN RENDERER ─── */
+function renderState(state,size,bg){
+  const isDark=(bg!=='light');
+  const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});
+  renderer.setPixelRatio(1);
+  renderer.setSize(size,size);
+  renderer.toneMapping=THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure=isDark?1.5:2.0;
+
+  const envMap=buildEnvMap(renderer);
+
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(38,1,.1,100);
+  camera.position.set(0,0,11);
+
+  if(isDark){
+    scene.add(new THREE.AmbientLight(0x020810,0.3));
+    const Lk=new THREE.DirectionalLight(0xffffff,5.5); Lk.position.set(-3,7,8); scene.add(Lk);
+    const Lb=new THREE.PointLight(0x4FA8FF,8,30); Lb.position.set(-8,2,8); scene.add(Lb);
+    const Lw=new THREE.PointLight(0xddeeff,22,26); Lw.position.set(8,4,7); scene.add(Lw);
+    const Lr=new THREE.PointLight(0xffffff,32,22); Lr.position.set(-1,11,-5); scene.add(Lr);
+    const Ld=new THREE.PointLight(0x08145a,10,26); Ld.position.set(0,-5,-8); scene.add(Ld);
+  } else {
+    scene.add(new THREE.AmbientLight(0x101820,1.5));
+    const Llk=new THREE.DirectionalLight(0xffffff,16); Llk.position.set(-4,8,6); scene.add(Llk);
+    const Llr1=new THREE.PointLight(0xffffff,80,28); Llr1.position.set(-2,12,-3); scene.add(Llr1);
+    const Llr2=new THREE.PointLight(0xffffff,55,24); Llr2.position.set(5,9,6); scene.add(Llr2);
+    const Llb=new THREE.PointLight(0x4FA8FF,30,24); Llb.position.set(-9,0,7); scene.add(Llb);
+  }
+
+  const mat=new THREE.MeshPhysicalMaterial({
+    color:isDark?0x0a1e3e:0x1e3550,
+    metalness:0.98,
+    roughness:0.04,
+    clearcoat:1.0,
+    clearcoatRoughness:0.06,
+    reflectivity:1.0,
+    envMapIntensity:isDark?0.9:2.0,
+    envMap,
+  });
+
+  const geo=makeChainLinkGeo();
+  const group=new THREE.Group();
+  const links=[];
+  for(let i=0;i<N;i++){
+    const mesh=new THREE.Mesh(geo,mat);
+    group.add(mesh); links.push(mesh);
+  }
+  scene.add(group);
+
+  state.build(links);
+  group.rotation.y=state.rotY;
+  group.rotation.z=state.rotZ;
+  group.rotation.x=0;
+  group.position.set(0,0,0);
+
+  if(bg==='dark')       scene.background=new THREE.Color(0x04060e);
+  else if(bg==='light') scene.background=new THREE.Color(0xf0f4fc);
+  else                  scene.background=null;
+
+  renderer.render(scene,camera);
+  const dataURL=renderer.domElement.toDataURL('image/png');
+  renderer.dispose();
+  return dataURL;
+}
+
+/* ─── PREVIEW CARDS ─── */
+const PREVIEW_SIZE=256;
+
+function renderAll(){
+  document.getElementById('spinner').classList.add('show');
+  setTimeout(()=>{
+    const grid=document.getElementById('export-grid');
+    grid.innerHTML='';
+    STATES.forEach(state=>{
+      const dataURL=renderState(state,currentRes,currentBg);
+      state._lastDataURL=dataURL;
+
+      const bgClass=currentBg==='transparent'?'transparent-bg':currentBg==='light'?'light-bg':'dark-bg';
+      const card=document.createElement('div');
+      card.className='export-card';
+      card.innerHTML=`
+        <div class="canvas-wrap ${bgClass}">
+          <img src="${dataURL}" width="${PREVIEW_SIZE}" height="${PREVIEW_SIZE}" style="display:block;border-radius:4px;" alt="${state.label}"/>
+        </div>
+        <div class="card-footer">
+          <div class="card-label">${state.label}</div>
+          <div class="card-spec">${state.spec} · ${currentRes}×${currentRes} · ${currentBg}</div>
+          <div class="dl-row">
+            <button class="dl-btn" onclick="downloadOne('${state.id}',this.closest('.export-card').querySelector('img').src,'${currentRes}','${currentBg}')">↓ PNG ${currentRes}px</button>
+          </div>
+        </div>`;
+      grid.appendChild(card);
+    });
+    document.getElementById('spinner').classList.remove('show');
+  },30);
+}
+
+/* ─── DOWNLOAD HELPERS ─── */
+function downloadOne(id,dataURL,size,bg){
+  const a=document.createElement('a');
+  a.href=dataURL;
+  a.download=`atrya-chain-${id}-${size}px-${bg}.png`;
+  a.click();
+}
+
+function downloadAll(){
+  document.getElementById('spinner').classList.add('show');
+  setTimeout(()=>{
+    STATES.forEach((state,i)=>{
+      const dataURL=state._lastDataURL||renderState(state,currentRes,currentBg);
+      setTimeout(()=>{
+        const a=document.createElement('a');
+        a.href=dataURL;
+        a.download=`atrya-chain-${state.id}-${currentRes}px-${currentBg}.png`;
+        a.click();
+      },i*220);
+    });
+    document.getElementById('spinner').classList.remove('show');
+  },30);
+}
+
+/* ─── INIT ─── */
+window.addEventListener('load',()=>{
+  if(typeof THREE==='undefined'){
+    document.getElementById('export-grid').innerHTML='<p style="padding:20px;color:var(--dim)">Could not load Three.js — check your internet connection.</p>';
+    return;
+  }
+  renderAll();
+});
+
+/* ─── THEME TOGGLE ─── */
+(()=>{
+  const root=document.documentElement;
+  const btn=document.getElementById('theme-toggle');
+  const saved=localStorage.getItem('atrya-theme');
+  const prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if(saved==='light'||(saved===null&&!prefersDark)) root.setAttribute('data-theme','light');
+  btn.addEventListener('click',()=>{
+    const isLight=root.getAttribute('data-theme')==='light';
+    if(isLight){root.removeAttribute('data-theme');localStorage.setItem('atrya-theme','dark');}
+    else{root.setAttribute('data-theme','light');localStorage.setItem('atrya-theme','light');}
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Atrya — 3D Logo</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#04060e;--ac:#4FA8FF;--text:#e2eaf8;--dim:rgba(226,234,248,.40);--line:rgba(255,255,255,.07)}
+html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-family:'Inter',sans-serif;font-weight:300;color:var(--text);-webkit-font-smoothing:antialiased}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:20;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:rgba(4,6,14,.7);backdrop-filter:blur(14px)}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Syne',sans-serif;font-size:22px;font-weight:600;letter-spacing:-0.025em;color:var(--text);text-decoration:none}
+.nav-label{font-size:11px;font-weight:500;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase}
+
+canvas{display:block;cursor:grab;position:fixed;inset:0;width:100%!important;height:100%!important}
+canvas:active{cursor:grabbing}
+
+.ui{position:fixed;bottom:32px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;z-index:20;background:rgba(4,6,14,.65);backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:12px;padding:10px 16px}
+.btn{padding:7px 15px;border-radius:7px;border:1px solid rgba(79,168,255,.22);background:transparent;color:rgba(226,234,248,.7);font-size:11px;font-weight:500;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif;letter-spacing:.5px;white-space:nowrap}
+.btn:hover{background:rgba(79,168,255,.12);border-color:rgba(79,168,255,.5);color:var(--text)}
+.btn.active{background:rgba(79,168,255,.16);border-color:var(--ac);color:var(--ac)}
+.sep{width:1px;height:22px;background:var(--line);flex-shrink:0}
+
+.hint{position:fixed;top:50%;left:50%;transform:translate(-50%,180px);font-size:11px;color:rgba(226,234,248,.28);letter-spacing:.1em;text-transform:uppercase;pointer-events:none;transition:opacity .8s}
+.hint.gone{opacity:0}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="../atrya-landing.html">
+    <svg viewBox="0 0 100 100" fill="none" width="28" height="28">
+      <path fill="currentColor" d="M11.9,47 L11.9,33 Q11.9,28 16.2,25.5 L45.7,8.5 Q50,6 54.3,8.5 L83.8,25.5 Q88.1,28 88.1,33 L88.1,47 C74,47 63,22 50,22 C37,22 26,47 11.9,47Z"/>
+      <path fill="currentColor" d="M11.9,53 L11.9,67 Q11.9,72 16.2,74.5 L45.7,91.5 Q50,94 54.3,91.5 L83.8,74.5 Q88.1,72 88.1,67 L88.1,53 C74,53 63,78 50,78 C37,78 26,53 11.9,53Z"/>
+    </svg>
+    Atrya
+  </a>
+  <span class="nav-label">3D Logo</span>
+</nav>
+
+<canvas id="c"></canvas>
+
+<div class="ui">
+  <button class="btn active" onclick="setBg('dark',this)">Dark</button>
+  <button class="btn" onclick="setBg('light',this)">Light</button>
+  <button class="btn" onclick="setBg('transparent',this)">Transparent</button>
+  <div class="sep"></div>
+  <button class="btn" onclick="exportPNG(1024)">↓ 1024 px</button>
+  <button class="btn" onclick="exportPNG(2048)">↓ 2048 px</button>
+</div>
+
+<div class="hint" id="hint">Drag to rotate</div>
+
+<script>
+if(typeof THREE==='undefined'){document.body.innerHTML='<p style="padding:40px">Three.js failed to load.</p>';throw 0;}
+
+/* ─────────────────────────────────────────────────
+   RENDERER
+───────────────────────────────────────────────── */
+const canvas = document.getElementById('c');
+
+const renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true, preserveDrawingBuffer:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping  = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.6;
+renderer.shadowMap.enabled = false;
+
+const scene  = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
+camera.position.set(0.8, 0.5, 9.5);
+camera.lookAt(0, 0, 0);
+
+function onResize(){
+  const w = window.innerWidth, h = window.innerHeight;
+  renderer.setSize(w, h);
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+}
+onResize();
+window.addEventListener('resize', onResize);
+
+/* ─────────────────────────────────────────────────
+   LIGHTS — tuned to match the metallic reference render
+───────────────────────────────────────────────── */
+scene.add(new THREE.AmbientLight(0x05091e, 0.7));
+
+// Key: bright white from upper-left front → creates the silver highlight on top wing
+const Lk = new THREE.DirectionalLight(0xffffff, 5.0);
+Lk.position.set(-3, 7, 8); scene.add(Lk);
+
+// Fill: cool blue from right → adds the blue reflection on the right side
+const Lf = new THREE.PointLight(0xb0ccec, 3.0, 24);
+Lf.position.set(8, 2, 6); scene.add(Lf);
+
+// Rim: white from upper-back → picks out the bevelled top edges
+const Lr = new THREE.PointLight(0xffffff, 6.5, 20);
+Lr.position.set(-1, 10, -7); scene.add(Lr);
+
+// Bottom bounce: dark blue-purple → gives the dark navy tone to the bottom of the lower piece
+const Lb = new THREE.PointLight(0x1830a0, 2.5, 20);
+Lb.position.set(0, -8, 5); scene.add(Lb);
+
+// Horizontal band highlight → brightens the area near the split, matching the reference
+const Lh = new THREE.PointLight(0xf0f8ff, 4.0, 16);
+Lh.position.set(0, 0, 10); scene.add(Lh);
+
+// Lower-right accent → adds shimmer to the bottom piece's right flank
+const La = new THREE.PointLight(0xd0e4ff, 2.0, 14);
+La.position.set(5, -5, 7); scene.add(La);
+
+/* ─────────────────────────────────────────────────
+   LOGO GEOMETRY
+   Paths traced from the brand SVG (viewBox 0 0 100 100).
+   Transform: x3d = (xSVG−50)×3/50,  y3d = −(ySVG−50)×3/50
+───────────────────────────────────────────────── */
+const SC = 3 / 50;
+const p = (x, y) => [(x - 50) * SC, -(y - 50) * SC];
+
+function buildShape(cmds){
+  const s = new THREE.Shape();
+  for(const [op, ...a] of cmds){
+    if(op === 'M') s.moveTo(          ...p(...a));
+    if(op === 'L') s.lineTo(          ...p(...a));
+    if(op === 'Q') s.quadraticCurveTo(...p(...a[0]), ...p(...a[1]));
+    if(op === 'C') s.bezierCurveTo(   ...p(...a[0]), ...p(...a[1]), ...p(...a[2]));
+  }
+  return s;
+}
+
+const topShape = buildShape([
+  ['M', 11.9, 47],
+  ['L', 11.9, 33],
+  ['Q', [11.9, 28],  [16.2, 25.5]],
+  ['L', 45.7, 8.5],
+  ['Q', [50,   6],   [54.3, 8.5]],
+  ['L', 83.8, 25.5],
+  ['Q', [88.1, 28],  [88.1, 33]],
+  ['L', 88.1, 47],
+  ['C', [74,   47],  [63,   22], [50,   22]],
+  ['C', [37,   22],  [26,   47], [11.9, 47]],
+]);
+
+const botShape = buildShape([
+  ['M', 11.9, 53],
+  ['L', 11.9, 67],
+  ['Q', [11.9, 72],  [16.2, 74.5]],
+  ['L', 45.7, 91.5],
+  ['Q', [50,   94],  [54.3, 91.5]],
+  ['L', 83.8, 74.5],
+  ['Q', [88.1, 72],  [88.1, 67]],
+  ['L', 88.1, 53],
+  ['C', [74,   53],  [63,   78], [50,   78]],
+  ['C', [37,   78],  [26,   53], [11.9, 53]],
+]);
+
+const extrudeOpts = {
+  depth: 0.52,
+  bevelEnabled:    true,
+  bevelThickness:  0.12,
+  bevelSize:       0.11,
+  bevelSegments:   12,
+  curveSegments:   80,
+};
+
+// Glossy metallic material — silver-steel base with high clearcoat
+const mat = new THREE.MeshPhysicalMaterial({
+  color:               0xa4b8cc,
+  metalness:           0.94,
+  roughness:           0.05,
+  clearcoat:           1.0,
+  clearcoatRoughness:  0.04,
+  reflectivity:        1.0,
+});
+
+const group = new THREE.Group();
+[topShape, botShape].forEach(shape => {
+  const geo  = new THREE.ExtrudeGeometry(shape, extrudeOpts);
+  geo.computeVertexNormals();
+  group.add(new THREE.Mesh(geo, mat));
+});
+group.position.z = -0.26; // centre the extruded depth on z=0
+scene.add(group);
+
+/* ─────────────────────────────────────────────────
+   INTERACTION — drag to rotate, auto-spin at rest
+───────────────────────────────────────────────── */
+let rotX = 0.12, rotY = 0.30;
+let dragging = false, prev = {x:0, y:0}, autoSpin = true, spinTimer;
+
+const hint = document.getElementById('hint');
+setTimeout(() => hint.classList.add('gone'), 3200);
+
+function onDown(x, y){ dragging = true; prev = {x,y}; autoSpin = false; clearTimeout(spinTimer); }
+function onUp()      { dragging = false; spinTimer = setTimeout(() => autoSpin = true, 2800); }
+function onMove(x, y){
+  if(!dragging) return;
+  rotY += (x - prev.x) * 0.012;
+  rotX  = Math.max(-1.1, Math.min(1.1, rotX + (y - prev.y) * 0.012));
+  prev  = {x, y};
+}
+
+canvas.addEventListener('mousedown',  e => onDown(e.clientX, e.clientY));
+window.addEventListener('mouseup',    onUp);
+window.addEventListener('mousemove',  e => onMove(e.clientX, e.clientY));
+canvas.addEventListener('touchstart', e => { e.preventDefault(); onDown(e.touches[0].clientX, e.touches[0].clientY); }, {passive:false});
+canvas.addEventListener('touchend',   e => { e.preventDefault(); onUp(); }, {passive:false});
+canvas.addEventListener('touchmove',  e => { e.preventDefault(); onMove(e.touches[0].clientX, e.touches[0].clientY); }, {passive:false});
+
+/* ─────────────────────────────────────────────────
+   BACKGROUND SWITCHER
+───────────────────────────────────────────────── */
+let bgMode = 'dark';
+scene.background = new THREE.Color(0x04060e);
+
+function setBg(mode, btn){
+  bgMode = mode;
+  document.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if(mode === 'dark'){
+    scene.background = new THREE.Color(0x04060e);
+    document.body.style.background = '#04060e';
+  } else if(mode === 'light'){
+    scene.background = new THREE.Color(0xf2f5fa);
+    document.body.style.background = '#f2f5fa';
+  } else {
+    scene.background = null;
+    document.body.style.background = 'transparent';
+  }
+}
+
+/* ─────────────────────────────────────────────────
+   PNG EXPORT
+───────────────────────────────────────────────── */
+function exportPNG(size){
+  const r = new THREE.WebGLRenderer({antialias:true, alpha:true, preserveDrawingBuffer:true});
+  r.setPixelRatio(1);
+  r.setSize(size, size);
+  r.toneMapping = THREE.ACESFilmicToneMapping;
+  r.toneMappingExposure = 1.6;
+
+  const cam = new THREE.PerspectiveCamera(36, 1, 0.1, 100);
+  cam.position.copy(camera.position);
+  cam.lookAt(0, 0, 0);
+
+  if(bgMode === 'dark')        r.setClearColor(0x04060e, 1);
+  else if(bgMode === 'light')  r.setClearColor(0xf2f5fa, 1);
+  else                         r.setClearAlpha(0);
+
+  r.render(scene, cam);
+  const a = document.createElement('a');
+  a.href = r.domElement.toDataURL('image/png');
+  a.download = `atrya-logo-3d-${size}px-${bgMode}.png`;
+  a.click();
+  r.dispose();
+}
+
+/* ─────────────────────────────────────────────────
+   RENDER LOOP
+───────────────────────────────────────────────── */
+function tick(){
+  requestAnimationFrame(tick);
+  if(autoSpin) rotY += 0.004;
+  group.rotation.x = rotX;
+  group.rotation.y = rotY;
+  renderer.render(scene, camera);
+}
+tick();
+</script>
+</body>
+</html>

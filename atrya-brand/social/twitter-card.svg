@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 628" width="1200" height="628">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&amp;family=Inter:wght@300;400;500&amp;display=swap');
+      .brand   { font-family: 'Syne', sans-serif; font-weight: 500; font-size: 72px; fill: #e2eaf8; letter-spacing: -0.03em; }
+      .tagline { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 22px; fill: rgba(226,234,248,0.76); }
+      .label   { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 13px; fill: #4FA8FF; letter-spacing: 0.08em; text-transform: uppercase; }
+      .logo-wm { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 32px; fill: #e2eaf8; letter-spacing: -0.025em; }
+    </style>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04060e"/>
+      <stop offset="55%" stop-color="#070b18"/>
+      <stop offset="100%" stop-color="#0c1830"/>
+    </linearGradient>
+    <radialGradient id="gl1" cx="80%" cy="30%" r="45%">
+      <stop offset="0%" stop-color="#4FA8FF" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#04060e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="628" fill="url(#bg2)"/>
+  <rect width="1200" height="628" fill="url(#gl1)"/>
+
+  <!-- Vertical accent bar -->
+  <rect x="0" y="0" width="3" height="628" fill="#4FA8FF" fill-opacity="0.5"/>
+
+  <!-- Large background hex right -->
+  <g transform="translate(780, 80) scale(9)" opacity="0.04">
+    <path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke="#4FA8FF" stroke-width="1" stroke-linejoin="round" fill="none"/>
+  </g>
+  <g transform="translate(1020, 320) scale(5)" opacity="0.07">
+    <path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke="#4FA8FF" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+    <path d="M20 13L27 20L20 27L13 20Z" fill="#4FA8FF" fill-opacity="0.3"/>
+  </g>
+
+  <!-- Logo icon -->
+  <g transform="translate(60, 60) scale(2.6)">
+    <path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke="#e2eaf8" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+    <path d="M20 13L27 20L20 27L13 20Z" fill="#e2eaf8"/>
+  </g>
+  <text x="168" y="130" class="logo-wm">Atrya</text>
+
+  <!-- Pill badge -->
+  <rect x="60" y="195" width="228" height="28" rx="14" fill="rgba(79,168,255,0.11)" stroke="#4FA8FF" stroke-opacity="0.28" stroke-width="1"/>
+  <text x="174" y="214" class="label" text-anchor="middle">Regulated · On-chain FX</text>
+
+  <!-- Main heading -->
+  <text x="60" y="334" class="brand">Payment Logic.</text>
+  <text x="60" y="420" class="brand">Settlement.</text>
+  <text x="60" y="506" class="brand">Unified.</text>
+
+  <!-- URL bottom right -->
+  <text x="1140" y="598" class="label" text-anchor="end">atrya.io</text>
+</svg>

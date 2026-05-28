@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+  <rect width="16" height="16" rx="2" fill="#04060e"/>
+  <!-- Minimal icon at 16x16: scale ~0.32 of original 40x40 -->
+  <g transform="translate(0.8, 0.8) scale(0.365)">
+    <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#e2eaf8" stroke-width="2.2"/>
+    <polygon points="20,13 27,20 20,27 13,20" fill="#e2eaf8"/>
+  </g>
+</svg>

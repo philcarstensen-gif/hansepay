@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Atrya Brand Guidelines 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-dark:       #04060e;
+      --bg-dark2:      #070b18;
+      --bg-light:      #f0f4fc;
+      --bg-light2:     #e6ecf8;
+      --accent:        #4FA8FF;
+      --accent-light:  #1a8ee0;
+      --text-dark:     #e2eaf8;
+      --text-mid:      rgba(226,234,248,.76);
+      --text-muted:    rgba(226,234,248,.40);
+      --text-light:    #0c1628;
+      --sidebar-w:     240px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-weight: 300;
+      line-height: 1.65;
+      display: flex;
+    }
+
+    /* ─── SIDEBAR ─────────────────────────────────────── */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--sidebar-w);
+      height: 100vh;
+      background: #030508;
+      border-right: 1px solid rgba(79,168,255,.12);
+      overflow-y: auto;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-logo {
+      padding: 28px 24px 20px;
+      border-bottom: 1px solid rgba(79,168,255,.10);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .sidebar-logo span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 20px;
+      color: var(--text-dark);
+      letter-spacing: -0.025em;
+    }
+
+    .sidebar-label {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 20px 24px 8px;
+    }
+
+    .sidebar nav a {
+      display: block;
+      padding: 8px 24px;
+      font-size: 13px;
+      color: var(--text-mid);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: color .2s, border-color .2s, background .2s;
+    }
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: rgba(79,168,255,.05);
+    }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding: 20px 24px;
+      border-top: 1px solid rgba(79,168,255,.08);
+      font-size: 10px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ─── MAIN CONTENT ─────────────────────────────────── */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ─── COVER PAGE ────────────────────────────────────── */
+    .cover {
+      min-height: 100vh;
+      background: radial-gradient(ellipse 80% 60% at 20% 80%, rgba(79,168,255,.14) 0%, transparent 70%),
+                  radial-gradient(ellipse 60% 50% at 85% 15%, rgba(79,168,255,.10) 0%, transparent 70%),
+                  linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-dark2) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 80px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), rgba(79,168,255,.3), var(--accent));
+    }
+
+    .cover-hex-bg {
+      position: absolute;
+      right: -60px; top: -60px;
+      opacity: .06;
+      pointer-events: none;
+    }
+
+    .cover-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+
+    .cover-logo-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .cover-wordmark {
+      font-family: 'Syne', sans-serif;
+      font-weight: 500;
+      font-size: 80px;
+      color: var(--text-dark);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+
+    .cover-tagline {
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--text-mid);
+      letter-spacing: 4px;
+      margin-bottom: 60px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 40px;
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+    .cover-meta strong { color: var(--text-mid); font-weight: 500; }
+
+    /* ─── SECTIONS ───────────────────────────────────── */
+    .section {
+      padding: 80px;
+      border-bottom: 1px solid rgba(79,168,255,.08);
+    }
+    .section:last-child { border-bottom: none; }
+
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 500;
+      font-size: 42px;
+      color: var(--text-dark);
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+
+    .section-rule {
+      width: 48px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      margin-bottom: 40px;
+    }
+
+    p { color: var(--text-mid); font-size: 16px; line-height: 1.75; margin-bottom: 16px; }
+    p:last-child { margin-bottom: 0; }
+
+    /* ─── LOGO GRID ──────────────────────────────────── */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .logo-card {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(79,168,255,.12);
+    }
+
+    .logo-card-preview {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      min-height: 160px;
+    }
+
+    .logo-card-preview.dark  { background: var(--bg-dark); }
+    .logo-card-preview.dark2 { background: var(--bg-dark2); }
+    .logo-card-preview.light { background: var(--bg-light); }
+    .logo-card-preview.light2 { background: #ffffff; }
+
+    .logo-card-info {
+      background: rgba(79,168,255,.04);
+      border-top: 1px solid rgba(79,168,255,.10);
+      padding: 14px 18px;
+    }
+
+    .logo-card-info h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 2px;
+    }
+    .logo-card-info p {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    /* Dos & Don'ts */
+    .dos-donts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .do-card, .dont-card {
+      border-radius: 12px;
+      padding: 24px 28px;
+    }
+    .do-card   { background: rgba(79,168,255,.05); border: 1px solid rgba(79,168,255,.20); }
+    .dont-card { background: rgba(255,80,80,.04);  border: 1px solid rgba(255,80,80,.15); }
+
+    .do-label   { font-size: 11px; font-weight: 600; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .dont-label { font-size: 11px; font-weight: 600; color: #ff6b6b;       letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+
+    .do-card li, .dont-card li {
+      font-size: 14px;
+      color: var(--text-mid);
+      margin-bottom: 8px;
+      padding-left: 16px;
+      position: relative;
+      list-style: none;
+    }
+    .do-card li::before   { content: '✓'; position: absolute; left: 0; color: var(--accent); }
+    .dont-card li::before { content: '×'; position: absolute; left: 0; color: #ff6b6b; }
+
+    /* ─── COLOR PALETTE ──────────────────────────────── */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .color-swatch {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(79,168,255,.10);
+    }
+
+    .color-swatch-block {
+      height: 120px;
+    }
+
+    .color-swatch-info {
+      background: rgba(255,255,255,.02);
+      padding: 14px 16px;
+    }
+    .color-swatch-info h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+    }
+    .color-swatch-info .hex {
+      font-family: 'Inter', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+    .color-swatch-info .rgb {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .color-swatch-info .usage {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* ─── TYPOGRAPHY ────────────────────────────────── */
+    .type-showcase {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    .type-block {
+      border-radius: 12px;
+      background: rgba(79,168,255,.03);
+      border: 1px solid rgba(79,168,255,.10);
+      padding: 36px 40px;
+    }
+
+    .type-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(79,168,255,.10);
+      padding-bottom: 12px;
+    }
+
+    .type-sizes { display: flex; flex-direction: column; gap: 16px; }
+
+    .type-row {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+    }
+    .type-meta {
+      width: 120px;
+      flex-shrink: 0;
+      font-size: 10px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+    }
+
+    /* ─── ICONOGRAPHY ───────────────────────────────── */
+    .icon-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .icon-anatomy {
+      background: rgba(79,168,255,.03);
+      border: 1px solid rgba(79,168,255,.10);
+      border-radius: 12px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .icon-desc { font-size: 14px; color: var(--text-mid); line-height: 1.7; }
+    .icon-desc li { margin-bottom: 8px; padding-left: 16px; position: relative; list-style: none; }
+    .icon-desc li::before { content: '→'; position: absolute; left: 0; color: var(--accent); }
+
+    /* ─── DIGITAL ASSETS ────────────────────────────── */
+    .asset-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 32px;
+      font-size: 14px;
+    }
+    .asset-table th {
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(79,168,255,.15);
+    }
+    .asset-table td {
+      padding: 12px 16px;
+      color: var(--text-mid);
+      border-bottom: 1px solid rgba(79,168,255,.06);
+      vertical-align: middle;
+    }
+    .asset-table tr:hover td { background: rgba(79,168,255,.03); }
+    .asset-table code {
+      font-family: 'Inter', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      background: rgba(79,168,255,.08);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .badge-svg  { background: rgba(79,168,255,.15); color: var(--accent); }
+    .badge-html { background: rgba(255,165,50,.12); color: #ffaa44; }
+
+    /* ─── BRAND VOICE ───────────────────────────────── */
+    .voice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .voice-card {
+      background: rgba(79,168,255,.03);
+      border: 1px solid rgba(79,168,255,.10);
+      border-radius: 12px;
+      padding: 28px 24px;
+    }
+    .voice-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 500;
+      font-size: 18px;
+      color: var(--text-dark);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .voice-card .accent-word { color: var(--accent); }
+    .voice-card p { font-size: 14px; color: var(--text-mid); }
+
+    .tone-example {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .tone-box {
+      border-radius: 10px;
+      padding: 20px 24px;
+    }
+    .tone-do   { background: rgba(79,168,255,.05); border: 1px solid rgba(79,168,255,.18); }
+    .tone-dont { background: rgba(255,80,80,.04);  border: 1px solid rgba(255,80,80,.15); }
+    .tone-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+    .tone-do   .tone-label { color: var(--accent); }
+    .tone-dont .tone-label { color: #ff6b6b; }
+    .tone-box p { font-size: 14px; font-style: italic; color: var(--text-mid); margin: 0; }
+
+    /* ─── CONTACT ────────────────────────────────────── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .contact-card {
+      background: rgba(79,168,255,.04);
+      border: 1px solid rgba(79,168,255,.12);
+      border-radius: 12px;
+      padding: 28px 24px;
+    }
+    .contact-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .contact-card a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 15px;
+    }
+    .contact-card a:hover { text-decoration: underline; }
+    .contact-card .addr { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin-top: 4px; }
+
+    /* ─── INLINE SVG HELPERS ────────────────────────── */
+    .inline-logo-dark {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .inline-logo-dark span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 28px;
+      color: var(--text-dark);
+      letter-spacing: -0.025em;
+    }
+
+    .inline-logo-light {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .inline-logo-light span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 28px;
+      color: var(--text-light);
+      letter-spacing: -0.025em;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb { background: rgba(79,168,255,.3); border-radius: 3px; }
+
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      .section, .cover { padding: 40px; }
+      .dos-donts, .icon-section, .tone-example { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ SIDEBAR ═══════════════ -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="32" height="32">
+      <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#e2eaf8" stroke-width="1.6"/>
+      <polygon points="20,13 27,20 20,27 13,20" fill="#e2eaf8"/>
+    </svg>
+    <span>Atrya</span>
+  </div>
+  <div class="sidebar-label">Brand Guidelines</div>
+  <nav>
+    <a href="#cover">Cover</a>
+    <a href="#brand-story">Brand Story</a>
+    <a href="#logo">Logo Usage</a>
+    <a href="#colors">Color Palette</a>
+    <a href="#typography">Typography</a>
+    <a href="#iconography">Iconography</a>
+    <a href="#digital-assets">Digital Assets</a>
+    <a href="#brand-voice">Brand Voice</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="sidebar-footer">
+    Version 1.0 · 2026<br/>
+    Caplend Technologies GmbH<br/>
+    <a href="https://atrya.io" style="color:#4FA8FF;text-decoration:none;">atrya.io</a>
+  </div>
+</aside>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<main class="main">
+
+  <!-- ── COVER ── -->
+  <section id="cover" class="cover">
+    <svg class="cover-hex-bg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="640" height="640">
+      <g transform="translate(-60, -60) scale(6)">
+        <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#4FA8FF" stroke-width="1"/>
+      </g>
+      <g transform="translate(160, 80) scale(4)">
+        <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#4FA8FF" stroke-width="1"/>
+      </g>
+      <g transform="translate(260, 260) scale(3)">
+        <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#4FA8FF" stroke-width="1"/>
+      </g>
+    </svg>
+
+    <div class="cover-eyebrow">Brand Guidelines — 2026</div>
+    <div class="cover-logo-row">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="80" height="80">
+        <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#e2eaf8" stroke-width="1.6"/>
+        <polygon points="20,13 27,20 20,27 13,20" fill="#e2eaf8"/>
+      </svg>
+      <div class="cover-wordmark">Atrya</div>
+    </div>
+    <div class="cover-tagline">Payment logic. Settlement. Unified.</div>
+    <div class="cover-meta">
+      <div><strong>Company:</strong> Caplend Technologies GmbH</div>
+      <div><strong>Version:</strong> 1.0</div>
+      <div><strong>Year:</strong> 2026</div>
+      <div><strong>Confidential</strong></div>
+    </div>
+  </section>
+
+  <!-- ── BRAND STORY ── -->
+  <section id="brand-story" class="section">
+    <div class="section-eyebrow">01 — Brand Story</div>
+    <h2 class="section-title">About Atrya</h2>
+    <div class="section-rule"></div>
+    <p>
+      Atrya is Europe's first regulated on-chain FX layer and native payment service provider (PSP) —
+      built at the intersection of traditional finance and blockchain-native settlement infrastructure.
+      Developed by Caplend Technologies GmbH, Atrya enables businesses, fintechs, and financial
+      institutions to settle cross-border payments with the speed, transparency, and programmability
+      of on-chain technology, while operating fully within Europe's regulatory framework. Where legacy
+      FX infrastructure is fragmented, opaque, and slow, Atrya is unified, auditable, and instant.
+    </p>
+    <p>
+      The name Atrya is derived from the ancient Sanskrit root meaning "one who transcends" — reflecting
+      the company's ambition to transcend the boundaries of traditional financial infrastructure. The
+      brand is designed to convey precision, trust, and technological sophistication: a bridge between
+      the rigor of regulated finance and the radical efficiency of distributed ledger technology.
+      Every element of the Atrya visual identity — from the hexagonal mark to the typographic choices —
+      communicates clarity, structure, and forward motion. Atrya does not merely process payments;
+      it redefines what payment infrastructure can be.
+    </p>
+  </section>
+
+  <!-- ── LOGO USAGE ── -->
+  <section id="logo" class="section">
+    <div class="section-eyebrow">02 — Logo Usage</div>
+    <h2 class="section-title">Logo Variations</h2>
+    <div class="section-rule"></div>
+    <p>
+      The Atrya logo consists of two elements: the hexagonal mark (icon) and the "Atrya" wordmark set
+      in Syne SemiBold. They may be used together as the full logo, or independently as needed.
+      The primary logo is always the full lockup on dark background. Use light variants only on
+      light-colored backgrounds.
+    </p>
+
+    <div class="logo-grid">
+
+      <div class="logo-card">
+        <div class="logo-card-preview dark">
+          <div class="inline-logo-dark">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="44" height="44">
+              <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#e2eaf8" stroke-width="1.6"/>
+              <polygon points="20,13 27,20 20,27 13,20" fill="#e2eaf8"/>
+            </svg>
+            <span>Atrya</span>
+          </div>
+        </div>
+        <div class="logo-card-info">
+          <h4>Full Logo — Dark</h4>
+          <p>Primary logo. Use on dark backgrounds (#04060e / #070b18).</p>
+        </div>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-card-preview light">
+          <div class="inline-logo-light">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="44" height="44">
+              <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#0c1628" stroke-width="1.6"/>
+              <polygon points="20,13 27,20 20,27 13,20" fill="#0c1628"/>
+            </svg>
+            <span>Atrya</span>
+          </div>
+        </div>
+        <div class="logo-card-info">
+          <h4>Full Logo — Light</h4>
+          <p>Use on light backgrounds (#f0f4fc / #ffffff). Icon uses text color #0c1628.</p>
+        </div>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-card-preview dark" style="padding:28px;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="120" height="120">
+            <rect width="200" height="200" rx="36" fill="#0d1930"/>
+            <g transform="translate(20, 20) scale(4)">
+              <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#e2eaf8" stroke-width="1.6"/>
+              <polygon points="20,13 27,20 20,27 13,20" fill="#e2eaf8"/>
+            </g>
+          </svg>
+        </div>
+        <div class="logo-card-info">
+          <h4>Mark — Dark Square</h4>
+          <p>Profile picture / app icon use. 200×200 rounded square.</p>
+        </div>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-card-preview light2" style="padding:28px;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="120" height="120">
+            <rect width="200" height="200" rx="36" fill="#e6ecf8"/>
+            <g transform="translate(20, 20) scale(4)">
+              <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#0c1628" stroke-width="1.6"/>
+              <polygon points="20,13 27,20 20,27 13,20" fill="#0c1628"/>
+            </g>
+          </svg>
+        </div>
+        <div class="logo-card-info">
+          <h4>Mark — Light Square</h4>
+          <p>For use in light UI contexts and print on white.</p>
+        </div>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-card-preview dark">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="80" height="80">
+            <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#e2eaf8" stroke-width="1.6"/>
+            <polygon points="20,13 27,20 20,27 13,20" fill="#e2eaf8"/>
+          </svg>
+        </div>
+        <div class="logo-card-info">
+          <h4>Mark Only — Transparent</h4>
+          <p>Transparent background. Use when background is defined by context.</p>
+        </div>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-card-preview dark">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" width="160" height="40">
+            <text x="100" y="36" style="font-family:'Syne',sans-serif;font-weight:600;font-size:32px;fill:#e2eaf8;letter-spacing:-0.025em;text-anchor:middle;">Atrya</text>
+          </svg>
+        </div>
+        <div class="logo-card-info">
+          <h4>Wordmark Only</h4>
+          <p>For contexts where the icon is shown separately or already established.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Dos & Don'ts -->
+    <h3 style="font-family:'Syne',sans-serif;font-size:22px;color:var(--text-dark);margin-top:56px;margin-bottom:8px;">Logo Do's &amp; Don'ts</h3>
+    <div class="dos-donts">
+      <div class="do-card">
+        <div class="do-label">Do</div>
+        <ul>
+          <li>Use the full logo lockup as the primary identifier</li>
+          <li>Maintain clear space equal to the height of the "A" on all sides</li>
+          <li>Use dark logo on dark backgrounds, light logo on light backgrounds</li>
+          <li>Scale proportionally — never stretch or squish</li>
+          <li>Use SVG format for screen; vector formats for print</li>
+          <li>Ensure sufficient contrast between logo and background</li>
+        </ul>
+      </div>
+      <div class="dont-card">
+        <div class="dont-label">Don't</div>
+        <ul>
+          <li>Change the logo colors outside of approved brand palettes</li>
+          <li>Add drop shadows, bevels, or other effects to the logo</li>
+          <li>Rotate or flip the logo</li>
+          <li>Place the logo on busy or low-contrast backgrounds</li>
+          <li>Rearrange the icon and wordmark positions</li>
+          <li>Use the wordmark alone if the mark has not already been shown</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COLOR PALETTE ── -->
+  <section id="colors" class="section">
+    <div class="section-eyebrow">03 — Color Palette</div>
+    <h2 class="section-title">Brand Colors</h2>
+    <div class="section-rule"></div>
+    <p>
+      The Atrya color system is built around a deep navy-black foundation with a precise electric blue accent.
+      This palette communicates sophistication, trust, and technological precision. Dark backgrounds
+      dominate digital contexts; light backgrounds are reserved for documents, print, and light-mode interfaces.
+    </p>
+
+    <div class="color-grid">
+
+      <div class="color-swatch">
+        <div class="color-swatch-block" style="background:#04060e;"></div>
+        <div class="color-swatch-info">
+          <h4>Dark Background Primary</h4>
+          <div class="hex">#04060e</div>
+          <div class="rgb">rgb(4, 6, 14)</div>
+          <div class="usage">Primary dark background. Used for all main dark surfaces.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch-block" style="background:#070b18;"></div>
+        <div class="color-swatch-info">
+          <h4>Dark Background Secondary</h4>
+          <div class="hex">#070b18</div>
+          <div class="rgb">rgb(7, 11, 24)</div>
+          <div class="usage">Secondary dark bg. Used for gradients, header bars, cards.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch-block" style="background:#4FA8FF;"></div>
+        <div class="color-swatch-info">
+          <h4>Accent Blue — Dark Mode</h4>
+          <div class="hex">#4FA8FF</div>
+          <div class="rgb">rgb(79, 168, 255)</div>
+          <div class="usage">Primary accent on dark backgrounds. Buttons, links, icons, highlights.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch-block" style="background:#1a8ee0;"></div>
+        <div class="color-swatch-info">
+          <h4>Accent Blue — Light Mode</h4>
+          <div class="hex">#1a8ee0</div>
+          <div class="rgb">rgb(26, 142, 224)</div>
+          <div class="usage">Primary accent on light backgrounds. Slightly deeper for contrast.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch-block" style="background:#e2eaf8;"></div>
+        <div class="color-swatch-info">
+          <h4>Text — Dark Background</h4>
+          <div class="hex">#e2eaf8</div>
+          <div class="rgb">rgb(226, 234, 248)</div>
+          <div class="usage">Primary body and heading text on dark backgrounds.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch-block" style="background:rgba(226,234,248,.76);border:1px solid rgba(255,255,255,.06);"></div>
+        <div class="color-swatch-info">
+          <h4>Text Mid — Dark Background</h4>
+          <div class="hex">rgba(226,234,248,.76)</div>
+          <div class="rgb">76% opacity on #e2eaf8</div>
+          <div class="usage">Secondary text, body copy, and descriptions on dark bg.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch-block" style="background:#0c1628;"></div>
+        <div class="color-swatch-info">
+          <h4>Text — Light Background</h4>
+          <div class="hex">#0c1628</div>
+          <div class="rgb">rgb(12, 22, 40)</div>
+          <div class="usage">Primary text on light backgrounds. Heading and body copy.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch-block" style="background:#f0f4fc;"></div>
+        <div class="color-swatch-info">
+          <h4>Light Background Primary</h4>
+          <div class="hex">#f0f4fc</div>
+          <div class="rgb">rgb(240, 244, 252)</div>
+          <div class="usage">Light UI background. Documents, light-mode surfaces.</div>
+        </div>
+      </div>
+
+      <div class="color-swatch">
+        <div class="color-swatch-block" style="background:#e6ecf8;border:1px solid #dde4f0;"></div>
+        <div class="color-swatch-info">
+          <h4>Light Background Secondary</h4>
+          <div class="hex">#e6ecf8</div>
+          <div class="rgb">rgb(230, 236, 248)</div>
+          <div class="usage">Secondary light surface. Sidebars, cards on light bg.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── TYPOGRAPHY ── -->
+  <section id="typography" class="section">
+    <div class="section-eyebrow">04 — Typography</div>
+    <h2 class="section-title">Type System</h2>
+    <div class="section-rule"></div>
+    <p>
+      Atrya uses two typefaces: <strong style="color:var(--text-dark);">Syne</strong> for headings,
+      logos, and display text — conveying authority and modernity — and
+      <strong style="color:var(--text-dark);">Inter</strong> for body copy, UI labels, and all
+      supporting text. Both are available via Google Fonts. Never substitute these with other typefaces
+      in branded communications.
+    </p>
+
+    <div class="type-showcase">
+
+      <div class="type-block">
+        <div class="type-label">Syne — Headings &amp; Display</div>
+        <div class="type-sizes">
+          <div class="type-row">
+            <div class="type-meta">Display / 80px · 500</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:500;font-size:48px;color:var(--text-dark);letter-spacing:-0.03em;line-height:1;">Atrya</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta">H1 / 52px · 500</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:500;font-size:36px;color:var(--text-dark);letter-spacing:-0.03em;">Payment Infrastructure</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta">H2 / 36px · 500</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:500;font-size:28px;color:var(--text-dark);letter-spacing:-0.02em;">On-Chain FX Settlement</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta">H3 / 24px · 600</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:600;font-size:22px;color:var(--text-dark);">Regulated. Unified. Instant.</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta">H4 / 18px · 600</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:600;font-size:18px;color:var(--text-dark);">Native PSP Infrastructure</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="type-block">
+        <div class="type-label">Inter — Body &amp; UI</div>
+        <div class="type-sizes">
+          <div class="type-row">
+            <div class="type-meta">Large Body / 20px · 400</div>
+            <div style="font-family:'Inter',sans-serif;font-weight:400;font-size:18px;color:var(--text-mid);">Atrya connects payment logic with on-chain settlement rails.</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta">Body / 16px · 400</div>
+            <div style="font-family:'Inter',sans-serif;font-weight:400;font-size:16px;color:var(--text-mid);">Europe's first regulated on-chain FX layer, enabling instant cross-border settlement.</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta">Small / 14px · 400</div>
+            <div style="font-family:'Inter',sans-serif;font-weight:400;font-size:14px;color:var(--text-mid);">Caplend Technologies GmbH · Stadtdeich 2-4 · 20097 Hamburg</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta">Caption / 12px · 300</div>
+            <div style="font-family:'Inter',sans-serif;font-weight:300;font-size:12px;color:var(--text-muted);letter-spacing:1px;">PAYMENT LOGIC. SETTLEMENT. UNIFIED.</div>
+          </div>
+          <div class="type-row">
+            <div class="type-meta">Label / 11px · 500</div>
+            <div style="font-family:'Inter',sans-serif;font-weight:500;font-size:11px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;">On-Chain · Regulated · Native PSP</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── ICONOGRAPHY ── -->
+  <section id="iconography" class="section">
+    <div class="section-eyebrow">05 — Iconography</div>
+    <h2 class="section-title">The Atrya Mark</h2>
+    <div class="section-rule"></div>
+    <p>
+      The Atrya mark is a hexagon containing a centered diamond. These two geometric forms carry
+      specific meaning: the hexagon represents structure, precision, and network connectivity
+      (echoing both blockchain architecture and the molecular bonds of regulated infrastructure).
+      The inner diamond represents the exchange transaction — the crossing of value at a precise
+      intersection point. Together, they communicate that Atrya is a structured, precise, and
+      connected exchange layer.
+    </p>
+
+    <div class="icon-section">
+      <div class="icon-anatomy">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="200" height="200">
+          <rect width="120" height="120" rx="20" fill="#070b18"/>
+          <g transform="translate(20, 20) scale(2)">
+            <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#e2eaf8" stroke-width="1.6"/>
+            <polygon points="20,13 27,20 20,27 13,20" fill="#e2eaf8"/>
+          </g>
+        </svg>
+        <div style="text-align:center;">
+          <div style="font-size:13px;color:var(--text-muted);">Original viewBox: 40×40</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-top:4px;">Scales proportionally at any size</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:24px;">
+        <div>
+          <h3 style="font-family:'Syne',sans-serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">Hexagon (Flat-top)</h3>
+          <ul class="icon-desc">
+            <li>Path: M36 20 L28 6 L12 6 L4 20 L12 34 L28 34 Z</li>
+            <li>Stroke: currentColor · stroke-width: 1.6 · fill: none</li>
+            <li>Represents: structure, blockchain nodes, regulated network</li>
+            <li>Always rendered as an outline (not filled)</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-family:'Syne',sans-serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">Diamond (Inner)</h3>
+          <ul class="icon-desc">
+            <li>Path: M20 13 L27 20 L20 27 L13 20 Z</li>
+            <li>Fill: currentColor · no stroke</li>
+            <li>Represents: FX exchange, value crossing, precision settlement</li>
+            <li>Always rendered as a solid fill</li>
+          </ul>
+        </div>
+        <div>
+          <h3 style="font-family:'Syne',sans-serif;font-size:18px;color:var(--text-dark);margin-bottom:12px;">Color Usage</h3>
+          <ul class="icon-desc">
+            <li>Dark bg: stroke and fill #e2eaf8</li>
+            <li>Light bg: stroke and fill #0c1628</li>
+            <li>White contexts (e.g. apple touch icon): #ffffff</li>
+            <li>Monochrome (print): currentColor inherits from parent</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DIGITAL ASSETS ── -->
+  <section id="digital-assets" class="section">
+    <div class="section-eyebrow">06 — Digital Assets</div>
+    <h2 class="section-title">Asset Package</h2>
+    <div class="section-rule"></div>
+    <p>
+      The Atrya brand package contains 29 files across 7 categories. All SVG assets are valid,
+      self-contained, and use embedded Google Fonts imports. HTML files are table-based and
+      email-client compatible where applicable.
+    </p>
+
+    <table class="asset-table">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Type</th>
+          <th>Dimensions</th>
+          <th>Use Case</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>logos/atrya-logo-dark.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>240×60</td><td>Primary logo — dark background</td></tr>
+        <tr><td><code>logos/atrya-logo-light.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>240×60</td><td>Primary logo — light background</td></tr>
+        <tr><td><code>logos/atrya-mark-only.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>80×80</td><td>Icon mark, transparent background</td></tr>
+        <tr><td><code>logos/atrya-mark-dark.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>200×200</td><td>Profile picture — dark</td></tr>
+        <tr><td><code>logos/atrya-mark-light.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>200×200</td><td>Profile picture — light</td></tr>
+        <tr><td><code>logos/atrya-wordmark.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>200×50</td><td>Wordmark only — dark bg</td></tr>
+        <tr><td><code>favicons/favicon.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>32×32</td><td>Browser favicon</td></tr>
+        <tr><td><code>favicons/favicon-16.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>16×16</td><td>Minimal 16px favicon</td></tr>
+        <tr><td><code>favicons/apple-touch-icon.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>180×180</td><td>iOS home screen icon</td></tr>
+        <tr><td><code>favicons/og-preview.html</code></td><td><span class="badge badge-html">HTML</span></td><td>—</td><td>Favicon preview page</td></tr>
+        <tr><td><code>social/linkedin-banner.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>1584×396</td><td>LinkedIn company banner</td></tr>
+        <tr><td><code>social/linkedin-profile.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>400×400</td><td>LinkedIn profile picture</td></tr>
+        <tr><td><code>social/og-image.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>1200×630</td><td>Open Graph meta image</td></tr>
+        <tr><td><code>social/twitter-card.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>1200×628</td><td>Twitter/X card image</td></tr>
+        <tr><td><code>social/instagram-square.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>1080×1080</td><td>Instagram feed post</td></tr>
+        <tr><td><code>social/instagram-story.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>1080×1920</td><td>Instagram / TikTok story</td></tr>
+        <tr><td><code>wallpapers/desktop-1920x1080.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>1920×1080</td><td>Desktop wallpaper — FHD</td></tr>
+        <tr><td><code>wallpapers/desktop-2560x1440.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>2560×1440</td><td>Desktop wallpaper — QHD</td></tr>
+        <tr><td><code>wallpapers/mobile-390x844.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>390×844</td><td>iPhone mobile wallpaper</td></tr>
+        <tr><td><code>wallpapers/zoom-background.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>1920×1080</td><td>Zoom virtual background — dark</td></tr>
+        <tr><td><code>wallpapers/zoom-background-light.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>1920×1080</td><td>Zoom virtual background — light</td></tr>
+        <tr><td><code>email/email-signature.html</code></td><td><span class="badge badge-html">HTML</span></td><td>500px</td><td>HTML email signature</td></tr>
+        <tr><td><code>email/email-footer-banner.html</code></td><td><span class="badge badge-html">HTML</span></td><td>600px</td><td>Email newsletter footer banner</td></tr>
+        <tr><td><code>print/business-card-front.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>85×55mm</td><td>Business card front</td></tr>
+        <tr><td><code>print/business-card-back.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>85×55mm</td><td>Business card back</td></tr>
+        <tr><td><code>print/letterhead.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>A4 (595×842)</td><td>A4 letterhead template</td></tr>
+        <tr><td><code>templates/pitch-deck-slide.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>1920×1080</td><td>Presentation slide template</td></tr>
+        <tr><td><code>templates/press-kit-cover.svg</code></td><td><span class="badge badge-svg">SVG</span></td><td>1200×800</td><td>Press kit cover page</td></tr>
+        <tr><td><code>chain-export.html</code></td><td><span class="badge badge-html">HTML</span></td><td>512–2048px</td><td><a href="chain-export.html" style="color:#4FA8FF;text-decoration:none;">Chain PNG export tool</a> — 5 states, 3 backgrounds, 3 sizes</td></tr>
+        <tr><td><code>fonts/typography-specimen.html</code></td><td><span class="badge badge-html">HTML</span></td><td>—</td><td><a href="fonts/typography-specimen.html" style="color:#4FA8FF;text-decoration:none;">Live typography specimen</a> — all type styles</td></tr>
+        <tr><td><code>brand-guidelines.html</code></td><td><span class="badge badge-html">HTML</span></td><td>—</td><td>This document</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── BRAND VOICE ── -->
+  <section id="brand-voice" class="section">
+    <div class="section-eyebrow">07 — Brand Voice</div>
+    <h2 class="section-title">Tone &amp; Voice</h2>
+    <div class="section-rule"></div>
+    <p>
+      Atrya's brand voice reflects the company's positioning: at the intersection of rigorous
+      financial regulation and cutting-edge technology. We speak with precision and confidence,
+      but never with jargon for its own sake. We are a trusted infrastructure provider — not
+      a consumer fintech app. Our voice is measured, expert, and forward-looking.
+    </p>
+
+    <div class="voice-grid">
+      <div class="voice-card">
+        <h3><span class="accent-word">Precise.</span> Not technical.</h3>
+        <p>Use clear, exact language. Avoid buzzwords and vague claims. If you can't explain it clearly, you don't understand it well enough.</p>
+      </div>
+      <div class="voice-card">
+        <h3><span class="accent-word">Confident.</span> Not arrogant.</h3>
+        <p>We are building something genuinely new. State it as fact. Don't oversell — the product speaks for itself.</p>
+      </div>
+      <div class="voice-card">
+        <h3><span class="accent-word">Institutional.</span> Not cold.</h3>
+        <p>We communicate with the gravitas of a regulated financial institution, but we remain human and accessible to the partners we serve.</p>
+      </div>
+      <div class="voice-card">
+        <h3><span class="accent-word">Forward.</span> Not futuristic.</h3>
+        <p>We are building now, not in theory. Talk about what we do and what we enable today, not science-fiction applications.</p>
+      </div>
+      <div class="voice-card">
+        <h3><span class="accent-word">Minimal.</span> Not sparse.</h3>
+        <p>Say more with less. Every word earns its place. No filler. No padding. Headlines should be statements, not questions.</p>
+      </div>
+      <div class="voice-card">
+        <h3><span class="accent-word">European.</span> Not provincial.</h3>
+        <p>We are a European company operating globally. Regulatory compliance is our competitive advantage, not a constraint.</p>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Syne',sans-serif;font-size:22px;color:var(--text-dark);margin-top:56px;margin-bottom:8px;">Tone in Practice</h3>
+    <div class="tone-example">
+      <div class="tone-box tone-do">
+        <div class="tone-label">Do say</div>
+        <p>"Atrya settles cross-border FX transactions on-chain, with full regulatory compliance — in seconds."</p>
+      </div>
+      <div class="tone-box tone-dont">
+        <div class="tone-label">Don't say</div>
+        <p>"We're disrupting the payments industry with our revolutionary blockchain-powered super-app!"</p>
+      </div>
+      <div class="tone-box tone-do">
+        <div class="tone-label">Do say</div>
+        <p>"Payment logic. Settlement. Unified." — clear, structured, final.</p>
+      </div>
+      <div class="tone-box tone-dont">
+        <div class="tone-label">Don't say</div>
+        <p>"We make payments faster, easier and more fun for everyone!" — vague, consumer-facing, not our register.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact" class="section">
+    <div class="section-eyebrow">08 — Contact &amp; Downloads</div>
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="section-rule"></div>
+    <p>
+      For press enquiries, partnership discussions, or questions about brand usage and licensing,
+      please reach out via the contacts below. Brand assets in this package are provided for
+      approved media, partner, and internal use only. All rights reserved by Caplend Technologies GmbH.
+    </p>
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3>General &amp; Media Enquiries</h3>
+        <a href="mailto:hello@atrya.io">hello@atrya.io</a>
+        <div class="addr">Caplend Technologies GmbH<br/>c/o Factory Works GmbH<br/>Stadtdeich 2-4<br/>20097 Hamburg, Germany</div>
+      </div>
+      <div class="contact-card">
+        <h3>Website</h3>
+        <a href="https://atrya.io" target="_blank">atrya.io</a>
+        <div class="addr" style="margin-top:12px;">Full product information, regulatory disclosures, and developer documentation available on the website.</div>
+      </div>
+      <div class="contact-card">
+        <h3>LinkedIn</h3>
+        <a href="https://linkedin.com/company/atrya" target="_blank">linkedin.com/company/atrya</a>
+        <div class="addr" style="margin-top:12px;">Follow for company updates, product announcements, and industry commentary.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:56px;padding:28px 32px;background:rgba(79,168,255,.04);border:1px solid rgba(79,168,255,.12);border-radius:12px;">
+      <div style="font-size:11px;font-weight:500;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px;">Legal Notice</div>
+      <p style="font-size:13px;color:var(--text-muted);margin:0;line-height:1.7;">
+        All brand assets, logos, marks, and visual identities contained in this package are the exclusive
+        intellectual property of Caplend Technologies GmbH. Unauthorized reproduction, modification, or
+        distribution is prohibited. Use of Atrya brand assets in media, press, and partner communications
+        requires prior written approval. © 2026 Caplend Technologies GmbH. All rights reserved.
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <div style="margin-top:60px;padding-top:32px;border-top:1px solid rgba(79,168,255,.10);display:flex;justify-content:space-between;align-items:center;flex-wrap:gap;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="32" height="32">
+          <polygon points="36,20 28,6 12,6 4,20 12,34 28,34" fill="none" stroke="#e2eaf8" stroke-width="1.6"/>
+          <polygon points="20,13 27,20 20,27 13,20" fill="#e2eaf8"/>
+        </svg>
+        <span style="font-family:'Syne',sans-serif;font-weight:600;font-size:18px;color:var(--text-dark);letter-spacing:-0.025em;">Atrya</span>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);">
+        Brand Guidelines v1.0 · 2026 · Caplend Technologies GmbH
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<script>
+  // Highlight active sidebar link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.sidebar nav a');
+
+  function updateNav() {
+    let current = '';
+    sections.forEach(sec => {
+      const top = sec.getBoundingClientRect().top;
+      if (top <= 120) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+
+  document.querySelector('.main').addEventListener('scroll', updateNav);
+  window.addEventListener('scroll', updateNav);
+  updateNav();
+</script>
+</body>
+</html>

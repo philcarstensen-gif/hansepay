@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Atrya — Email Signature Generator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#f0f4fc;min-height:100vh;padding:48px 24px;color:#0c1628}
+.wrap{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+h1{font-family:'Syne',sans-serif;font-size:28px;font-weight:700;color:#0c1628;margin-bottom:6px;grid-column:1/-1}
+.tagline{font-size:13px;color:#6b7a99;margin-bottom:32px;grid-column:1/-1}
+
+.panel{background:#fff;border-radius:16px;border:1px solid rgba(12,22,40,.08);box-shadow:0 2px 16px rgba(12,22,40,.06);padding:32px}
+.panel-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#9aa3b8;margin-bottom:24px}
+
+label{display:block;font-size:12px;font-weight:500;color:#6b7a99;letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px;margin-top:18px}
+label:first-of-type{margin-top:0}
+input{width:100%;padding:10px 14px;border:1px solid rgba(12,22,40,.12);border-radius:8px;font-family:'Inter',sans-serif;font-size:14px;color:#0c1628;outline:none;transition:border-color .2s,box-shadow .2s;background:#fafbfd}
+input:focus{border-color:rgba(26,142,224,.5);box-shadow:0 0 0 3px rgba(26,142,224,.1)}
+
+.preview-wrap{position:sticky;top:24px}
+.preview-box{background:#fff;border:1px solid rgba(12,22,40,.08);border-radius:12px;padding:28px 28px 20px;overflow:hidden}
+.preview-label{font-size:12px;font-weight:500;color:#9aa3b8;letter-spacing:.04em;text-transform:uppercase;margin-bottom:16px}
+
+.copy-btn{margin-top:20px;width:100%;padding:12px;background:#0c1628;color:#fff;border:none;border-radius:10px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:background .2s,transform .1s}
+.copy-btn:hover{background:#1a2e4a}
+.copy-btn:active{transform:scale(.98)}
+.copy-btn.copied{background:#1a8ee0}
+
+.instructions{margin-top:20px;background:#fff;border-radius:12px;border:1px solid rgba(12,22,40,.08);padding:20px 24px}
+.inst-title{font-family:'Syne',sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#9aa3b8;margin-bottom:12px}
+.instructions ol{padding-left:18px;display:flex;flex-direction:column;gap:8px}
+.instructions li{font-size:12.5px;color:#6b7a99;line-height:1.55}
+.instructions strong{color:#0c1628;font-weight:500}
+
+@media(max-width:700px){.wrap{grid-template-columns:1fr}.preview-wrap{position:static}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Email Signature</h1>
+  <p class="tagline">Fill in your details — the preview updates live. Copy the HTML and paste into your email client.</p>
+
+  <div class="panel">
+    <div class="panel-title">Your Details</div>
+    <label>Full Name</label>
+    <input type="text" id="f-name" value="Lorian Qorraj" oninput="render()"/>
+    <label>Title</label>
+    <input type="text" id="f-title" value="Founder &amp; CEO" oninput="render()"/>
+    <label>Mobile</label>
+    <input type="text" id="f-phone" value="+49 157 317 85222" oninput="render()"/>
+    <label>Email</label>
+    <input type="email" id="f-email" value="lorian.qorraj@atrya.io" oninput="render()"/>
+    <label>LinkedIn URL</label>
+    <input type="url" id="f-li" value="https://www.linkedin.com/in/lorian-qorraj" oninput="render()"/>
+  </div>
+
+  <div class="preview-wrap">
+    <div class="panel">
+      <div class="panel-title">Preview</div>
+      <div class="preview-box" id="preview"></div>
+    </div>
+    <button class="copy-btn" onclick="copyToClipboard()">Copy Signature</button>
+    <div class="instructions">
+      <div class="inst-title">How to add to Gmail</div>
+      <ol>
+        <li>Click <strong>Copy Signature</strong> above — the signature is copied to your clipboard.</li>
+        <li>In Gmail, click the <strong>⚙ Settings</strong> icon (top right) → <strong>See all settings</strong>.</li>
+        <li>Stay on the <strong>General</strong> tab and scroll down to <strong>Signature</strong>.</li>
+        <li>Click <strong>Create new</strong>, give it a name (e.g. "Atrya"), then click inside the signature text area.</li>
+        <li>Press <strong>Cmd + V</strong> to paste.</li>
+        <li>Scroll to the bottom and click <strong>Save Changes</strong>.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<script>
+const LOGO = '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';
+
+function v(id){ return document.getElementById(id).value.trim() }
+
+function buildSig(){
+  const name   = v('f-name')  || 'Your Name';
+  const title  = v('f-title') || 'Title';
+  const phone  = v('f-phone');
+  const email  = v('f-email');
+  const li     = v('f-li');
+  const phoneHref = 'tel:' + phone.replace(/\s/g,'');
+
+  function iconRow(pngDataUrl, content, isLast){
+    return `<tr>
+      <td width="22" style="vertical-align:middle;padding-bottom:${isLast?'0':'7'}px">
+        <img src="${pngDataUrl}" width="13" height="13" style="display:block;width:13px;height:13px;border:0"/>
+      </td>
+      <td style="vertical-align:middle;padding-bottom:${isLast?'0':'7'}px">${content}</td>
+    </tr>`;
+  }
+
+  const txt = `font-family:Arial,sans-serif;font-size:12.5px;color:#3d4f66;text-decoration:none`;
+  const rows = [
+    phone ? iconRow(IC_PNG.phone, `<a href="${phoneHref}" style="${txt}">${phone}</a>`, false) : '',
+    email ? iconRow(IC_PNG.email, `<a href="mailto:${email}" style="${txt}">${email}</a>`, false) : '',
+    iconRow(IC_PNG.web, `<a href="https://atrya.io" style="${txt}">atrya.io</a>`, !li),
+    li    ? iconRow(IC_PNG.li,    `<a href="${li}" style="font-family:Arial,sans-serif;font-size:12.5px;color:#0077b5;text-decoration:none">LinkedIn</a>`, true) : '',
+  ].join('');
+
+  return `<table cellpadding="0" cellspacing="0" border="0" width="360" style="font-family:Arial,sans-serif;color:#0c1628;width:360px">
+  <tr>
+    <td style="padding-bottom:10px">
+      <img src="data:image/jpeg;base64,${LOGO}" width="120" height="34" alt="Atrya" style="display:block;width:120px;height:34px;border:0;outline:none"/>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding-bottom:16px;border-bottom:1px solid #e8ecf4">
+      <span style="font-family:'Syne','Trebuchet MS',Arial,sans-serif;font-size:17px;font-weight:700;color:#0d1a29;display:block;letter-spacing:-.01em">${name}</span>
+      <span style="font-family:Arial,sans-serif;font-size:12.5px;color:#198EE1;display:block;margin-top:3px;font-weight:400">${title}</span>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding-top:14px;padding-bottom:14px">
+      <table cellpadding="0" cellspacing="0" border="0">
+        ${rows}
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding-top:16px;border-top:1px solid #e8ecf4">
+      <span style="font-family:Arial,sans-serif;font-size:10px;color:#b0b8cc;line-height:1.65;display:block">Caplend Technologies GmbH | c/o Factory Works GmbH | Stadtdeich 2-4 | 20097 Hamburg | Germany | Commercial Register: Amtsgericht Hamburg | HRB 185277 | Managing Director: Lorian Qorraj</span>
+    </td>
+  </tr>
+</table>`;
+}
+
+/* Convert an SVG string to a PNG data URL via canvas */
+function svgToPng(svgStr, size){
+  return new Promise(res => {
+    const blob = new Blob([svgStr], {type:'image/svg+xml'});
+    const url  = URL.createObjectURL(blob);
+    const img  = new Image();
+    img.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = c.height = size * 2;
+      const ctx = c.getContext('2d');
+      ctx.scale(2, 2);
+      ctx.drawImage(img, 0, 0, size, size);
+      URL.revokeObjectURL(url);
+      res(c.toDataURL('image/png'));
+    };
+    img.src = url;
+  });
+}
+
+const SVG = {
+  phone: `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#b0b8cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.86-.86a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.5 16.5z"/></svg>`,
+  email: `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#b0b8cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>`,
+  web:   `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#b0b8cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+  li:    `<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="#0077b5"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>`,
+};
+
+let IC_PNG = {};
+
+async function initIcons(){
+  IC_PNG.phone = await svgToPng(SVG.phone, 13);
+  IC_PNG.email = await svgToPng(SVG.email, 13);
+  IC_PNG.web   = await svgToPng(SVG.web,   13);
+  IC_PNG.li    = await svgToPng(SVG.li,    13);
+  render(); // render once icons are ready
+}
+
+function render(){
+  document.getElementById('preview').innerHTML = buildSig();
+}
+
+async function copyToClipboard(){
+  const btn = document.querySelector('.copy-btn');
+  const html = buildSig();
+  try {
+    await navigator.clipboard.write([
+      new ClipboardItem({'text/html': new Blob([html], {type:'text/html'})})
+    ]);
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(()=>{ btn.textContent='Copy Signature'; btn.classList.remove('copied'); }, 2000);
+  } catch(e) {
+    btn.textContent = 'Failed — try a different browser';
+    setTimeout(()=>{ btn.textContent='Copy Signature'; }, 3000);
+  }
+}
+
+initIcons();
+</script>
+</body>
+</html>

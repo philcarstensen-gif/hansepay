@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Atrya — Typography Specimen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04060e;--bg2:#070b18;
+  --text:#e2eaf8;--mid:rgba(226,234,248,.76);--dim:rgba(226,234,248,.40);--faint:rgba(226,234,248,.14);
+  --line:rgba(255,255,255,.07);
+  --ac:#4FA8FF;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;font-weight:300;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.65}
+
+/* ── NAV ── */
+nav{padding:20px 56px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Syne',sans-serif;font-size:22px;font-weight:600;letter-spacing:-0.025em;color:var(--text);text-decoration:none}
+.logo svg{width:28px;height:28px}
+.nav-label{font-size:11px;font-weight:500;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase}
+
+/* ── LAYOUT ── */
+.wrap{max-width:960px;margin:0 auto;padding:80px 40px 120px}
+
+/* ── SECTION ── */
+.spec-section{margin-bottom:80px}
+.spec-eyebrow{font-size:10px;font-weight:500;color:var(--ac);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:10px}
+.spec-rule{width:36px;height:2px;background:var(--ac);border-radius:1px;margin:16px 0 40px}
+
+/* ── TYPE ROWS ── */
+.type-row{display:flex;align-items:baseline;gap:32px;padding:24px 0;border-bottom:1px solid var(--line)}
+.type-row:last-child{border-bottom:none}
+.type-meta{width:180px;flex-shrink:0}
+.type-meta-name{font-size:11px;font-weight:500;color:var(--ac);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:3px}
+.type-meta-spec{font-size:10px;font-weight:300;color:var(--dim);line-height:1.6}
+.type-sample{flex:1;min-width:0}
+
+/* ── PAIR GRID ── */
+.pair-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px}
+.pair-card{background:rgba(79,168,255,.03);border:1px solid var(--line);border-radius:12px;padding:28px 32px}
+.pair-card-label{font-size:10px;font-weight:500;color:var(--ac);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px}
+
+/* ── COLOR CHIPS ── */
+.weight-chips{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.chip{padding:8px 18px;border-radius:8px;background:rgba(79,168,255,.06);border:1px solid rgba(79,168,255,.14);font-size:13px;color:var(--mid)}
+.chip span{color:var(--ac);font-weight:500}
+
+footer{border-top:1px solid var(--line);padding:28px 56px;text-align:center;font-size:11px;color:var(--dim)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="../brand-guidelines.html">
+    <svg viewBox="0 0 40 40" fill="none">
+      <path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M20 13L27 20L20 27L13 20Z" fill="currentColor"/>
+    </svg>
+    Atrya
+  </a>
+  <span class="nav-label">Typography Specimen</span>
+</nav>
+
+<div class="wrap">
+
+  <!-- ── SYNE ── -->
+  <div class="spec-section">
+    <div class="spec-eyebrow">01 — Primary Typeface</div>
+    <div class="spec-rule"></div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-meta-name">Logo Wordmark</div>
+        <div class="type-meta-spec">Syne 600<br/>letter-spacing: -0.025em</div>
+      </div>
+      <div class="type-sample" style="font-family:'Syne',sans-serif;font-weight:600;font-size:52px;letter-spacing:-0.025em;line-height:1;">Atrya</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-meta-name">Display</div>
+        <div class="type-meta-spec">Syne 500 · 72px<br/>letter-spacing: -0.03em</div>
+      </div>
+      <div class="type-sample" style="font-family:'Syne',sans-serif;font-weight:500;font-size:clamp(36px,5vw,72px);letter-spacing:-0.03em;line-height:1.05;">Payment Logic.<br/>Settlement. Unified.</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-meta-name">H1</div>
+        <div class="type-meta-spec">Syne 500 · 52px<br/>letter-spacing: -0.03em</div>
+      </div>
+      <div class="type-sample" style="font-family:'Syne',sans-serif;font-weight:500;font-size:clamp(28px,4vw,52px);letter-spacing:-0.03em;line-height:1.08;">Europe's First Regulated On-Chain FX Layer</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-meta-name">H2</div>
+        <div class="type-meta-spec">Syne 500 · 36px<br/>letter-spacing: -0.025em</div>
+      </div>
+      <div class="type-sample" style="font-family:'Syne',sans-serif;font-weight:500;font-size:clamp(22px,3vw,36px);letter-spacing:-0.025em;line-height:1.1;">Native PSP Infrastructure</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-meta-name">H3</div>
+        <div class="type-meta-spec">Syne 500 · 24px<br/>letter-spacing: -0.02em</div>
+      </div>
+      <div class="type-sample" style="font-family:'Syne',sans-serif;font-weight:500;font-size:24px;letter-spacing:-0.02em;line-height:1.2;">Regulated. Unified. Instant.</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-meta-name">H4</div>
+        <div class="type-meta-spec">Syne 500 · 18px<br/>letter-spacing: -0.015em</div>
+      </div>
+      <div class="type-sample" style="font-family:'Syne',sans-serif;font-weight:500;font-size:18px;letter-spacing:-0.015em;">Cross-Border FX Settlement</div>
+    </div>
+  </div>
+
+  <!-- ── INTER ── -->
+  <div class="spec-section">
+    <div class="spec-eyebrow">02 — Secondary Typeface</div>
+    <div class="spec-rule"></div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-meta-name">Body Large</div>
+        <div class="type-meta-spec">Inter 300 · 18px<br/>line-height: 1.75</div>
+      </div>
+      <div class="type-sample" style="font-family:'Inter',sans-serif;font-weight:300;font-size:18px;line-height:1.75;color:rgba(226,234,248,.76);">Atrya enables businesses, fintechs, and financial institutions to settle cross-border payments with the speed, transparency, and programmability of on-chain technology.</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-meta-name">Body</div>
+        <div class="type-meta-spec">Inter 300 · 16px<br/>line-height: 1.75</div>
+      </div>
+      <div class="type-sample" style="font-family:'Inter',sans-serif;font-weight:300;font-size:16px;line-height:1.75;color:rgba(226,234,248,.76);">Where legacy FX infrastructure is fragmented, opaque, and slow — Atrya is unified, auditable, and instant. Operating fully within Europe's regulatory framework, Atrya redefines what payment infrastructure can be.</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-meta-name">Body Small</div>
+        <div class="type-meta-spec">Inter 300 · 14px<br/>line-height: 1.7</div>
+      </div>
+      <div class="type-sample" style="font-family:'Inter',sans-serif;font-weight:300;font-size:14px;line-height:1.7;color:rgba(226,234,248,.76);">Developed by Caplend Technologies GmbH. Registered in Hamburg, Germany. Regulated under European financial law. Built for fintechs, institutions, and payment businesses.</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-meta-name">UI Label</div>
+        <div class="type-meta-spec">Inter 500 · 11px<br/>letter-spacing: 0.1em · uppercase</div>
+      </div>
+      <div class="type-sample" style="font-family:'Inter',sans-serif;font-weight:500;font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:#4FA8FF;">Payment Infrastructure · Settlement · FX</div>
+    </div>
+
+    <div class="type-row">
+      <div class="type-meta">
+        <div class="type-meta-name">Caption / Meta</div>
+        <div class="type-meta-spec">Inter 300 · 12px<br/>color: --dim</div>
+      </div>
+      <div class="type-sample" style="font-family:'Inter',sans-serif;font-weight:300;font-size:12px;line-height:1.6;color:rgba(226,234,248,.40);">© 2026 Caplend Technologies GmbH · Stadtdeich 2-4 · 20097 Hamburg · Germany</div>
+    </div>
+
+  </div>
+
+  <!-- ── PAIRING EXAMPLES ── -->
+  <div class="spec-section">
+    <div class="spec-eyebrow">03 — Pairing Examples</div>
+    <div class="spec-rule"></div>
+
+    <div class="pair-grid">
+
+      <div class="pair-card">
+        <div class="pair-card-label">Hero Section</div>
+        <div style="font-size:10px;font-weight:500;font-family:'Inter',sans-serif;color:#4FA8FF;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:14px;">PSP · FX · Settlement</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:500;font-size:28px;letter-spacing:-0.03em;line-height:1.1;margin-bottom:14px;">Payment logic.<br/>Reimagined.</div>
+        <div style="font-family:'Inter',sans-serif;font-weight:300;font-size:14px;line-height:1.75;color:rgba(226,234,248,.76);">Europe's first regulated on-chain FX layer — built for fintechs and financial institutions.</div>
+      </div>
+
+      <div class="pair-card">
+        <div class="pair-card-label">Feature Card</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:500;font-size:18px;letter-spacing:-0.02em;margin-bottom:10px;">Instant Settlement</div>
+        <div style="font-family:'Inter',sans-serif;font-weight:300;font-size:14px;line-height:1.75;color:rgba(226,234,248,.76);">On-chain FX settlement in seconds. No correspondent banks. No hidden fees. Fully auditable on-ledger.</div>
+      </div>
+
+      <div class="pair-card">
+        <div class="pair-card-label">Stat / KPI</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:500;font-size:42px;letter-spacing:-0.03em;color:#4FA8FF;line-height:1;">99.97%</div>
+        <div style="font-family:'Inter',sans-serif;font-weight:300;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:rgba(226,234,248,.46);margin-top:6px;">Settlement Uptime</div>
+      </div>
+
+      <div class="pair-card">
+        <div class="pair-card-label">Navigation / UI</div>
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;">
+          <svg viewBox="0 0 40 40" fill="none" width="24" height="24"><path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke="#e2eaf8" stroke-width="1.6" stroke-linejoin="round"/><path d="M20 13L27 20L20 27L13 20Z" fill="#e2eaf8"/></svg>
+          <span style="font-family:'Syne',sans-serif;font-weight:600;font-size:18px;letter-spacing:-0.025em;">Atrya</span>
+        </div>
+        <div style="display:flex;gap:20px;font-family:'Inter',sans-serif;font-weight:300;font-size:13px;color:rgba(226,234,248,.6);">
+          <span>Product</span><span>Technology</span><span>Company</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── WEIGHTS REFERENCE ── -->
+  <div class="spec-section">
+    <div class="spec-eyebrow">04 — Approved Weights</div>
+    <div class="spec-rule"></div>
+    <div class="weight-chips">
+      <div class="chip">Syne <span>400</span> — unused (avoid)</div>
+      <div class="chip">Syne <span>500</span> — headings, display</div>
+      <div class="chip">Syne <span>600</span> — logo wordmark only</div>
+      <div class="chip">Inter <span>300</span> — body, captions, all prose</div>
+      <div class="chip">Inter <span>400</span> — avoid unless necessary</div>
+      <div class="chip">Inter <span>500</span> — labels, links, accents</div>
+    </div>
+    <p style="margin-top:24px;font-size:13px;font-weight:300;color:rgba(226,234,248,.46);">
+      Never use font-weight 700 or "bold" in any Atrya asset. The brand aesthetic is deliberately light and refined — weight creates hierarchy through size and spacing, not stroke width.
+    </p>
+  </div>
+
+</div>
+
+<footer>© 2026 Caplend Technologies GmbH · HRB 185277 Amtsgericht Hamburg</footer>
+
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Atrya — Interlocked Chain Export</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04060e;--bg2:#070b18;
+  --text:#e2eaf8;--mid:rgba(226,234,248,.76);--dim:rgba(226,234,248,.40);
+  --line:rgba(255,255,255,.07);--ac:#4FA8FF;
+}
+body{font-family:'Inter',sans-serif;font-weight:300;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.6;min-height:100vh}
+
+nav{padding:20px 56px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Syne',sans-serif;font-size:22px;font-weight:600;letter-spacing:-0.025em;color:var(--text);text-decoration:none}
+.logo svg{width:28px;height:28px}
+.nav-label{font-size:11px;font-weight:500;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase}
+
+.wrap{max-width:1100px;margin:0 auto;padding:60px 40px 120px}
+h1{font-family:'Syne',sans-serif;font-weight:500;font-size:32px;letter-spacing:-0.03em;margin-bottom:8px}
+.subtitle{font-size:14px;color:var(--dim);margin-bottom:48px;line-height:1.6}
+
+.note{display:inline-flex;align-items:center;gap:8px;background:rgba(79,168,255,.06);border:1px solid rgba(79,168,255,.18);border-radius:6px;padding:8px 14px;font-size:12px;color:var(--mid);margin-bottom:40px}
+.note span{color:var(--ac);font-weight:500}
+
+.controls{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:40px;padding:24px;background:rgba(79,168,255,.03);border:1px solid var(--line);border-radius:12px;align-items:flex-end}
+.control-group{display:flex;flex-direction:column;gap:6px}
+.control-group label{font-size:10px;font-weight:500;color:var(--ac);letter-spacing:0.1em;text-transform:uppercase}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap}
+.btn{padding:7px 14px;border-radius:6px;border:1px solid rgba(79,168,255,.25);background:rgba(79,168,255,.06);color:var(--mid);font-size:12px;font-weight:500;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
+.btn:hover{background:rgba(79,168,255,.14);border-color:rgba(79,168,255,.45);color:var(--text)}
+.btn.active{background:rgba(79,168,255,.18);border-color:var(--ac);color:var(--ac)}
+
+.export-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px}
+.export-card{background:rgba(79,168,255,.03);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.canvas-wrap{display:flex;align-items:center;justify-content:center;padding:12px}
+.canvas-wrap.dark-bg{background:var(--bg)}
+.canvas-wrap.light-bg{background:#f0f4fc}
+.canvas-wrap.transparent-bg{background:repeating-conic-gradient(#1a1f2e 0% 25%,#101420 0% 50%) 0 0/20px 20px}
+.card-footer{padding:16px 20px;border-top:1px solid var(--line)}
+.card-label{font-size:11px;font-weight:500;color:var(--ac);letter-spacing:0.06em;text-transform:uppercase;margin-bottom:4px}
+.card-spec{font-size:11px;color:var(--dim);margin-bottom:12px}
+.dl-btn{padding:6px 12px;border-radius:5px;border:1px solid rgba(79,168,255,.25);background:transparent;color:var(--ac);font-size:11px;font-weight:500;cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
+.dl-btn:hover{background:rgba(79,168,255,.12);border-color:var(--ac)}
+
+.btn-primary{padding:11px 26px;border-radius:7px;background:var(--ac);border:none;color:#04060e;font-size:13px;font-weight:500;cursor:pointer;font-family:'Inter',sans-serif;transition:opacity .15s}
+.btn-primary:hover{opacity:.85}
+
+.spinner{font-size:12px;color:var(--dim);padding:8px 0;display:none}
+.spinner.show{display:block}
+
+footer{border-top:1px solid var(--line);padding:28px 56px;text-align:center;font-size:11px;color:var(--dim)}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="../atrya-landing.html">
+    <svg viewBox="0 0 40 40" fill="none">
+      <path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M20 13L27 20L20 27L13 20Z" fill="currentColor"/>
+    </svg>
+    Atrya
+  </a>
+  <span class="nav-label">Interlocked Chain Export</span>
+</nav>
+
+<div class="wrap">
+  <h1>Interlocked Chain</h1>
+  <p class="subtitle">
+    True Hopf-linked rings: each ring passes through the hole of the adjacent ring.<br>
+    Alternating XZ-plane and YZ-plane orientations with geometry verified for zero tube intersection.
+  </p>
+
+  <div class="note">
+    <span>Geometry:</span> R=1.0 · tube=0.12 · spacing=0.80 · N=8 links — crossing depth 0.60, inner hole 0.88 (0.28 clearance)
+  </div>
+
+  <div class="controls">
+    <div class="control-group">
+      <label>Export Size</label>
+      <div class="btn-row" id="size-btns">
+        <button class="btn active" onclick="setRes(this,512)">512 px</button>
+        <button class="btn" onclick="setRes(this,1024)">1024 px</button>
+        <button class="btn" onclick="setRes(this,2048)">2048 px</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>Background</label>
+      <div class="btn-row" id="bg-btns">
+        <button class="btn active" onclick="setBg(this,'dark')">Dark</button>
+        <button class="btn" onclick="setBg(this,'light')">Light</button>
+        <button class="btn" onclick="setBg(this,'transparent')">Transparent</button>
+      </div>
+    </div>
+    <div class="control-group" style="margin-left:auto">
+      <label>&nbsp;</label>
+      <button class="btn-primary" onclick="downloadAll()">↓ Download All (6 PNGs)</button>
+    </div>
+  </div>
+  <div class="spinner" id="spinner">Rendering…</div>
+
+  <div class="export-grid" id="export-grid"></div>
+</div>
+
+<footer>© 2026 Caplend Technologies GmbH · HRB 185277 Amtsgericht Hamburg</footer>
+
+<script>
+/* ──────────────────────────────────────────────────────────────────
+   INTERLOCKED CHAIN GEOMETRY
+
+   Chain axis: Y. Two perpendicular ring planes interleave:
+   • Even rings (i=0,2,4…): rotation.x = π/2  →  ring in XZ plane, hole faces ±Y
+   • Odd rings  (i=1,3,5…): rotation.y = π/2  →  ring in YZ plane, hole faces ±X
+
+   For ring[i+1] (YZ plane, center at y = spacing) to thread through
+   ring[i] (XZ plane, center at y = 0):
+     crossing z = sqrt(R² − spacing²) = sqrt(1−0.64) = 0.60
+     must be < inner hole radius (R − tube) = 0.88  ✓
+     tube clearance: closest ring distance ≈ 0.40 > 2×tube = 0.24  ✓
+────────────────────────────────────────────────────────────────── */
+const N = 8;
+const R = 1.0;       // torus major radius
+const TUBE = 0.12;   // torus tube radius
+const SPACING = 0.80; // center-to-center spacing along chain axis
+
+// Assembled interlocked chain
+const CHAIN = Array.from({length:N}, (_,i) => ({
+  x: 0,
+  y: (i - (N-1)/2) * SPACING,
+  z: 0,
+  rx: i%2 === 0 ? Math.PI/2 : 0,
+  ry: i%2 === 0 ? 0 : Math.PI/2,
+  rz: 0,
+}));
+
+// Scattered / tangle positions (rings drifted apart)
+const TANGLE = [
+  { x: 1.30, y: 2.80, z: 0.50, rx: 0.40, ry: 0.55, rz: 0.30 },
+  { x:-1.40, y: 1.70, z:-0.40, rx: 1.57+0.55, ry: 0.25, rz:-0.25 },
+  { x: 0.90, y: 0.55, z: 0.60, rx:-0.30, ry: 0.85, rz: 0.45 },
+  { x:-1.00, y:-0.40, z:-0.50, rx: 1.57-0.45, ry:-0.20, rz: 0.30 },
+  { x: 1.20, y:-1.50, z: 0.40, rx: 0.45, ry:-0.55, rz:-0.35 },
+  { x:-0.85, y:-2.40, z:-0.30, rx: 1.57+0.30, ry: 0.45, rz:-0.20 },
+  { x: 1.05, y:-3.30, z: 0.50, rx: 0.20, ry: 0.65, rz: 0.40 },
+  { x:-0.70, y:-4.10, z:-0.20, rx: 1.57-0.20, ry:-0.30, rz: 0.15 },
+];
+
+function lerp(a,b,t){ return a+(b-a)*t; }
+function smoothstep(a,b,x){ const t=Math.max(0,Math.min(1,(x-a)/(b-a))); return t*t*(3-2*t); }
+
+/* ──────────────────────────────────────────────────────────────────
+   RENDER STATES — 6 views
+────────────────────────────────────────────────────────────────── */
+const STATES = [
+  {
+    id: 'assembled-diagonal',
+    label: 'Chain — Diagonal',
+    spec: 'Classic 3/4 view showing interlocking rings',
+    groupRot: { x: 0.18, y: 0.52, z: 0.10 },
+    camZ: 15,
+    build: (links) => links.forEach((m,i) => applyPos(m, CHAIN[i])),
+  },
+  {
+    id: 'assembled-45deg',
+    label: 'Chain — 45° Angle',
+    spec: 'Best view for seeing alternating ring planes',
+    groupRot: { x: 0.22, y: Math.PI/4, z: 0.05 },
+    camZ: 15,
+    build: (links) => links.forEach((m,i) => applyPos(m, CHAIN[i])),
+  },
+  {
+    id: 'assembled-horizontal',
+    label: 'Chain — Horizontal',
+    spec: 'Chain laid flat, slight elevation angle',
+    groupRot: { x: 0.30, y: 0.40, z: Math.PI/2 },
+    camZ: 15,
+    build: (links) => links.forEach((m,i) => applyPos(m, CHAIN[i])),
+  },
+  {
+    id: 'assembled-closeup',
+    label: 'Chain — Close-up',
+    spec: 'Centre 4 links, tight crop',
+    groupRot: { x: 0.22, y: Math.PI/4, z: 0.05 },
+    camZ: 7,
+    build: (links) => links.forEach((m,i) => applyPos(m, CHAIN[i])),
+  },
+  {
+    id: 'transition',
+    label: 'Chain — Mid Transition',
+    spec: 'Links 50% drifted apart',
+    groupRot: { x: 0.18, y: 0.65, z: 0.15 },
+    camZ: 15,
+    build(links){
+      links.forEach((m,i) => {
+        const t = 0.5;
+        applyPos(m, {
+          x: lerp(CHAIN[i].x, TANGLE[i].x, t),
+          y: lerp(CHAIN[i].y, TANGLE[i].y, t),
+          z: lerp(CHAIN[i].z, TANGLE[i].z, t),
+          rx: lerp(CHAIN[i].rx, TANGLE[i].rx, t),
+          ry: lerp(CHAIN[i].ry, TANGLE[i].ry, t),
+          rz: lerp(CHAIN[i].rz, TANGLE[i].rz, t),
+        });
+      });
+    },
+  },
+  {
+    id: 'scattered',
+    label: 'Chain — Scattered',
+    spec: 'Fully disassembled rings',
+    groupRot: { x: 0.10, y: 0.70, z: 0.22 },
+    camZ: 15,
+    build: (links) => links.forEach((m,i) => applyPos(m, TANGLE[i])),
+  },
+];
+
+function applyPos(mesh, p){
+  mesh.position.set(p.x, p.y, p.z);
+  mesh.rotation.set(p.rx, p.ry, p.rz);
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   SCENE BUILDER
+────────────────────────────────────────────────────────────────── */
+function buildScene(isDark){
+  const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true, preserveDrawingBuffer:true });
+  renderer.setPixelRatio(1);
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
+
+  if(isDark){
+    renderer.toneMappingExposure = 1.5;
+    scene.add(new THREE.AmbientLight(0x04102a, 1.2));
+    const Lk = new THREE.DirectionalLight(0xffffff, 2.4); Lk.position.set(6,9,8); scene.add(Lk);
+    const Lb = new THREE.PointLight(0x4FA8FF, 14, 30); Lb.position.set(-7,2,8); scene.add(Lb);
+    const Lw = new THREE.PointLight(0xB8D4FF, 6, 26);  Lw.position.set(8,4,7);  scene.add(Lw);
+    const Ld = new THREE.PointLight(0x0F28AA, 4, 26);  Ld.position.set(0,-5,-8); scene.add(Ld);
+    const Lr = new THREE.PointLight(0x7AA8FF, 3, 20);  Lr.position.set(4,-7,3);  scene.add(Lr);
+  } else {
+    renderer.toneMappingExposure = 1.55;
+    scene.add(new THREE.AmbientLight(0x101820, 0.6));
+    const Lk = new THREE.DirectionalLight(0xffffff, 6.0); Lk.position.set(6,9,8); scene.add(Lk);
+    const Ls = new THREE.PointLight(0xffffff,16,24); Ls.position.set(-4,9,10); scene.add(Ls);
+    const Lr = new THREE.PointLight(0xfff0e0, 9,28); Lr.position.set(10,-2,7); scene.add(Lr);
+    const La = new THREE.PointLight(0x6090ff, 5,26); La.position.set(-9,2,6);  scene.add(La);
+  }
+
+  const mat = new THREE.MeshPhysicalMaterial({
+    color: isDark ? 0x0e1c3c : 0x18202c,
+    metalness: 0.99,
+    roughness: isDark ? 0.018 : 0.010,
+    clearcoat: 1,
+    clearcoatRoughness: isDark ? 0.008 : 0.006,
+  });
+
+  const group = new THREE.Group();
+  const links = [];
+  for(let i=0; i<N; i++){
+    const mesh = new THREE.Mesh(new THREE.TorusGeometry(R, TUBE, 24, 160), mat);
+    group.add(mesh);
+    links.push(mesh);
+  }
+  scene.add(group);
+
+  return { renderer, scene, camera, group, links };
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   RENDER ONE STATE
+────────────────────────────────────────────────────────────────── */
+function renderState(state, size, bg){
+  const isDark = (bg !== 'light');
+  const { renderer, scene, camera, group, links } = buildScene(isDark);
+
+  renderer.setSize(size, size);
+  camera.position.set(0, 0, state.camZ);
+  camera.updateProjectionMatrix();
+
+  state.build(links);
+  group.rotation.set(state.groupRot.x, state.groupRot.y, state.groupRot.z);
+
+  if(bg === 'dark') scene.background = new THREE.Color(0x04060e);
+  else if(bg === 'light') scene.background = new THREE.Color(0xf0f4fc);
+  else scene.background = null;
+
+  renderer.render(scene, camera);
+  const dataURL = renderer.domElement.toDataURL('image/png');
+  renderer.dispose();
+  return dataURL;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   UI
+────────────────────────────────────────────────────────────────── */
+let currentRes = 512;
+let currentBg  = 'dark';
+
+function setRes(btn, res){
+  document.querySelectorAll('#size-btns .btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentRes = res;
+  renderAll();
+}
+function setBg(btn, bg){
+  document.querySelectorAll('#bg-btns .btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  currentBg = bg;
+  renderAll();
+}
+
+const PREVIEW = 264;
+
+function renderAll(){
+  document.getElementById('spinner').classList.add('show');
+  setTimeout(()=>{
+    const grid = document.getElementById('export-grid');
+    grid.innerHTML = '';
+    STATES.forEach(state => {
+      const dataURL = renderState(state, currentRes, currentBg);
+      state._dataURL = dataURL;
+
+      const bgClass = currentBg==='transparent' ? 'transparent-bg'
+                    : currentBg==='light'        ? 'light-bg'
+                    :                              'dark-bg';
+
+      const card = document.createElement('div');
+      card.className = 'export-card';
+      card.innerHTML = `
+        <div class="canvas-wrap ${bgClass}">
+          <img src="${dataURL}" width="${PREVIEW}" height="${PREVIEW}" style="display:block;border-radius:4px;" alt="${state.label}"/>
+        </div>
+        <div class="card-footer">
+          <div class="card-label">${state.label}</div>
+          <div class="card-spec">${state.spec}<br>${currentRes}×${currentRes}px · ${currentBg}</div>
+          <button class="dl-btn" style="margin-top:10px" onclick="dl('${state.id}')">↓ PNG ${currentRes}px</button>
+        </div>`;
+      grid.appendChild(card);
+    });
+    document.getElementById('spinner').classList.remove('show');
+  }, 30);
+}
+
+function dl(id){
+  const state = STATES.find(s=>s.id===id);
+  if(!state||!state._dataURL) return;
+  const a = document.createElement('a');
+  a.href = state._dataURL;
+  a.download = `atrya-chain-interlocked-${id}-${currentRes}px-${currentBg}.png`;
+  a.click();
+}
+
+function downloadAll(){
+  document.getElementById('spinner').classList.add('show');
+  setTimeout(()=>{
+    STATES.forEach((state, i) => {
+      const dataURL = state._dataURL || renderState(state, currentRes, currentBg);
+      setTimeout(()=>{
+        const a = document.createElement('a');
+        a.href = dataURL;
+        a.download = `atrya-chain-interlocked-${state.id}-${currentRes}px-${currentBg}.png`;
+        a.click();
+      }, i * 220);
+    });
+    document.getElementById('spinner').classList.remove('show');
+  }, 30);
+}
+
+window.addEventListener('load', ()=>{
+  if(typeof THREE === 'undefined'){
+    document.getElementById('export-grid').innerHTML =
+      '<p style="color:rgba(226,234,248,.4);padding:20px;">Could not load Three.js — check connection.</p>';
+    return;
+  }
+  renderAll();
+});
+</script>
+</body>
+</html>

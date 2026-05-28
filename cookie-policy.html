@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Atrya — Cookie Policy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a1020'/><path fill='%23b8cad8' d='M11.9,47 L11.9,33 Q11.9,28 16.2,25.5 L45.7,8.5 Q50,6 54.3,8.5 L83.8,25.5 Q88.1,28 88.1,33 L88.1,47 C74,47 63,22 50,22 C37,22 26,47 11.9,47Z'/><path fill='%235a7090' d='M11.9,53 L11.9,67 Q11.9,72 16.2,74.5 L45.7,91.5 Q50,94 54.3,91.5 L83.8,74.5 Q88.1,72 88.1,67 L88.1,53 C74,53 63,78 50,78 C37,78 26,53 11.9,53Z'/></svg>"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04060e;--ac:#4FA8FF;--text:#e2eaf8;
+  --mid:rgba(226,234,248,.76);--dim:rgba(226,234,248,.36);--faint:rgba(226,234,248,.26);
+  --line:rgba(255,255,255,.065);--lineb:rgba(255,255,255,.12)
+}
+[data-theme="light"]{
+  --bg:#f0f4fc;--ac:#1a8ee0;--text:#0c1628;
+  --mid:rgba(12,22,40,.54);--dim:rgba(12,22,40,.32);--faint:rgba(12,22,40,.18);
+  --line:rgba(12,22,40,.08);--lineb:rgba(12,22,40,.15)
+}
+html,body{width:100%;min-height:100%;background:var(--bg);font-family:'Inter',sans-serif;font-weight:300;color:var(--text);-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(4,6,14,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+[data-theme="light"] nav{background:rgba(240,244,252,.82)}
+[data-theme="light"] nav.up{background:rgba(240,244,252,.96)}
+nav.up{background:rgba(4,6,14,.88)}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:'Syne',sans-serif;font-size:30px;font-weight:600;color:var(--text);letter-spacing:-.025em}
+.logo svg{width:36px;height:36px}
+.nav-r{display:flex;align-items:center;gap:34px}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{font-size:13.5px;color:var(--dim);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-btn{padding:8px 18px;border:1px solid var(--line);border-radius:6px;font-size:13.5px;color:var(--text);text-decoration:none;transition:border-color .2s,background .2s}
+.nav-btn:hover{border-color:rgba(79,168,255,.4);background:var(--acg)}
+.nav-back{font-size:13px;color:var(--dim);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .15s}
+.nav-back:hover{color:var(--text)}
+.nav-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+footer{border-top:1px solid var(--line);padding:40px 56px;display:grid;grid-template-columns:1.2fr 1fr 1fr 1.4fr;align-items:start;gap:40px}
+.ft-brand{display:flex;flex-direction:column;gap:8px}
+.fl{font-family:'Syne',sans-serif;font-size:14.5px;font-weight:600;color:var(--dim)}
+.fc-ft{font-size:12px;color:var(--faint);line-height:1.6}
+.ft-col{display:flex;flex-direction:column;gap:10px}
+.ft-col-label{font-size:10px;font-weight:500;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+.flinks{display:flex;flex-direction:column;gap:9px}
+.flinks a{font-size:12.5px;color:var(--faint);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--dim)}
+.ft-bottom{grid-column:1/-1;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.ft-copy{font-size:11.5px;color:var(--faint)}
+@media(max-width:768px){.nav-links{display:flex;gap:30px;list-style:none}.nav-btn{padding:8px 18px;border:1px solid var(--line);border-radius:6px;font-size:13.5px;color:var(--text);text-decoration:none;transition:border-color .2s,background .2s}footer{padding:36px 20px;grid-template-columns:1fr 1fr}.ft-brand,.ft-bottom,.ft-get-in-touch{grid-column:1/-1}}
+@media(max-width:600px){footer{grid-template-columns:1fr}}
+
+.theme-toggle{width:32px;height:32px;border-radius:7px;border:1px solid var(--line);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--dim);flex-shrink:0;transition:color .2s,border-color .2s}
+.theme-toggle:hover{color:var(--text)}
+.theme-toggle svg{width:15px;height:15px}
+.icon-sun{display:none}.icon-moon{display:block}
+[data-theme="light"] .icon-sun{display:block}[data-theme="light"] .icon-moon{display:none}
+
+main{max-width:720px;margin:0 auto;padding:120px 24px 100px}
+
+.page-tag{display:block;font-size:11px;font-weight:500;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:16px}
+h1{font-family:'Syne',sans-serif;font-size:clamp(28px,4vw,42px);font-weight:500;line-height:1.1;letter-spacing:-.03em;color:var(--text);margin-bottom:10px}
+.meta{font-size:12.5px;color:var(--faint);margin-bottom:56px}
+
+.doc-body{display:flex;flex-direction:column;gap:36px}
+
+h2{font-family:'Syne',sans-serif;font-size:17px;font-weight:500;letter-spacing:-.015em;color:var(--text);margin-bottom:10px}
+p{font-size:14.5px;font-weight:300;color:var(--mid);line-height:1.78}
+p+p{margin-top:10px}
+
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:14px}
+th{text-align:left;font-weight:500;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ac);padding:10px 14px;border-bottom:1px solid var(--line)}
+td{padding:12px 14px;border-bottom:1px solid var(--line);color:var(--mid);font-weight:300;line-height:1.6;vertical-align:top}
+tr:last-child td{border-bottom:none}
+
+a{color:var(--ac);text-decoration:none}
+a:hover{text-decoration:underline}
+
+.divider{height:1px;background:var(--line)}
+
+footer-note{display:block;font-size:12px;color:var(--faint);margin-top:48px;padding-top:32px;border-top:1px solid var(--line)}
+
+@media(max-width:600px){
+  nav{padding:16px 20px}
+  main{padding:100px 20px 80px}
+  th,td{padding:10px 8px}
+}
+
+/* hamburger */
+.nav-hamburger{display:none;width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:transparent;cursor:pointer;color:var(--dim);align-items:center;justify-content:center;flex-direction:column;gap:5px;flex-shrink:0;transition:color .2s,border-color .2s}
+.nav-hamburger span{display:block;width:14px;height:1.5px;background:currentColor;border-radius:2px;transition:transform .25s,opacity .25s}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+@media(max-width:768px){
+  .nav-btn{padding:8px 18px;border:1px solid var(--line);border-radius:6px;font-size:13.5px;color:var(--text);text-decoration:none;transition:border-color .2s,background .2s}
+  .nav-hamburger{display:flex}
+  .nav-links{display:flex;gap:30px;list-style:none}
+  .nav-links.open{display:flex}
+  .nav-links li{border-bottom:1px solid var(--line)}
+  .nav-links a{font-size:13.5px;color:var(--dim);text-decoration:none;transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  [data-theme="light"] .nav-links{display:flex;gap:30px;list-style:none}
+  [data-theme="light"] .nav-links li{border-color:rgba(12,22,40,.08)}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a class="logo" href="index.html">
+    <svg viewBox="0 0 100 100" fill="none" style="flex-shrink:0">
+      <defs>
+        <linearGradient id="cp-lg" x1="10" y1="6" x2="90" y2="94" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#c2d2e4"/><stop offset="52%" stop-color="#5a7092"/><stop offset="100%" stop-color="#101828"/>
+        </linearGradient>
+      </defs>
+      <path fill="url(#cp-lg)" d="M11.9,47 L11.9,33 Q11.9,28 16.2,25.5 L45.7,8.5 Q50,6 54.3,8.5 L83.8,25.5 Q88.1,28 88.1,33 L88.1,47 C74,47 63,22 50,22 C37,22 26,47 11.9,47Z"/>
+      <path fill="url(#cp-lg)" d="M11.9,53 L11.9,67 Q11.9,72 16.2,74.5 L45.7,91.5 Q50,94 54.3,91.5 L83.8,74.5 Q88.1,72 88.1,67 L88.1,53 C74,53 63,78 50,78 C37,78 26,53 11.9,53Z"/>
+    </svg>
+    Atrya
+  </a>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li><a href="index.html#features">Features</a></li>
+      <li><a href="index.html#usecases">Use Cases</a></li>
+      <li><a href="index.html#vision">Vision</a></li>
+      <li><a href="index.html#about">About</a></li>
+    </ul>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+    <a class="nav-btn" href="waitlist.html">Join Beta</a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main>
+  <span class="page-tag">Legal</span>
+  <h1>Cookie Policy</h1>
+  <p class="meta">Caplend Technologies GmbH · Last updated: May 2026</p>
+
+  <div class="doc-body">
+
+    <div>
+      <h2>What are cookies?</h2>
+      <p>Cookies are small text files placed on your device when you visit a website. We also use similar technologies such as <em>localStorage</em> — browser-based storage that works like cookies but is never sent to a server. This policy covers both.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div>
+      <h2>What we use</h2>
+      <p>Atrya's website uses only the minimal storage necessary to function. We do not use advertising, tracking, or analytics cookies.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Purpose</th>
+            <th>Expires</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code style="font-size:12px;color:var(--ac)">atrya-theme</code></td>
+            <td>localStorage</td>
+            <td>Remembers your light or dark mode preference so it persists across visits.</td>
+            <td>Until cleared</td>
+          </tr>
+          <tr>
+            <td><code style="font-size:12px;color:var(--ac)">atrya-cookies</code></td>
+            <td>localStorage</td>
+            <td>Records that you have acknowledged this cookie notice so the banner is not shown again.</td>
+            <td>Until cleared</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="divider"></div>
+
+    <div>
+      <h2>Third-party services</h2>
+      <p>We load fonts from <a href="https://fonts.google.com" target="_blank" rel="noopener">Google Fonts</a>. When your browser requests a font file, Google may log your IP address and browser information in accordance with <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>. No cookies are set by Google Fonts directly.</p>
+      <p>We do not embed analytics, advertising networks, social media widgets, or any other third-party tracking scripts.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div>
+      <h2>Legal basis</h2>
+      <p>The storage items listed above are strictly necessary for the website to function as you expect and do not require separate consent under Art. 25 TTDSG and Art. 6(1)(f) GDPR. You may clear them at any time via your browser settings without affecting your ability to use the site.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div>
+      <h2>How to manage or delete storage</h2>
+      <p>You can clear all locally stored data through your browser's settings. In most browsers: <strong>Settings → Privacy &amp; Security → Clear browsing data → Cookies and site data</strong>. You can also use your browser's developer tools to inspect and delete specific entries.</p>
+      <p>Blocking all local storage may prevent your theme preference from being saved, but the site will continue to work normally.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div>
+      <h2>Changes to this policy</h2>
+      <p>If we introduce new cookies or storage in the future we will update this page and, where required by law, seek fresh consent. The date at the top of this page reflects the most recent revision.</p>
+    </div>
+
+    <div class="divider"></div>
+
+    <div>
+      <h2>Contact</h2>
+      <p>Questions about this policy or our data practices:<br>
+      <a href="mailto:hello@atrya.io">hello@atrya.io</a><br><br>
+      Caplend Technologies GmbH<br>
+      c/o Factory Works GmbH<br>
+      Stadtdeich 2-4, 20097 Hamburg, Germany</p>
+    </div>
+
+  </div>
+</main>
+
+<footer id="about">
+  <div class="ft-brand">
+    <svg viewBox="0 0 100 100" fill="none" width="52" height="52" aria-hidden="true" style="margin-bottom:4px">
+      <defs><linearGradient id="ft-cp-lg" x1="10" y1="6" x2="90" y2="94" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#c2d2e4"/><stop offset="52%" stop-color="#5a7092"/><stop offset="100%" stop-color="#101828"/></linearGradient></defs>
+      <path fill="url(#ft-cp-lg)" d="M11.9,47 L11.9,33 Q11.9,28 16.2,25.5 L45.7,8.5 Q50,6 54.3,8.5 L83.8,25.5 Q88.1,28 88.1,33 L88.1,47 C74,47 63,22 50,22 C37,22 26,47 11.9,47Z"/>
+      <path fill="url(#ft-cp-lg)" d="M11.9,53 L11.9,67 Q11.9,72 16.2,74.5 L45.7,91.5 Q50,94 54.3,91.5 L83.8,74.5 Q88.1,72 88.1,67 L88.1,53 C74,53 63,78 50,78 C37,78 26,53 11.9,53Z"/>
+    </svg>
+    <span class="fl">Atrya</span>
+    <span class="fc">Europe's first regulated on-chain FX facility.<br>Building programmable money infrastructure.</span>
+  </div>
+  <div class="ft-col">
+    <span class="ft-col-label">Product</span>
+    <div class="flinks">
+      <a href="index.html#usecases">Use Cases</a>
+      <a href="index.html#platform">Platform</a>
+    </div>
+  </div>
+  <div class="ft-col">
+    <span class="ft-col-label">Company</span>
+    <div class="flinks">
+      <a href="index.html#vision">Vision</a>
+      <a href="index.html#about">About</a>
+      <a href="imprint.html">Imprint</a>
+    </div>
+  </div>
+  <div class="ft-col ft-get-in-touch">
+    <span class="ft-col-label">Get In Touch</span>
+    <div class="flinks">
+      <a href="mailto:hello@atrya.io" style="color:var(--dim)">hello@atrya.io</a>
+      <a href="https://www.linkedin.com/company/atrya-infrastructure" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
+    <span class="fc" style="margin-top:14px;display:block">Caplend Technologies GmbH<br>c/o Factory Works GmbH<br>Stadtdeich 2-4<br>20097 Hamburg<br>Germany</span>
+  </div>
+  <div class="ft-bottom">
+    <span class="ft-copy">© 2026 Caplend Technologies GmbH · HRB 185277 Amtsgericht Hamburg</span>
+    <div class="flinks" style="flex-direction:row;gap:20px"><a href="cookie-policy.html">Cookies</a><a href="imprint.html">Imprint</a></div>
+  </div>
+</footer>
+
+<script>
+(()=>{
+  const root=document.documentElement;
+  const btn=document.getElementById('theme-toggle');
+  const saved=localStorage.getItem('atrya-theme');
+  const prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if(saved==='light'||(saved===null&&!prefersDark)) root.setAttribute('data-theme','light');
+  btn.addEventListener('click',()=>{
+    const isLight=root.getAttribute('data-theme')==='light';
+    if(isLight){root.removeAttribute('data-theme');localStorage.setItem('atrya-theme','dark');}
+    else{root.setAttribute('data-theme','light');localStorage.setItem('atrya-theme','light');}
+  });
+})();
+</script>
+
+<script>
+/* NAV HAMBURGER */
+(()=>{
+  const btn=document.getElementById('nav-hamburger');
+  const links=document.querySelector('.nav-links');
+  if(!btn||!links) return;
+  btn.addEventListener('click',()=>{
+    const open=btn.classList.toggle('open');
+    links.classList.toggle('open',open);
+    document.body.style.overflow=open?'hidden':'';
+  });
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    btn.classList.remove('open');
+    links.classList.remove('open');
+    document.body.style.overflow='';
+  }));
+})();
+</script>
+</body>
+</html>

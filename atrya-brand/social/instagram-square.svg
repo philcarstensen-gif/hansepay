@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" width="1080" height="1080">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&amp;family=Inter:wght@300;400;500&amp;display=swap');
+      .ig-brand   { font-family: 'Syne', sans-serif; font-weight: 500; font-size: 108px; fill: #e2eaf8; letter-spacing: -0.03em; text-anchor: middle; }
+      .ig-tagline { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 26px; fill: rgba(226,234,248,0.76); line-height: 1.74; text-anchor: middle; }
+      .ig-url     { font-family: 'Inter', sans-serif; font-weight: 500; font-size: 20px; fill: #4FA8FF; letter-spacing: 0.08em; text-transform: uppercase; text-anchor: middle; }
+    </style>
+    <linearGradient id="igBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04060e"/>
+      <stop offset="100%" stop-color="#070b18"/>
+    </linearGradient>
+    <radialGradient id="igGlow" cx="50%" cy="42%" r="45%">
+      <stop offset="0%" stop-color="#4FA8FF" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#04060e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1080" height="1080" fill="url(#igBg)"/>
+  <rect width="1080" height="1080" fill="url(#igGlow)"/>
+
+  <!-- Corner mark decorations -->
+  <g opacity="0.09" fill="none" stroke="#4FA8FF">
+    <g transform="translate(-40, -40) scale(4)">
+      <path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.2" stroke-linejoin="round"/>
+    </g>
+    <g transform="translate(960, 960) scale(4)">
+      <path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.2" stroke-linejoin="round"/>
+    </g>
+    <g transform="translate(-30, 1000) scale(3)">
+      <path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.4" stroke-linejoin="round"/>
+    </g>
+    <g transform="translate(990, -20) scale(3)">
+      <path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke-width="1.4" stroke-linejoin="round"/>
+    </g>
+  </g>
+
+  <!-- Border -->
+  <rect x="32" y="32" width="1016" height="1016" rx="4" fill="none" stroke="rgba(79,168,255,0.11)" stroke-width="1.5"/>
+
+  <!-- Large centered mark: scale 12, center = 540,540. translate = 540 - 20*12 = 300 -->
+  <g transform="translate(300, 260) scale(12)">
+    <path d="M36 20L28 6L12 6L4 20L12 34L28 34Z" stroke="#e2eaf8" stroke-width="1.6" stroke-linejoin="round" fill="none"/>
+    <path d="M20 13L27 20L20 27L13 20Z" fill="#e2eaf8"/>
+  </g>
+
+  <!-- Brand name -->
+  <text x="540" y="760" class="ig-brand">Atrya</text>
+
+  <!-- Accent line -->
+  <rect x="420" y="786" width="240" height="1.5" fill="#4FA8FF" fill-opacity="0.4" rx="1"/>
+
+  <!-- Tagline -->
+  <text x="540" y="858" class="ig-tagline">Payment logic. Settlement. Unified.</text>
+
+  <!-- URL -->
+  <text x="540" y="966" class="ig-url">atrya.io</text>
+</svg>
