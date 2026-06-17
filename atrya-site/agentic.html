@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Agentic Payments — Atrya</title>
+<meta name="description" content="The execution engine for AI agents. Programmable wallets, real-time settlement, and embedded compliance — native financial infrastructure for the agentic economy.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://atrya.io/agentic">
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://atrya.io/agentic">
+<meta property="og:title"       content="Agentic Payments — Atrya">
+<meta property="og:description" content="The execution engine for AI agents. Native wallets, real-time settlement, compliance as architecture.">
+<meta property="og:image"       content="https://atrya.io/og-image.png">
+<meta name="twitter:card"       content="summary_large_image">
+<meta name="twitter:title"      content="Agentic Payments — Atrya">
+<meta name="twitter:description" content="The execution engine for AI agents.">
+<meta name="twitter:image"      content="https://atrya.io/og-image.png">
+<meta name="theme-color" content="#04060e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f0f4fc" media="(prefers-color-scheme: light)">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────────────────────────────────── */
+:root{
+  --bg:#04060e;--bg2:#090d1c;
+  --text:#e2eaf8;--mid:rgba(226,234,248,.52);--dim:rgba(226,234,248,.32);--faint:rgba(226,234,248,.14);
+  --line:rgba(226,234,248,.07);--lineb:rgba(226,234,248,.12);
+  --ac:#4FA8FF;--acg:rgba(79,168,255,.07);--acgl:rgba(79,168,255,.13);
+  --logo-g1:#c8d8f0;--logo-g2:#8aafdc;--logo-g3:#4a7fbf;
+  --glass-bg:linear-gradient(155deg,rgba(10,24,64,.52) 0%,rgba(4,8,26,.45) 100%);
+  --glass-border:rgba(226,234,248,.06);
+  --glass-top:rgba(79,168,255,.18);
+  --glass-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 0 0 .5px rgba(79,168,255,.06) inset,0 20px 48px rgba(0,0,0,.38);
+}
+[data-theme="light"]{
+  --bg:#f0f4fc;--bg2:#e6ecf8;
+  --text:#0c1628;--mid:rgba(12,22,40,.54);--dim:rgba(12,22,40,.32);--faint:rgba(12,22,40,.18);
+  --line:rgba(12,22,40,.08);--lineb:rgba(12,22,40,.15);
+  --ac:#1a8ee0;--acg:rgba(26,142,224,.08);--acgl:rgba(26,142,224,.14);
+  --logo-g1:#0c1628;--logo-g2:#0c1628;--logo-g3:#0c1628;
+  --glass-bg:rgba(255,255,255,.68);
+  --glass-border:rgba(12,22,40,.09);
+  --glass-top:rgba(26,142,224,.28);
+  --glass-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 12px 36px rgba(12,22,80,.1);
+}
+
+/* ─── RESET ──────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+img{display:block;max-width:100%}
+
+/* ─── NAV (via assets/atrya-nav.js) ──────────────────────────────── */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;border-bottom:1px solid transparent;transition:background .3s,border-color .3s}
+nav.up{background:rgba(4,6,14,.82);backdrop-filter:blur(20px) saturate(1.5);-webkit-backdrop-filter:blur(20px) saturate(1.5);border-color:var(--line)}
+[data-theme="light"] nav.up{background:rgba(240,244,252,.88)}
+.logo{display:flex;align-items:center;gap:9px;font-family:'Syne',sans-serif;font-size:18px;font-weight:500;letter-spacing:-.02em;color:var(--text)}
+.nav-r{display:flex;align-items:center;gap:20px}
+.nav-links{display:flex;gap:30px;list-style:none}
+.nav-links a{font-size:13.5px;color:var(--dim);transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-btn{padding:8px 18px;border:1px solid var(--line);border-radius:6px;font-size:13.5px;color:var(--text);transition:border-color .2s,background .2s}
+.nav-btn:hover{border-color:rgba(79,168,255,.4);background:var(--acg)}
+[data-theme="light"] .nav-btn:hover{border-color:rgba(26,142,224,.35);background:var(--acg)}
+.theme-toggle{width:34px;height:34px;display:flex;align-items:center;justify-content:center;color:var(--dim);border-radius:8px;transition:color .2s,background .2s}
+.theme-toggle:hover{color:var(--text);background:var(--acg)}
+.theme-toggle svg{width:16px;height:16px}
+.icon-sun{display:none}
+[data-theme="light"] .icon-moon{display:none}
+[data-theme="light"] .icon-sun{display:block}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;width:34px;height:34px;align-items:center;justify-content:center;color:var(--text)}
+.nav-hamburger span{display:block;width:18px;height:1.5px;background:currentColor;border-radius:2px;transition:transform .25s,opacity .25s}
+.nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* ─── FOOTER / COOKIE (via assets/atrya-footer.js) ──────────────── */
+footer{padding:64px 64px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:40px}
+.ft-brand{display:flex;flex-direction:column}
+.fl{font-family:'Syne',sans-serif;font-size:17px;font-weight:500;letter-spacing:-.02em;color:var(--text);margin-bottom:12px}
+.fc{font-size:13px;font-weight:300;color:var(--dim);line-height:1.7;max-width:220px}
+.ft-col{display:flex;flex-direction:column;gap:4px}
+.ft-col-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);margin-bottom:14px}
+.flinks{display:flex;flex-direction:column;gap:12px}
+.flinks a{font-size:13.5px;font-weight:300;color:var(--dim);transition:color .2s}
+.flinks a:hover{color:var(--text)}
+.ft-bottom{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:24px 0;border-top:1px solid var(--line);margin-top:40px}
+.ft-copy{font-size:12px;color:var(--faint)}
+.cookie-banner{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(9,13,28,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--lineb);border-radius:12px;padding:14px 20px;display:flex;align-items:center;gap:16px;font-size:12.5px;color:var(--dim);max-width:600px;width:calc(100% - 40px);z-index:2000;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.cookie-banner.hidden{display:none}
+.cookie-banner a{color:var(--ac)}
+.cookie-btn{padding:7px 16px;background:var(--ac);color:#fff;border-radius:6px;font-size:12px;font-weight:500;white-space:nowrap;transition:opacity .2s;cursor:pointer}
+.cookie-btn:hover{opacity:.85}
+[data-theme="light"] .cookie-banner{background:rgba(240,244,252,.92);border-color:rgba(12,22,40,.12)}
+
+/* ─── NEON GLOW BORDER ───────────────────────────────────────────── */
+@keyframes glowBreathe{
+  0%,100%{
+    box-shadow:
+      0 0 0 1px rgba(79,168,255,.22),
+      0 0 18px rgba(79,168,255,.28),
+      0 0 48px rgba(79,168,255,.16),
+      0 0 100px rgba(79,168,255,.08),
+      0 36px 80px rgba(0,0,0,.52);
+  }
+  50%{
+    box-shadow:
+      0 0 0 1px rgba(79,168,255,.38),
+      0 0 26px rgba(79,168,255,.44),
+      0 0 70px rgba(79,168,255,.26),
+      0 0 130px rgba(79,168,255,.13),
+      0 36px 80px rgba(0,0,0,.52);
+  }
+}
+@keyframes glowBreathLight{
+  0%,100%{
+    box-shadow:
+      0 0 0 1px rgba(26,142,224,.28),
+      0 0 16px rgba(26,142,224,.22),
+      0 0 44px rgba(26,142,224,.12),
+      0 0 90px rgba(26,142,224,.06),
+      0 20px 48px rgba(12,22,80,.12);
+  }
+  50%{
+    box-shadow:
+      0 0 0 1px rgba(26,142,224,.48),
+      0 0 24px rgba(26,142,224,.36),
+      0 0 64px rgba(26,142,224,.20),
+      0 0 120px rgba(26,142,224,.10),
+      0 20px 48px rgba(12,22,80,.12);
+  }
+}
+
+.ag-shimmer-ring{
+  position:relative;border-radius:23px;
+  animation:glowBreathe 5s ease-in-out infinite;
+}
+[data-theme="light"] .ag-shimmer-ring{
+  animation:glowBreathLight 5s ease-in-out infinite;
+}
+
+/* ─── SHARED UTILITIES ───────────────────────────────────────────── */
+.sh-tag{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--ac);display:inline-block;margin-bottom:14px}
+.btn-a{display:inline-flex;align-items:center;gap:7px;padding:13px 26px;background:var(--ac);color:#fff;border-radius:7px;font-size:14px;font-weight:500;transition:opacity .2s,box-shadow .2s}
+.btn-a:hover{opacity:.9;box-shadow:0 0 28px rgba(79,168,255,.35)}
+.btn-b{display:inline-flex;align-items:center;gap:7px;padding:12px 24px;border:1px solid var(--lineb);color:var(--mid);border-radius:7px;font-size:14px;transition:border-color .2s,color .2s,background .2s}
+.btn-b:hover{border-color:var(--ac);color:var(--text);background:var(--acg)}
+[data-theme="light"] .btn-b{border-color:rgba(12,22,40,.18)}
+
+/* ─── HERO ───────────────────────────────────────────────────────── */
+.ag-hero{position:relative;overflow:hidden;padding:160px 64px 100px;border-bottom:1px solid var(--line)}
+/* Atmospheric hazes */
+.ag-hero::before{content:'';position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(79,168,255,.09) 0%,transparent 65%);top:-320px;right:-200px;pointer-events:none;animation:haze1 14s ease-in-out infinite}
+.ag-hero::after{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(90,55,220,.06) 0%,transparent 65%);bottom:-80px;left:-80px;pointer-events:none;animation:haze2 18s ease-in-out infinite}
+@keyframes haze1{0%,100%{transform:translate(0,0) scale(1)}40%{transform:translate(-50px,40px) scale(1.1)}75%{transform:translate(30px,-50px) scale(.93)}}
+@keyframes haze2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(70px,-30px) scale(1.15)}}
+[data-theme="light"] .ag-hero::before{background:radial-gradient(circle,rgba(26,142,224,.06) 0%,transparent 65%)}
+[data-theme="light"] .ag-hero::after{background:radial-gradient(circle,rgba(80,50,200,.03) 0%,transparent 65%)}
+
+.ag-hero-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;position:relative;z-index:1}
+.ag-hero-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:100px;background:rgba(79,168,255,.09);border:1px solid rgba(79,168,255,.2);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);margin-bottom:28px}
+[data-theme="light"] .ag-hero-badge{background:rgba(26,142,224,.08);border-color:rgba(26,142,224,.22)}
+.ag-hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--ac);animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.7)}}
+.ag-h1{font-family:'Syne',sans-serif;font-size:clamp(34px,4vw,54px);font-weight:500;letter-spacing:-.035em;line-height:1.1;color:var(--text);margin-bottom:22px}
+.ag-h1 em{font-style:normal;color:var(--ac)}
+.ag-hero-sub{font-size:16px;font-weight:300;color:var(--mid);line-height:1.72;max-width:460px;margin-bottom:36px}
+.ag-hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+
+/* ─── HERO CARD ──────────────────────────────────────────────────── */
+.ag-flow-card{
+  position:relative;z-index:1;border-radius:22px;padding:28px;
+  background:
+    radial-gradient(ellipse 90% 55% at 20% 0%,rgba(79,168,255,.09) 0%,transparent 55%),
+    radial-gradient(ellipse 60% 45% at 85% 100%,rgba(90,55,220,.06) 0%,transparent 50%),
+    linear-gradient(145deg,rgba(10,24,64,.74) 0%,rgba(6,14,42,.86) 55%,rgba(4,8,26,.80) 100%);
+  backdrop-filter:blur(60px) saturate(2.2) brightness(1.04);
+  -webkit-backdrop-filter:blur(60px) saturate(2.2) brightness(1.04);
+  box-shadow:
+    0 0 0 .5px rgba(255,255,255,.06) inset,
+    0 1px 0 rgba(255,255,255,.11) inset,
+    0 40px 80px rgba(0,0,0,.55),
+    0 0 120px rgba(79,168,255,.08);
+}
+/* Prismatic surface streak */
+.ag-flow-card::before{
+  content:'';position:absolute;top:0;left:12%;right:12%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),rgba(120,200,255,.30),rgba(255,255,255,.16),transparent);
+  pointer-events:none;border-radius:1px;
+}
+[data-theme="light"] .ag-flow-card{
+  background:
+    radial-gradient(ellipse 90% 55% at 20% 0%,rgba(79,168,255,.05) 0%,transparent 55%),
+    rgba(255,255,255,.78);
+  backdrop-filter:blur(28px) saturate(1.6);
+  -webkit-backdrop-filter:blur(28px) saturate(1.6);
+  box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 16px 48px rgba(12,22,80,.12),0 0 0 .5px rgba(79,168,255,.1);
+}
+[data-theme="light"] .ag-flow-card::before{background:linear-gradient(90deg,transparent,rgba(79,168,255,.12),rgba(120,200,255,.22),rgba(79,168,255,.12),transparent)}
+
+.ag-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+.ag-card-title{font-size:11.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--dim)}
+.ag-card-status{display:flex;align-items:center;gap:6px;font-size:12px;color:rgba(79,230,130,.85)}
+.ag-status-dot{width:6px;height:6px;border-radius:50%;background:rgba(79,230,130,.9);box-shadow:0 0 8px rgba(79,230,130,.6);animation:pulse 2s ease-in-out infinite}
+
+/* Flow nodes */
+.ag-flow-nodes{display:flex;align-items:center;margin-bottom:24px}
+.ag-node{display:flex;flex-direction:column;align-items:center;gap:9px;flex-shrink:0}
+.ag-node-icon{width:50px;height:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,rgba(79,168,255,.10) 0%,rgba(6,14,42,.6) 100%);border:1px solid rgba(79,168,255,.16);box-shadow:0 1px 0 rgba(255,255,255,.06) inset}
+.ag-node-icon svg{width:20px;height:20px;color:var(--ac)}
+.ag-node-label{font-size:10.5px;font-weight:400;color:var(--dim);white-space:nowrap}
+.ag-node.center .ag-node-icon{width:56px;height:56px;border-radius:15px;background:linear-gradient(145deg,rgba(79,168,255,.20) 0%,rgba(30,80,160,.6) 100%);border-color:rgba(79,168,255,.42);box-shadow:0 0 24px rgba(79,168,255,.22),0 0 0 1px rgba(79,168,255,.10) inset,0 1px 0 rgba(255,255,255,.12) inset}
+.ag-node.center .ag-node-label{color:var(--ac);font-weight:500;font-size:11px}
+[data-theme="light"] .ag-node-icon{background:rgba(255,255,255,.7);border-color:rgba(26,142,224,.2);box-shadow:0 2px 8px rgba(12,22,80,.08)}
+[data-theme="light"] .ag-node.center .ag-node-icon{background:linear-gradient(145deg,rgba(26,142,224,.15) 0%,rgba(26,100,200,.4) 100%);border-color:rgba(26,142,224,.4);box-shadow:0 4px 16px rgba(26,142,224,.2)}
+
+.ag-flow-line{flex:1;height:1px;background:linear-gradient(90deg,rgba(79,168,255,.2),rgba(79,168,255,.35),rgba(79,168,255,.2));position:relative;margin:0 8px;top:-10px}
+[data-theme="light"] .ag-flow-line{background:linear-gradient(90deg,rgba(26,142,224,.2),rgba(26,142,224,.35),rgba(26,142,224,.2))}
+.ag-flow-dot{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--ac);top:-2.5px;box-shadow:0 0 10px rgba(79,168,255,.9);animation:flowDot 2.4s ease-in-out infinite}
+.ag-flow-dot.d2{animation-delay:1.2s}
+@keyframes flowDot{0%{left:-6px;opacity:0}6%{opacity:1}94%{opacity:1}100%{left:calc(100% + 6px);opacity:0}}
+
+.ag-log{background:rgba(4,8,26,.55);border:1px solid rgba(79,168,255,.09);border-radius:12px;padding:17px 18px;font-family:'SF Mono','Fira Code','Fira Mono',monospace;box-shadow:0 1px 0 rgba(255,255,255,.04) inset}
+[data-theme="light"] .ag-log{background:rgba(240,244,252,.72);border-color:rgba(26,142,224,.14)}
+.ag-log-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(79,168,255,.055)}
+.ag-log-row:last-child{border-bottom:none}
+[data-theme="light"] .ag-log-row{border-bottom-color:rgba(12,22,40,.06)}
+.ag-log-key{font-size:11px;color:var(--dim)}
+.ag-log-val{font-size:11px;color:var(--text);font-weight:400}
+.ag-log-val.ok{color:rgba(79,230,130,.9)}
+.ag-log-val.em{color:var(--ac)}
+
+/* ─── GLASS CARD BASE ────────────────────────────────────────────── */
+/* Shared across problem, pillar, cap cards */
+.ag-glass{
+  position:relative;overflow:hidden;
+  background:var(--glass-bg);
+  backdrop-filter:blur(40px) saturate(1.9);-webkit-backdrop-filter:blur(40px) saturate(1.9);
+  border:1px solid var(--glass-border);
+  border-top:1px solid var(--glass-top);
+  box-shadow:var(--glass-shadow);
+  transition:border-top-color .3s,box-shadow .3s,transform .3s;
+}
+/* Surface sheen line */
+.ag-glass::after{
+  content:'';position:absolute;top:0;left:12%;right:12%;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(79,168,255,.36),rgba(120,200,255,.20),rgba(79,168,255,.36),transparent);
+  pointer-events:none;opacity:.75;transition:opacity .3s;
+}
+[data-theme="light"] .ag-glass::after{background:linear-gradient(90deg,transparent,rgba(26,142,224,.22),rgba(26,142,224,.14),rgba(26,142,224,.22),transparent)}
+.ag-glass:hover{transform:translateY(-3px);border-top-color:rgba(79,168,255,.36);box-shadow:0 1px 0 rgba(255,255,255,.08) inset,0 0 0 .5px rgba(79,168,255,.10) inset,0 28px 64px rgba(0,0,0,.45),0 0 64px rgba(79,168,255,.07)}
+.ag-glass:hover::after{opacity:1}
+[data-theme="light"] .ag-glass:hover{border-top-color:rgba(26,142,224,.45);box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 20px 56px rgba(12,22,80,.14)}
+
+/* ─── PROBLEM ────────────────────────────────────────────────────── */
+.ag-problem{padding:100px 64px;border-bottom:1px solid var(--line)}
+.ag-problem-inner{max-width:1120px;margin:0 auto}
+.ag-problem-header{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:64px}
+.ag-problem-h{font-family:'Syne',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:500;letter-spacing:-.03em;line-height:1.15;color:var(--text)}
+.ag-problem-sub{font-size:15px;font-weight:300;color:var(--mid);line-height:1.72}
+.ag-problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ag-pcard{padding:32px 28px;border-radius:18px}
+.ag-pcard-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(79,168,255,.07);border:1px solid rgba(79,168,255,.14);margin-bottom:22px}
+.ag-pcard-icon svg{width:19px;height:19px;color:var(--ac)}
+[data-theme="light"] .ag-pcard-icon{background:rgba(26,142,224,.07);border-color:rgba(26,142,224,.15)}
+.ag-pcard-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:500;letter-spacing:-.02em;color:var(--text);margin-bottom:12px}
+.ag-pcard-body{font-size:13.5px;font-weight:300;color:var(--mid);line-height:1.76}
+
+/* ─── ARCHITECTURE ───────────────────────────────────────────────── */
+.ag-arch{padding:100px 64px;border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.ag-arch::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(79,168,255,.05) 0%,transparent 65%);top:50%;right:-200px;transform:translateY(-50%);pointer-events:none}
+[data-theme="light"] .ag-arch::before{background:radial-gradient(circle,rgba(26,142,224,.04) 0%,transparent 65%)}
+.ag-arch-inner{max-width:1120px;margin:0 auto}
+.ag-arch-header{text-align:center;margin-bottom:72px}
+.ag-arch-h{font-family:'Syne',sans-serif;font-size:clamp(26px,3vw,40px);font-weight:500;letter-spacing:-.03em;line-height:1.15;color:var(--text);margin-bottom:16px}
+.ag-arch-sub{font-size:15px;font-weight:300;color:var(--mid);max-width:560px;margin:0 auto;line-height:1.72}
+.ag-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:64px}
+
+/* Pillar with animated left-edge glow */
+.ag-pillar{
+  padding:36px 30px;border-radius:20px;position:relative;overflow:hidden;
+  background:var(--glass-bg);
+  backdrop-filter:blur(40px) saturate(1.9);-webkit-backdrop-filter:blur(40px) saturate(1.9);
+  border:1px solid var(--glass-border);
+  box-shadow:0 1px 0 rgba(255,255,255,.05) inset,0 20px 48px rgba(0,0,0,.35);
+  transition:border-color .3s,box-shadow .3s,transform .3s;
+}
+/* Surface sheen */
+.ag-pillar::after{content:'';position:absolute;top:0;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(79,168,255,.30),rgba(120,200,255,.18),rgba(79,168,255,.30),transparent);pointer-events:none;opacity:.7;transition:opacity .3s}
+/* Left edge glow */
+.ag-pillar::before{content:'';position:absolute;left:0;top:10%;bottom:10%;width:2px;background:linear-gradient(180deg,transparent,rgba(79,168,255,.55),rgba(140,215,255,.80),rgba(79,168,255,.55),transparent);border-radius:2px;opacity:0;transition:opacity .35s}
+.ag-pillar:hover::before{opacity:1}
+.ag-pillar:hover::after{opacity:1}
+.ag-pillar:hover{transform:translateY(-3px);border-color:rgba(79,168,255,.13);box-shadow:0 1px 0 rgba(255,255,255,.07) inset,0 28px 64px rgba(0,0,0,.42),0 0 80px rgba(79,168,255,.07)}
+[data-theme="light"] .ag-pillar{box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 12px 36px rgba(12,22,80,.08)}
+[data-theme="light"] .ag-pillar:hover{border-color:rgba(26,142,224,.15);box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 20px 56px rgba(12,22,80,.13)}
+[data-theme="light"] .ag-pillar::before{background:linear-gradient(180deg,transparent,rgba(26,142,224,.5),rgba(26,142,224,.72),rgba(26,142,224,.5),transparent)}
+[data-theme="light"] .ag-pillar::after{background:linear-gradient(90deg,transparent,rgba(26,142,224,.18),rgba(26,142,224,.10),rgba(26,142,224,.18),transparent)}
+
+.ag-pillar-num{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(79,168,255,.42);margin-bottom:20px}
+[data-theme="light"] .ag-pillar-num{color:rgba(26,142,224,.48)}
+.ag-pillar-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,rgba(79,168,255,.12) 0%,rgba(79,168,255,.04) 100%);border:1px solid rgba(79,168,255,.20);margin-bottom:22px;box-shadow:0 1px 0 rgba(255,255,255,.07) inset}
+.ag-pillar-icon svg{width:21px;height:21px;color:var(--ac)}
+[data-theme="light"] .ag-pillar-icon{background:rgba(26,142,224,.08);border-color:rgba(26,142,224,.2)}
+.ag-pillar-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:500;letter-spacing:-.025em;color:var(--text);margin-bottom:14px}
+.ag-pillar-body{font-size:13.5px;font-weight:300;color:var(--mid);line-height:1.76}
+
+/* Connector diagram */
+.ag-connector{display:flex;align-items:center;padding:40px 0 0}
+.ag-conn-node{padding:18px 26px;border-radius:13px;text-align:center;background:var(--glass-bg);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid var(--glass-border);border-top:1px solid var(--glass-top);box-shadow:var(--glass-shadow)}
+.ag-conn-node.hub{padding:22px 34px;background:linear-gradient(145deg,rgba(79,168,255,.16) 0%,rgba(30,78,150,.65) 100%);border:1px solid rgba(79,168,255,.28);border-top:1px solid rgba(79,168,255,.50);box-shadow:0 0 0 1px rgba(79,168,255,.07) inset,0 0 40px rgba(79,168,255,.16),0 20px 48px rgba(0,0,0,.4)}
+[data-theme="light"] .ag-conn-node.hub{background:linear-gradient(145deg,rgba(26,142,224,.14) 0%,rgba(26,100,200,.38) 100%);border-color:rgba(26,142,224,.35);border-top-color:rgba(26,142,224,.5);box-shadow:0 8px 28px rgba(12,22,80,.15),0 0 24px rgba(26,142,224,.12)}
+.ag-conn-label{font-family:'Syne',sans-serif;font-size:13px;font-weight:500;color:var(--text);display:block;white-space:nowrap}
+.ag-conn-sub{font-size:11px;font-weight:300;color:var(--dim);margin-top:4px;display:block}
+.ag-conn-hub-label{font-family:'Syne',sans-serif;font-size:15px;font-weight:500;color:#fff;display:block}
+[data-theme="light"] .ag-conn-hub-label{color:var(--text)}
+.ag-conn-hub-sub{font-size:11.5px;font-weight:300;color:rgba(79,168,255,.85);margin-top:5px;display:block}
+[data-theme="light"] .ag-conn-hub-sub{color:rgba(26,142,224,.8)}
+.ag-conn-arrow{flex:1;height:1px;background:linear-gradient(90deg,rgba(79,168,255,.15),rgba(79,168,255,.4),rgba(79,168,255,.15));margin:0 12px;position:relative;min-width:32px}
+.ag-conn-arrow::after{content:'';position:absolute;right:-1px;top:-3.5px;border-left:7px solid rgba(79,168,255,.45);border-top:3.5px solid transparent;border-bottom:3.5px solid transparent}
+[data-theme="light"] .ag-conn-arrow{background:linear-gradient(90deg,rgba(26,142,224,.15),rgba(26,142,224,.4),rgba(26,142,224,.15))}
+[data-theme="light"] .ag-conn-arrow::after{border-left-color:rgba(26,142,224,.45)}
+.ag-conn-outputs{display:flex;flex-direction:column;gap:10px}
+
+/* ─── CAPABILITIES ───────────────────────────────────────────────── */
+.ag-cap{padding:100px 64px;border-bottom:1px solid var(--line)}
+.ag-cap-inner{max-width:1120px;margin:0 auto}
+.ag-cap-header{margin-bottom:52px}
+.ag-cap-h{font-family:'Syne',sans-serif;font-size:clamp(24px,2.8vw,38px);font-weight:500;letter-spacing:-.03em;line-height:1.15;color:var(--text);max-width:560px}
+.ag-cap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ag-ccard{
+  padding:26px 22px;border-radius:15px;position:relative;overflow:hidden;
+  background:var(--glass-bg);
+  backdrop-filter:blur(32px) saturate(1.8);-webkit-backdrop-filter:blur(32px) saturate(1.8);
+  border:1px solid var(--glass-border);
+  border-top:1px solid rgba(79,168,255,.12);
+  box-shadow:0 1px 0 rgba(255,255,255,.04) inset,0 12px 32px rgba(0,0,0,.3);
+  transition:border-top-color .3s,box-shadow .3s,transform .3s;
+}
+.ag-ccard::after{content:'';position:absolute;top:0;left:16%;right:16%;height:1px;background:linear-gradient(90deg,transparent,rgba(79,168,255,.26),transparent);pointer-events:none;opacity:.55;transition:opacity .3s}
+.ag-ccard:hover{transform:translateY(-2px);border-top-color:rgba(79,168,255,.28);box-shadow:0 1px 0 rgba(255,255,255,.06) inset,0 16px 40px rgba(0,0,0,.4),0 0 52px rgba(79,168,255,.05)}
+.ag-ccard:hover::after{opacity:1}
+[data-theme="light"] .ag-ccard{border-top-color:rgba(26,142,224,.16);box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 8px 24px rgba(12,22,80,.08)}
+[data-theme="light"] .ag-ccard:hover{border-top-color:rgba(26,142,224,.35);box-shadow:0 1px 0 rgba(255,255,255,.95) inset,0 14px 40px rgba(12,22,80,.12)}
+[data-theme="light"] .ag-ccard::after{background:linear-gradient(90deg,transparent,rgba(26,142,224,.16),transparent)}
+.ag-ccard-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:rgba(79,168,255,.07);border:1px solid rgba(79,168,255,.13);margin-bottom:16px}
+.ag-ccard-icon svg{width:16px;height:16px;color:var(--ac)}
+[data-theme="light"] .ag-ccard-icon{background:rgba(26,142,224,.07);border-color:rgba(26,142,224,.14)}
+.ag-ccard-title{font-family:'Syne',sans-serif;font-size:15px;font-weight:500;letter-spacing:-.02em;color:var(--text);margin-bottom:9px}
+.ag-ccard-body{font-size:13px;font-weight:300;color:var(--mid);line-height:1.72}
+
+/* ─── CTA ────────────────────────────────────────────────────────── */
+.ag-cta{padding:100px 64px;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(79,168,255,.05) 0%,transparent 65%)}
+.ag-cta::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(79,168,255,.03) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+[data-theme="light"] .ag-cta{background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(26,142,224,.04) 0%,transparent 65%)}
+[data-theme="light"] .ag-cta::before{background-image:radial-gradient(circle,rgba(26,142,224,.04) 1px,transparent 1px)}
+.ag-cta-inner{position:relative;z-index:1;max-width:640px;margin:0 auto}
+.ag-cta-h{font-family:'Syne',sans-serif;font-size:clamp(28px,3.5vw,46px);font-weight:500;letter-spacing:-.035em;line-height:1.12;color:var(--text);margin-bottom:18px}
+.ag-cta-sub{font-size:15px;font-weight:300;color:var(--mid);line-height:1.72;margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto}
+.ag-cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+/* ─── MOBILE ─────────────────────────────────────────────────────── */
+@media(max-width:900px){
+  .ag-hero-inner{grid-template-columns:1fr}
+  .ag-flow-wrap{display:none}
+  .ag-problem-header,.ag-problem-grid,.ag-pillars{grid-template-columns:1fr}
+  .ag-cap-grid{grid-template-columns:1fr 1fr}
+  .ag-connector{flex-direction:column;gap:14px}
+  .ag-conn-arrow{display:none}
+  .ag-conn-outputs{flex-direction:row;flex-wrap:wrap;justify-content:center}
+}
+@media(max-width:768px){
+  .ag-hero,.ag-problem,.ag-arch,.ag-cap,.ag-cta{padding-left:20px;padding-right:20px}
+  .ag-hero{padding-top:120px;padding-bottom:60px}
+  footer{grid-template-columns:1fr 1fr;padding:48px 20px 0}
+  .ft-brand{grid-column:1/-1}
+  .ft-bottom{flex-direction:column;gap:16px;text-align:center}
+  .nav-btn{display:none}
+  .nav-links{display:none;position:fixed;top:62px;left:0;right:0;bottom:0;background:rgba(4,6,14,.97);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);flex-direction:column;gap:0;padding:8px 0 24px;overflow-y:auto;z-index:1001;list-style:none}
+  .nav-links.open{display:flex}
+  .nav-links li{border-bottom:1px solid var(--line)}
+  .nav-links a{display:block;padding:16px 24px;font-size:16px;color:var(--mid)}
+  .nav-links a:hover{color:var(--text);background:var(--acg)}
+  [data-theme="light"] .nav-links{background:rgba(240,244,252,.97)}
+  [data-theme="light"] .nav-links li{border-color:rgba(12,22,40,.08)}
+  .nav-hamburger{display:flex}
+}
+@media(max-width:480px){
+  .ag-cap-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<script src="assets/atrya-nav.js"></script>
+
+<!-- ─── HERO ──────────────────────────────────────────────────────────── -->
+<section class="ag-hero">
+  <div class="ag-hero-inner">
+    <div>
+      <div class="ag-hero-badge"><span class="ag-hero-badge-dot"></span>Agentic Payments</div>
+      <h1 class="ag-h1">The execution engine<br>for <em>AI agents.</em></h1>
+      <p class="ag-hero-sub">Atrya gives AI agents a native financial identity — programmable wallets, real-time settlement, and compliance built into the ledger layer. Not adapted from human infrastructure.</p>
+      <div class="ag-hero-btns">
+        <a href="waitlist.html" class="btn-a">Apply for access →</a>
+        <a href="#architecture" class="btn-b">See the architecture</a>
+      </div>
+    </div>
+    <div class="ag-flow-wrap">
+      <div class="ag-shimmer-ring">
+        <div class="ag-flow-card">
+          <div class="ag-card-header">
+            <span class="ag-card-title">Live settlement</span>
+            <span class="ag-card-status"><span class="ag-status-dot"></span>Active</span>
+          </div>
+          <div class="ag-flow-nodes">
+            <div class="ag-node">
+              <div class="ag-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h.01M15 9h.01M9 15h6"/></svg></div>
+              <span class="ag-node-label">AI Agent</span>
+            </div>
+            <div class="ag-flow-line"><div class="ag-flow-dot"></div><div class="ag-flow-dot d2"></div></div>
+            <div class="ag-node center">
+              <div class="ag-node-icon">
+                <svg viewBox="0 0 100 100" fill="none" width="24" height="24"><path fill="var(--ac)" d="M11.9,47 L11.9,33 Q11.9,28 16.2,25.5 L45.7,8.5 Q50,6 54.3,8.5 L83.8,25.5 Q88.1,28 88.1,33 L88.1,47 C74,47 63,22 50,22 C37,22 26,47 11.9,47Z"/><path fill="var(--ac)" d="M11.9,53 L11.9,67 Q11.9,72 16.2,74.5 L45.7,91.5 Q50,94 54.3,91.5 L83.8,74.5 Q88.1,72 88.1,67 L88.1,53 C74,53 63,78 50,78 C37,78 26,53 11.9,53Z"/></svg>
+              </div>
+              <span class="ag-node-label">Atrya</span>
+            </div>
+            <div class="ag-flow-line"><div class="ag-flow-dot" style="animation-delay:.9s"></div><div class="ag-flow-dot d2" style="animation-delay:2.1s"></div></div>
+            <div class="ag-node">
+              <div class="ag-node-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+              <span class="ag-node-label">Recipient</span>
+            </div>
+          </div>
+          <div class="ag-log">
+            <div class="ag-log-row"><span class="ag-log-key">status</span><span class="ag-log-val ok">settled</span></div>
+            <div class="ag-log-row"><span class="ag-log-key">amount</span><span class="ag-log-val em">€ 1,250.00</span></div>
+            <div class="ag-log-row"><span class="ag-log-key">agent_id</span><span class="ag-log-val">procurement-7</span></div>
+            <div class="ag-log-row"><span class="ag-log-key">latency</span><span class="ag-log-val">0.3s</span></div>
+            <div class="ag-log-row"><span class="ag-log-key">compliance</span><span class="ag-log-val ok">✓ passed</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROBLEM ───────────────────────────────────────────────────────── -->
+<section class="ag-problem">
+  <div class="ag-problem-inner">
+    <div class="ag-problem-header">
+      <div>
+        <span class="sh-tag">The gap</span>
+        <h2 class="ag-problem-h">Legacy rails were built<br>for humans.</h2>
+      </div>
+      <p class="ag-problem-sub">Every existing payment rail was designed around a human account holder with a government-issued identity. AI agents break every assumption these systems were built on.</p>
+    </div>
+    <div class="ag-problem-grid">
+      <div class="ag-glass ag-pcard">
+        <div class="ag-pcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/><line x1="18" y1="14" x2="22" y2="14"/></svg></div>
+        <div class="ag-pcard-title">No financial identity</div>
+        <div class="ag-pcard-body">Agents can't open bank accounts, hold funds, or settle obligations without a human account holder as intermediary. Every payment introduces a bottleneck and a single point of failure.</div>
+      </div>
+      <div class="ag-glass ag-pcard">
+        <div class="ag-pcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="ag-pcard-title">Approval loops kill autonomy</div>
+        <div class="ag-pcard-body">Existing rails require human sign-off at every significant transaction. The autonomous agent becomes a proposal generator — not an executor. Latency and friction accumulate at every step.</div>
+      </div>
+      <div class="ag-glass ag-pcard">
+        <div class="ag-pcard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <div class="ag-pcard-title">Workarounds, not infrastructure</div>
+        <div class="ag-pcard-body">Virtual cards and API keys bolted onto legacy banking weren't designed for machine actors. They introduce hard limits, compliance blind spots, and architectures that break as complexity scales.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ARCHITECTURE ──────────────────────────────────────────────────── -->
+<section class="ag-arch" id="architecture">
+  <div class="ag-arch-inner">
+    <div class="ag-arch-header">
+      <span class="sh-tag">The architecture</span>
+      <h2 class="ag-arch-h">Native primitives for<br>the machine economy.</h2>
+      <p class="ag-arch-sub">Atrya doesn't adapt banking for agents. It builds from first principles — a financial layer designed around how autonomous systems actually operate.</p>
+    </div>
+    <div class="ag-pillars">
+      <div class="ag-pillar">
+        <div class="ag-pillar-num">01</div>
+        <div class="ag-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+        <div class="ag-pillar-title">Agent Wallets</div>
+        <div class="ag-pillar-body">Issue a regulated EMT wallet to any agent, task, or workflow in milliseconds. Each wallet carries a ledger identity — not just an API key. Spend limits, allowlists, and full audit trails enforced at the protocol level.</div>
+      </div>
+      <div class="ag-pillar">
+        <div class="ag-pillar-num">02</div>
+        <div class="ag-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="ag-pillar-title">Programmable Settlement</div>
+        <div class="ag-pillar-body">Payment logic lives in code, not a workflow tool. Define triggers, multi-party splits, conditional releases, and escrow that execute at ledger level — deterministic, composable, real-time.</div>
+      </div>
+      <div class="ag-pillar">
+        <div class="ag-pillar-num">03</div>
+        <div class="ag-pillar-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></div>
+        <div class="ag-pillar-title">Compliance as Architecture</div>
+        <div class="ag-pillar-body">Regulatory obligations embedded at the infrastructure layer, not checked after the fact. Agents operate within defined parameters without human approval per transaction. The ledger is the compliance record.</div>
+      </div>
+    </div>
+    <div class="ag-connector">
+      <div class="ag-conn-node"><span class="ag-conn-label">Your AI Agent</span><span class="ag-conn-sub">Any framework</span></div>
+      <div class="ag-conn-arrow"></div>
+      <div class="ag-conn-node hub"><span class="ag-conn-hub-label">Atrya Gateway</span><span class="ag-conn-hub-sub">Wallets · Settlement · Compliance</span></div>
+      <div class="ag-conn-arrow"></div>
+      <div class="ag-conn-outputs">
+        <div class="ag-conn-node"><span class="ag-conn-label">Supplier</span><span class="ag-conn-sub">Real-time payout</span></div>
+        <div class="ag-conn-node"><span class="ag-conn-label">Treasury</span><span class="ag-conn-sub">FX &amp; settlement</span></div>
+        <div class="ag-conn-node"><span class="ag-conn-label">Agent B</span><span class="ag-conn-sub">Peer settlement</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CAPABILITIES ──────────────────────────────────────────────────── -->
+<section class="ag-cap">
+  <div class="ag-cap-inner">
+    <div class="ag-cap-header">
+      <span class="sh-tag">Use cases</span>
+      <h2 class="ag-cap-h">Built for autonomous systems at every scale.</h2>
+    </div>
+    <div class="ag-cap-grid">
+      <div class="ag-ccard"><div class="ag-ccard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></div><div class="ag-ccard-title">Autonomous Procurement</div><div class="ag-ccard-body">Agents source, evaluate, and pay for services within predefined budget parameters — no purchase order, no approval workflow, no delay.</div></div>
+      <div class="ag-ccard"><div class="ag-ccard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="ag-ccard-title">Pay-per-inference Billing</div><div class="ag-ccard-body">Micro-settlements between AI services metered to the individual request. From fractions of a cent to enterprise volumes — settled at the transaction layer.</div></div>
+      <div class="ag-ccard"><div class="ag-ccard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="ag-ccard-title">Multi-Agent Coordination</div><div class="ag-ccard-body">Shared escrow, programmatic cost splits, and peer-to-peer settlement across distributed agent pipelines. Funds move when conditions are met — not when a human approves.</div></div>
+      <div class="ag-ccard"><div class="ag-ccard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div><div class="ag-ccard-title">Cross-Border Treasury</div><div class="ag-ccard-body">Agents manage FX exposure and execute cross-border movements at machine speed. Deterministic rates, instant settlement — no T+2, no correspondent banking lag.</div></div>
+      <div class="ag-ccard"><div class="ag-ccard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="ag-ccard-title">Compliance-Gated Releases</div><div class="ag-ccard-body">Define compliance rules as code. Payments clear only when conditions are satisfied — counterparty checks, spend limits, time windows, jurisdiction rules enforced at the ledger.</div></div>
+      <div class="ag-ccard"><div class="ag-ccard-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg></div><div class="ag-ccard-title">Audit by Default</div><div class="ag-ccard-body">Every wallet, every transaction, every agent action recorded immutably at ledger level. Full traceability without a separate logging layer — the ledger is the audit trail.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ───────────────────────────────────────────────────────────── -->
+<section class="ag-cta">
+  <div class="ag-cta-inner">
+    <span class="sh-tag">Private beta</span>
+    <h2 class="ag-cta-h">Give your agents<br>a financial identity.</h2>
+    <p class="ag-cta-sub">Atrya is in private beta. If you're building autonomous payment infrastructure — agent frameworks, AI platforms, or programmable treasury — we want to hear from you.</p>
+    <div class="ag-cta-btns">
+      <a href="waitlist.html" class="btn-a">Apply for access →</a>
+      <a href="mailto:hello@atrya.io" class="btn-b">Talk to the team</a>
+    </div>
+  </div>
+</section>
+
+<script src="assets/atrya-footer.js"></script>
+</body>
+</html>
