@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Schedule an Interview — Atrya</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#04060e;--sur:#0a1640;--ac:#4FA8FF;--ac2:#a3d4ff;
+    --tx:#e2eaf8;--sub:#7a8eaa;--bdr:rgba(226,234,248,.08);
+    --glass:linear-gradient(145deg,rgba(10,24,64,.74) 0%,rgba(6,14,42,.86) 55%,rgba(4,8,26,.80) 100%);
+    --glass-hover:linear-gradient(145deg,rgba(14,30,76,.80) 0%,rgba(8,18,52,.88) 55%,rgba(6,12,34,.84) 100%);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);color:var(--tx);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:15px;line-height:1.6;min-height:100vh;
+    background-image:
+      radial-gradient(ellipse 900px 500px at 60% -10%, rgba(79,168,255,.07) 0%, transparent 70%),
+      radial-gradient(ellipse 600px 400px at -10% 80%, rgba(79,168,255,.04) 0%, transparent 60%);
+  }
+
+  /* ── Layout ── */
+  .page-wrap{
+    min-height:100vh;display:flex;flex-direction:column;
+    align-items:center;padding:48px 20px 80px;gap:32px;
+  }
+  .logo-bar{display:flex;align-items:center;gap:10px;color:var(--tx);text-decoration:none;font-family:'Syne',sans-serif;font-weight:500;font-size:26px;letter-spacing:-.025em;}
+  .logo-bar svg{width:36px;height:36px;flex-shrink:0;}
+
+  .booking-card{
+    display:grid;grid-template-columns:300px 1fr;
+    width:100%;max-width:900px;
+    background:var(--glass);
+    backdrop-filter:blur(60px) saturate(2.2);
+    -webkit-backdrop-filter:blur(60px) saturate(2.2);
+    border:1px solid var(--bdr);
+    border-top:1px solid rgba(79,168,255,.18);
+    border-radius:20px;
+    box-shadow:0 40px 80px rgba(0,0,0,.55),0 0 120px rgba(79,168,255,.08);
+    overflow:hidden;min-height:560px;
+  }
+
+  /* ── Left: interviewer ── */
+  .iv-panel{
+    padding:48px 36px;border-right:1px solid var(--bdr);
+    display:flex;flex-direction:column;gap:0;
+  }
+  .iv-photo{
+    width:80px;height:80px;border-radius:50%;object-fit:cover;
+    border:2px solid rgba(79,168,255,.4);margin-bottom:20px;
+  }
+  .iv-name{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:var(--tx);line-height:1.2;margin-bottom:4px;}
+  .iv-title{font-size:13px;color:var(--sub);margin-bottom:24px;}
+  .iv-type-label{font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--tx);margin-bottom:4px;}
+  .iv-type-desc{font-size:13px;color:var(--sub);line-height:1.5;margin-bottom:20px;}
+  .iv-meta{display:flex;flex-direction:column;gap:10px;}
+  .iv-meta-row{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--sub);}
+  .iv-meta-row svg{flex-shrink:0;opacity:.6;}
+  .iv-meta-row span{color:var(--tx);}
+  .iv-bio{font-size:13px;color:var(--sub);line-height:1.6;margin-top:24px;padding-top:24px;border-top:1px solid var(--bdr);}
+  .iv-spacer{flex:1;}
+  .iv-brand{font-family:'Syne',sans-serif;font-size:13px;font-weight:600;color:rgba(226,234,248,.25);letter-spacing:.05em;text-transform:uppercase;margin-top:32px;}
+
+  /* ── Right: booking flow ── */
+  .flow-panel{padding:48px 48px;display:flex;flex-direction:column;overflow:hidden;}
+  .flow-step{display:none;}
+  .flow-step.active{display:block;}
+
+  /* Step 1: calendar */
+  .step-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--tx);margin-bottom:24px;}
+
+  /* Calendar */
+  .cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+  .cal-month{font-family:'Syne',sans-serif;font-size:15px;font-weight:600;color:var(--tx);}
+  .cal-arrow{
+    background:none;border:1px solid var(--bdr);border-radius:8px;
+    color:var(--sub);width:32px;height:32px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    transition:all .18s;font-size:16px;
+  }
+  .cal-arrow:hover{border-color:rgba(79,168,255,.4);color:var(--ac);}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+  .cal-dow{
+    font-size:11px;font-weight:500;color:var(--sub);
+    text-align:center;padding:4px 0 8px;text-transform:uppercase;letter-spacing:.06em;
+  }
+  .cal-day{
+    aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+    font-size:13px;border-radius:8px;cursor:pointer;transition:all .15s;
+    color:var(--tx);border:1px solid transparent;
+  }
+  .cal-day:hover:not(.disabled):not(.selected){background:rgba(79,168,255,.1);border-color:rgba(79,168,255,.2);}
+  .cal-day.today{color:var(--ac);font-weight:600;}
+  .cal-day.selected{background:var(--ac);color:#04060e;font-weight:700;border-color:var(--ac);}
+  .cal-day.disabled{color:rgba(226,234,248,.2);cursor:default;}
+  .cal-day.other-month{color:rgba(226,234,248,.15);cursor:default;}
+
+  /* Slots */
+  .slots-section{margin-top:28px;}
+  .slots-date-label{font-size:13px;color:var(--sub);margin-bottom:12px;}
+  .slots-date-label strong{color:var(--ac);}
+  .slots-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;}
+  .slot-btn{
+    padding:10px 8px;border-radius:8px;border:1px solid var(--bdr);
+    background:rgba(79,168,255,.05);color:var(--tx);
+    font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;text-align:center;
+  }
+  .slot-btn:hover{background:rgba(79,168,255,.15);border-color:rgba(79,168,255,.35);}
+  .slot-btn.selected{background:var(--ac);border-color:var(--ac);color:#04060e;font-weight:700;}
+  .slots-empty{font-size:13px;color:var(--sub);font-style:italic;}
+  .slots-loading{font-size:13px;color:var(--sub);}
+
+  /* Step 2: form */
+  .form-back{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:13px;color:var(--sub);cursor:pointer;
+    background:none;border:none;padding:0;margin-bottom:24px;
+    transition:color .15s;
+  }
+  .form-back:hover{color:var(--ac);}
+  .slot-summary{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(79,168,255,.08);border:1px solid rgba(79,168,255,.2);
+    border-radius:8px;padding:10px 16px;font-size:13px;margin-bottom:28px;
+  }
+  .slot-summary svg{color:var(--ac);flex-shrink:0;}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .form-group{display:flex;flex-direction:column;gap:6px;}
+  .form-group.full{grid-column:1/-1;}
+  .form-group label{font-size:12px;font-weight:500;color:var(--sub);text-transform:uppercase;letter-spacing:.06em;}
+  .form-group input,
+  .form-group textarea{
+    background:rgba(255,255,255,.04);border:1px solid rgba(226,234,248,.1);
+    border-radius:8px;padding:11px 14px;color:var(--tx);
+    font-family:'Inter',sans-serif;font-size:14px;
+    transition:border-color .15s,box-shadow .15s;resize:none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus{
+    outline:none;border-color:rgba(79,168,255,.5);
+    box-shadow:0 0 0 3px rgba(79,168,255,.08);
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder{color:rgba(226,234,248,.2);}
+  .form-group.optional label::after{content:' (optional)';opacity:.5;text-transform:none;font-size:11px;}
+  .form-note{grid-column:1/-1;font-size:12px;color:var(--sub);}
+
+  .btn-submit{
+    margin-top:24px;width:100%;padding:15px 28px;border-radius:10px;border:none;
+    background:var(--ac);color:#04060e;font-family:'Syne',sans-serif;
+    font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;
+    letter-spacing:-.01em;
+  }
+  .btn-submit:hover{background:#7cc0ff;transform:translateY(-1px);box-shadow:0 8px 24px rgba(79,168,255,.3);}
+  .btn-submit:active{transform:translateY(0);}
+  .btn-submit:disabled{opacity:.5;cursor:default;transform:none;}
+  .form-error{color:#ff6b7a;font-size:13px;margin-top:8px;}
+
+  /* Step 3: success */
+  .success-icon{
+    width:64px;height:64px;border-radius:50%;
+    background:rgba(79,168,255,.12);border:2px solid rgba(79,168,255,.3);
+    display:flex;align-items:center;justify-content:center;margin-bottom:24px;
+  }
+  .success-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:8px;}
+  .success-sub{color:var(--sub);font-size:14px;margin-bottom:32px;}
+  .confirm-card{
+    background:rgba(79,168,255,.05);border:1px solid rgba(79,168,255,.15);
+    border-radius:12px;padding:24px;margin-bottom:24px;
+  }
+  .confirm-row{display:flex;gap:16px;align-items:flex-start;margin:10px 0;}
+  .confirm-label{font-size:12px;color:var(--sub);min-width:80px;padding-top:1px;text-transform:uppercase;letter-spacing:.05em;}
+  .confirm-value{font-size:14px;color:var(--tx);font-weight:500;}
+  .confirm-value a{color:var(--ac);text-decoration:none;}
+  .success-actions{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn-meet{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 24px;border-radius:8px;
+    background:var(--ac);color:#04060e;font-weight:600;font-size:14px;
+    text-decoration:none;transition:all .18s;
+  }
+  .btn-meet:hover{background:#7cc0ff;}
+  .btn-ghost{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 24px;border-radius:8px;
+    border:1px solid var(--bdr);color:var(--sub);font-size:14px;
+    text-decoration:none;transition:all .18s;background:none;cursor:pointer;font-family:inherit;
+  }
+  .btn-ghost:hover{border-color:rgba(79,168,255,.3);color:var(--tx);}
+
+  /* Loading skeleton */
+  .skeleton{
+    background:linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.08) 50%,rgba(255,255,255,.04) 75%);
+    background-size:200% 100%;animation:shimmer 1.4s ease-in-out infinite;
+    border-radius:6px;height:16px;
+  }
+  @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+  /* Error state */
+  .error-state{text-align:center;padding:48px 24px;}
+  .error-state h2{font-family:'Syne',sans-serif;font-size:20px;margin-bottom:8px;}
+  .error-state p{color:var(--sub);font-size:14px;}
+
+  /* Mobile */
+  @media(max-width:700px){
+    .booking-card{grid-template-columns:1fr;min-height:auto;}
+    .iv-panel{padding:32px 28px;border-right:none;border-bottom:1px solid var(--bdr);}
+    .flow-panel{padding:32px 28px;}
+    .form-grid{grid-template-columns:1fr;}
+    .form-group.full{grid-column:1;}
+    .page-wrap{padding:24px 16px 60px;}
+  }
+</style>
+</head>
+<body>
+<div class="page-wrap">
+
+  <!-- gradient def for the logo mark -->
+  <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
+    <defs>
+      <linearGradient id="atrya-lg" x1="10" y1="6" x2="90" y2="94" gradientUnits="userSpaceOnUse">
+        <stop offset="0%"   stop-color="#c8d8f0"/>
+        <stop offset="52%"  stop-color="#8aafdc"/>
+        <stop offset="100%" stop-color="#4a7fbf"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <a class="logo-bar" href="/">
+    <svg viewBox="0 0 100 100" fill="none">
+      <path fill="url(#atrya-lg)" d="M11.9,47 L11.9,33 Q11.9,28 16.2,25.5 L45.7,8.5 Q50,6 54.3,8.5 L83.8,25.5 Q88.1,28 88.1,33 L88.1,47 C74,47 63,22 50,22 C37,22 26,47 11.9,47Z"/>
+      <path fill="url(#atrya-lg)" d="M11.9,53 L11.9,67 Q11.9,72 16.2,74.5 L45.7,91.5 Q50,94 54.3,91.5 L83.8,74.5 Q88.1,72 88.1,67 L88.1,53 C74,53 63,78 50,78 C37,78 26,53 11.9,53Z"/>
+    </svg>
+    Atrya
+  </a>
+
+  <div class="booking-card" id="card">
+
+    <!-- Left: Interviewer info -->
+    <div class="iv-panel" id="ivPanel">
+      <div class="skeleton" style="width:80px;height:80px;border-radius:50%;margin-bottom:20px;"></div>
+      <div class="skeleton" style="width:140px;margin-bottom:8px;"></div>
+      <div class="skeleton" style="width:100px;height:12px;margin-bottom:24px;"></div>
+      <div class="skeleton" style="width:120px;margin-bottom:6px;"></div>
+      <div class="skeleton" style="height:40px;margin-bottom:20px;"></div>
+      <div class="skeleton" style="width:90px;height:12px;margin-bottom:8px;"></div>
+      <div class="skeleton" style="width:110px;height:12px;"></div>
+    </div>
+
+    <!-- Right: Booking flow -->
+    <div class="flow-panel">
+
+      <!-- Step 1: calendar + slots -->
+      <div class="flow-step active" id="step1">
+        <div class="step-title">Select a date &amp; time</div>
+
+        <div class="cal-nav">
+          <button class="cal-arrow" id="calPrev" onclick="shiftMonth(-1)">&#8249;</button>
+          <div class="cal-month" id="calMonthLabel"></div>
+          <button class="cal-arrow" id="calNext" onclick="shiftMonth(1)">&#8250;</button>
+        </div>
+
+        <div class="cal-grid" id="calGrid">
+          <div class="cal-dow">Mo</div>
+          <div class="cal-dow">Tu</div>
+          <div class="cal-dow">We</div>
+          <div class="cal-dow">Th</div>
+          <div class="cal-dow">Fr</div>
+          <div class="cal-dow">Sa</div>
+          <div class="cal-dow">Su</div>
+        </div>
+
+        <div class="slots-section" id="slotsSection" style="display:none;">
+          <div class="slots-date-label" id="slotsDateLabel"></div>
+          <div class="slots-grid" id="slotsGrid"></div>
+        </div>
+      </div>
+
+      <!-- Step 2: candidate form -->
+      <div class="flow-step" id="step2">
+        <button class="form-back" onclick="showStep(1)">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Back
+        </button>
+        <div class="step-title">Your details</div>
+        <div class="slot-summary" id="slotSummary">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#4FA8FF" stroke-width="1.5"/><path d="M8 5v3.5l2.5 1.5" stroke="#4FA8FF" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span id="slotSummaryText"></span>
+        </div>
+        <form id="bookingForm" onsubmit="submitBooking(event)">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>First name</label>
+              <input type="text" name="firstName" required placeholder="Jane" autocomplete="given-name">
+            </div>
+            <div class="form-group">
+              <label>Last name</label>
+              <input type="text" name="lastName" required placeholder="Smith" autocomplete="family-name">
+            </div>
+            <div class="form-group full">
+              <label>Email</label>
+              <input type="email" name="email" required placeholder="jane@company.com" autocomplete="email">
+            </div>
+            <div class="form-group full">
+              <label>Role you're applying for</label>
+              <input type="text" name="role" required placeholder="e.g. Senior Product Engineer">
+            </div>
+            <div class="form-group full optional">
+              <label>LinkedIn</label>
+              <input type="url" name="linkedin" placeholder="https://linkedin.com/in/jane-smith">
+            </div>
+            <div class="form-group full optional">
+              <label>Anything you'd like us to know</label>
+              <textarea name="notes" rows="3" placeholder="Background context, availability constraints, questions…"></textarea>
+            </div>
+            <p class="form-note">By booking you agree to us storing your contact details for recruiting purposes.</p>
+          </div>
+          <div class="form-error" id="formError" style="display:none;"></div>
+          <button type="submit" class="btn-submit" id="submitBtn">Confirm interview</button>
+        </form>
+      </div>
+
+      <!-- Step 3: success -->
+      <div class="flow-step" id="step3">
+        <div class="success-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#4FA8FF" stroke-width="1.5"/><path d="M8 12l3 3 5-5" stroke="#4FA8FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="success-title">You're confirmed.</div>
+        <div class="success-sub" id="successSub">A confirmation email is on its way.</div>
+        <div class="confirm-card" id="confirmCard"></div>
+        <div class="success-actions" id="successActions"></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+const params  = new URLSearchParams(location.search);
+const HOST    = params.get('host')     || 'phil';
+const TYPE    = params.get('type')     || null;
+
+let ivData        = null;
+let bookingType   = null;
+let tzInfo        = 'Europe/Berlin';
+let daysAhead     = 21;
+
+let calYear, calMonth;
+let selectedDate = null;
+let selectedSlot = null;
+let confirmResult = null;
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+
+async function init() {
+  const now = new Date();
+  calYear  = now.getFullYear();
+  calMonth = now.getMonth();
+
+  try {
+    const q = TYPE ? `?host=${HOST}&type=${TYPE}` : `?host=${HOST}`;
+    const r = await fetch(`/api/schedule/interviewer${q}`);
+    if (!r.ok) throw new Error('Interviewer not found');
+    const d = await r.json();
+    ivData      = d.interviewer;
+    bookingType = d.bookingType;
+    tzInfo      = d.timezone || 'Europe/Berlin';
+    daysAhead   = d.daysAhead || 21;
+    renderInterviewer();
+    renderCalendar();
+  } catch (err) {
+    document.getElementById('ivPanel').innerHTML = `
+      <div class="error-state">
+        <h2>Not found</h2>
+        <p>This scheduling link may be invalid or expired.</p>
+      </div>`;
+    document.getElementById('step1').innerHTML = '';
+  }
+}
+
+// ── Interviewer panel ─────────────────────────────────────────────────────────
+
+function renderInterviewer() {
+  const iv = ivData;
+  const bt = bookingType;
+  document.getElementById('ivPanel').innerHTML = `
+    <img class="iv-photo" src="${iv.photo || ''}" alt="${iv.name}">
+    <div class="iv-name">${iv.name}</div>
+    <div class="iv-title">${iv.title || ''}</div>
+    ${bt ? `<div class="iv-type-label">${bt.label}</div>
+    <div class="iv-type-desc">${bt.description || ''}</div>` : ''}
+    <div class="iv-meta">
+      ${bt ? `<div class="iv-meta-row">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.4"/><path d="M8 5v3.5l2 1.2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span>${bt.duration} minutes</span>
+      </div>` : ''}
+      <div class="iv-meta-row">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5A6.5 6.5 0 1 1 8 14.5" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 8l-2.5 0 0-2.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span>${tzInfo.replace(/_/g, ' ')}</span>
+      </div>
+      <div class="iv-meta-row">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M5 1.5V4M11 1.5V4M2 7h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <span>Video call (Google Meet)</span>
+      </div>
+    </div>
+    ${iv.bio ? `<div class="iv-bio">${iv.bio}</div>` : ''}
+    <div class="iv-spacer"></div>
+    <div class="iv-brand">Powered by Atrya</div>`;
+}
+
+// ── Calendar ──────────────────────────────────────────────────────────────────
+
+function shiftMonth(dir) {
+  calMonth += dir;
+  if (calMonth > 11) { calMonth = 0; calYear++; }
+  if (calMonth < 0)  { calMonth = 11; calYear--; }
+  selectedDate = null;
+  document.getElementById('slotsSection').style.display = 'none';
+  renderCalendar();
+}
+
+function renderCalendar() {
+  const monthNames = ['January','February','March','April','May','June',
+    'July','August','September','October','November','December'];
+  document.getElementById('calMonthLabel').textContent = `${monthNames[calMonth]} ${calYear}`;
+
+  const today    = new Date();
+  today.setHours(0,0,0,0);
+  const maxDate  = new Date(today);
+  maxDate.setDate(maxDate.getDate() + daysAhead);
+
+  const firstDay = new Date(calYear, calMonth, 1);
+  // ISO week: Mon=1..Sun=7; JS: Sun=0..Sat=6
+  let startDow = firstDay.getDay(); // 0=Sun
+  startDow = startDow === 0 ? 6 : startDow - 1; // convert to Mon=0
+
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+  const grid = document.getElementById('calGrid');
+  // Clear old day cells (keep DOW headers = first 7 children)
+  while (grid.children.length > 7) grid.removeChild(grid.lastChild);
+
+  // Empty cells before first day
+  for (let i = 0; i < startDow; i++) {
+    const empty = document.createElement('div');
+    empty.className = 'cal-day other-month';
+    grid.appendChild(empty);
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const date = new Date(calYear, calMonth, d);
+    date.setHours(0,0,0,0);
+    const isWeekend = date.getDay() === 0 || date.getDay() === 6;
+    const isPast    = date < today;
+    const isFuture  = date > maxDate;
+    const isToday   = date.getTime() === today.getTime();
+    const isSelected = selectedDate === fmtDate(date);
+
+    const cell = document.createElement('div');
+    const classes = ['cal-day'];
+    if (isWeekend || isPast || isFuture) {
+      classes.push('disabled');
+    } else {
+      if (isToday)    classes.push('today');
+      if (isSelected) classes.push('selected');
+      cell.onclick = () => selectDate(date, cell);
+    }
+    cell.className = classes.join(' ');
+    cell.textContent = d;
+    grid.appendChild(cell);
+  }
+
+  // Disable prev arrow when on current month
+  document.getElementById('calPrev').disabled =
+    calYear === today.getFullYear() && calMonth === today.getMonth();
+  document.getElementById('calPrev').style.opacity =
+    document.getElementById('calPrev').disabled ? '.3' : '1';
+}
+
+function fmtDate(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+async function selectDate(dateObj, cell) {
+  selectedDate = fmtDate(dateObj);
+  selectedSlot = null;
+
+  // Update selected state
+  document.querySelectorAll('.cal-day.selected').forEach(el => el.classList.remove('selected'));
+  cell.classList.add('selected');
+
+  const section = document.getElementById('slotsSection');
+  section.style.display = 'block';
+  document.getElementById('slotsGrid').innerHTML = '<div class="slots-loading">Loading availability…</div>';
+
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const dow = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+  const dowIdx = dateObj.getDay() === 0 ? 6 : dateObj.getDay() - 1;
+  document.getElementById('slotsDateLabel').innerHTML =
+    `Available times for <strong>${dow[dowIdx]}, ${dateObj.getDate()} ${months[dateObj.getMonth()]}</strong>`;
+
+  try {
+    const t = TYPE || '';
+    const r = await fetch(`/api/schedule/slots?host=${HOST}&type=${t}&date=${selectedDate}`);
+    const { slots } = await r.json();
+    renderSlots(slots || []);
+  } catch (err) {
+    document.getElementById('slotsGrid').innerHTML = '<div class="slots-empty">Could not load slots. Please try again.</div>';
+  }
+}
+
+function renderSlots(slots) {
+  const grid = document.getElementById('slotsGrid');
+  if (!slots.length) {
+    grid.innerHTML = '<div class="slots-empty">No availability on this day. Please try another date.</div>';
+    return;
+  }
+  grid.innerHTML = '';
+  slots.forEach(slot => {
+    const btn = document.createElement('button');
+    btn.className = 'slot-btn';
+    // Show only start time
+    const startLabel = slot.label.split(' –')[0].trim();
+    btn.textContent = startLabel;
+    btn.onclick = () => selectSlot(slot, btn);
+    grid.appendChild(btn);
+  });
+}
+
+function selectSlot(slot, btn) {
+  document.querySelectorAll('.slot-btn.selected').forEach(el => el.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedSlot = slot;
+
+  // Update form summary
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const d = new Date(slot.startISO);
+  const dow = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const dowIdx = d.getDay() === 0 ? 6 : d.getDay() - 1;
+  const dateStr = new Date(selectedDate + 'T12:00:00Z');
+  const dayNames = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+  const dNum = parseInt(selectedDate.split('-')[2]);
+  const mNum = parseInt(selectedDate.split('-')[1]) - 1;
+
+  const timeLabel = slot.label.split(' –')[0].trim();
+  const tz = tzInfo.replace('Europe/Berlin','Berlin').replace('_',' ');
+  document.getElementById('slotSummaryText').textContent =
+    `${dow[dowIdx]}, ${dNum} ${months[mNum]} · ${timeLabel} ${tz} · ${bookingType?.duration || 30} min`;
+
+  showStep(2);
+}
+
+// ── Steps ─────────────────────────────────────────────────────────────────────
+
+function showStep(n) {
+  document.querySelectorAll('.flow-step').forEach((el, i) => {
+    el.classList.toggle('active', i + 1 === n);
+  });
+  if (n === 1 && selectedSlot) {
+    document.querySelectorAll('.slot-btn').forEach(el => el.classList.remove('selected'));
+  }
+}
+
+// ── Form submission ───────────────────────────────────────────────────────────
+
+async function submitBooking(e) {
+  e.preventDefault();
+  if (!selectedSlot) return;
+
+  const form    = e.target;
+  const errEl   = document.getElementById('formError');
+  const submitEl = document.getElementById('submitBtn');
+
+  errEl.style.display = 'none';
+  submitEl.disabled   = true;
+  submitEl.textContent = 'Confirming…';
+
+  const body = {
+    host:      HOST,
+    type:      TYPE || (bookingType?.id),
+    slot:      selectedSlot,
+    candidate: {
+      firstName: form.firstName.value.trim(),
+      lastName:  form.lastName.value.trim(),
+      email:     form.email.value.trim(),
+      role:      form.role.value.trim(),
+      linkedin:  form.linkedin.value.trim(),
+      notes:     form.notes.value.trim(),
+    },
+  };
+
+  try {
+    const r = await fetch('/api/schedule/book', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(body),
+    });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || 'Booking failed');
+
+    confirmResult = { ...data, candidate: body.candidate };
+    renderSuccess();
+    showStep(3);
+  } catch (err) {
+    errEl.textContent   = err.message || 'Something went wrong. Please try again.';
+    errEl.style.display = 'block';
+    submitEl.disabled   = false;
+    submitEl.textContent = 'Confirm interview';
+  }
+}
+
+function renderSuccess() {
+  const d = confirmResult;
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const dow = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+
+  const slotDate = new Date(d.slot.startISO);
+  const dowIdx = slotDate.getDay() === 0 ? 6 : slotDate.getDay() - 1;
+  const dNum = parseInt(selectedDate.split('-')[2]);
+  const mNum = parseInt(selectedDate.split('-')[1]) - 1;
+  const timeLabel = d.slot.label.split(' –')[0].trim();
+  const tzShort = tzInfo.replace('Europe/Berlin','Berlin').replace('_',' ');
+
+  document.getElementById('successSub').textContent =
+    `A confirmation has been sent to ${d.candidate.email}`;
+
+  document.getElementById('confirmCard').innerHTML = `
+    <div class="confirm-row"><span class="confirm-label">With</span><span class="confirm-value">${d.interviewer?.name || ivData?.name}</span></div>
+    <div class="confirm-row"><span class="confirm-label">Type</span><span class="confirm-value">${d.bookingType?.label || bookingType?.label}</span></div>
+    <div class="confirm-row"><span class="confirm-label">Date</span><span class="confirm-value">${dow[dowIdx]}, ${dNum} ${months[mNum]}</span></div>
+    <div class="confirm-row"><span class="confirm-label">Time</span><span class="confirm-value">${timeLabel} ${tzShort}</span></div>
+    <div class="confirm-row"><span class="confirm-label">Duration</span><span class="confirm-value">${d.bookingType?.duration || bookingType?.duration || 30} minutes</span></div>
+    ${d.meetLink ? `<div class="confirm-row"><span class="confirm-label">Meeting</span><span class="confirm-value"><a href="${d.meetLink}" target="_blank" rel="noopener">${d.meetLink}</a></span></div>` : ''}`;
+
+  const actions = document.getElementById('successActions');
+  actions.innerHTML = '';
+  if (d.meetLink) {
+    const a = document.createElement('a');
+    a.href = d.meetLink;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.className = 'btn-meet';
+    a.innerHTML = `<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13z" stroke="currentColor" stroke-width="1.4"/><path d="M8 5v3.5l2.5 1.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg> Open Google Meet`;
+    actions.appendChild(a);
+  }
+  if (d.calEventLink) {
+    const a = document.createElement('a');
+    a.href = d.calEventLink;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.className = 'btn-ghost';
+    a.innerHTML = `<svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M5 1.5V4M11 1.5V4M2 7h12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg> View in Calendar`;
+    actions.appendChild(a);
+  }
+}
+
+// ── Start ─────────────────────────────────────────────────────────────────────
+
+init();
+</script>
+</body>
+</html>

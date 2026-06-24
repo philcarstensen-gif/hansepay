@@ -1,0 +1,52 @@
+[
+  {
+    "id": "phil",
+    "name": "Phil Carstensen",
+    "firstName": "Phil",
+    "title": "Co-Founder & CEO",
+    "email": "phil.carstensen@caplend.de",
+    "photo": "/benjamin-james.jpg",
+    "active": true,
+    "bio": "Co-Founder of Atrya. I lead early conversations with candidates and look forward to learning more about you.",
+    "calendarId": null,
+    "bookingTypes": [
+      {
+        "id": "intro",
+        "label": "Intro Call",
+        "duration": 30,
+        "description": "A brief introduction to discuss the opportunity and get to know each other."
+      },
+      {
+        "id": "deep",
+        "label": "Deep Dive",
+        "duration": 60,
+        "description": "An in-depth conversation about the role, your experience, and mutual expectations."
+      }
+    ]
+  },
+  {
+    "id": "lorian",
+    "name": "Lorian Qorraj",
+    "firstName": "Lorian",
+    "title": "Co-Founder & CTO",
+    "email": "lorian@atrya.io",
+    "photo": "/lorian-qorraj.jpg",
+    "active": true,
+    "bio": "Co-Founder of Atrya. I lead technical discussions and architecture deep dives with engineering candidates.",
+    "calendarId": null,
+    "bookingTypes": [
+      {
+        "id": "technical",
+        "label": "Technical Interview",
+        "duration": 45,
+        "description": "A technical discussion covering your engineering approach, past projects, and problem-solving style."
+      },
+      {
+        "id": "intro",
+        "label": "Intro Call",
+        "duration": 30,
+        "description": "A quick introduction before the technical rounds."
+      }
+    ]
+  }
+]
