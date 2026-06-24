@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Investors — Atrya</title>
+<meta name="description" content="Every era of commerce needed new infrastructure. We are building the native PSP for programmable money."/>
+<link rel="canonical" href="https://atrya.io/investors"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://atrya.io/investors"/>
+<meta property="og:title" content="Investors — Atrya"/>
+<meta property="og:description" content="Every era of commerce needed new infrastructure. We are building the native PSP for programmable money."/>
+<meta property="og:image" content="https://atrya.io/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Atrya — programmable money infrastructure"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@atrya_io"/>
+<meta name="twitter:title" content="Investors — Atrya"/>
+<meta name="twitter:description" content="Every era of commerce needed new infrastructure. We are building the native PSP for programmable money."/>
+<meta name="twitter:image" content="https://atrya.io/og-image.png"/>
+<meta name="twitter:image:alt" content="Atrya"/>
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#04060e"/>
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f0f4fc"/>
+<meta name="robots" content="index, follow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+/* ─── TOKENS ─────────────────────────────────────────────────────────────── */
+:root{
+  --bg:#04060e;--bg2:#090d1c;--text:#e2eaf8;--mid:rgba(226,234,248,.52);
+  --dim:rgba(226,234,248,.32);--faint:rgba(226,234,248,.14);
+  --line:rgba(226,234,248,.07);--lineb:rgba(226,234,248,.12);
+  --ac:#4FA8FF;--acg:rgba(79,168,255,.07);--acgl:rgba(79,168,255,.13);
+  --logo-g1:#c2d2e4;--logo-g2:#5a7092;--logo-g3:#101828;
+}
+[data-theme="light"]{
+  --bg:#f0f4fc;--bg2:#e6ecf8;--text:#0c1628;--mid:rgba(12,22,40,.54);
+  --dim:rgba(12,22,40,.32);--faint:rgba(12,22,40,.18);
+  --line:rgba(12,22,40,.08);--lineb:rgba(12,22,40,.15);
+  --ac:#1a8ee0;--acg:rgba(26,142,224,.08);--acgl:rgba(26,142,224,.14);
+  --logo-g1:#0c1628;--logo-g2:#0c1628;--logo-g3:#0c1628;
+}
+
+/* ─── RESET ──────────────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:clip}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;overflow-x:clip;line-height:1.6}
+a{color:inherit;text-decoration:none}
+
+/* ─── HERO ───────────────────────────────────────────────────────────────── */
+.inv-hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:120px 24px 80px}
+.inv-hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 65% 55% at 50% 10%,rgba(79,168,255,.07) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 50% at 80% 85%,rgba(80,55,220,.05) 0%,transparent 55%),
+    var(--bg);
+}
+.inv-hero::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:38px 38px;
+  mask-image:radial-gradient(ellipse 75% 55% at 50% 40%,black 10%,transparent 100%);
+}
+.inv-hero-inner{position:relative;z-index:1;max-width:780px}
+.inv-badge{display:inline-flex;align-items:center;gap:7px;padding:5px 14px 5px 10px;border-radius:100px;background:rgba(79,168,255,.08);border:1px solid rgba(79,168,255,.18);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);margin-bottom:32px}
+.inv-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--ac);animation:bdot 2.6s ease-in-out infinite}
+@keyframes bdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.8)}}
+.inv-hero h1{font-family:'Syne',sans-serif;font-size:clamp(40px,5.8vw,82px);font-weight:500;line-height:1.05;letter-spacing:-.036em;margin-bottom:26px}
+.inv-hero h1 em{font-style:normal;color:var(--ac)}
+.inv-hero-sub{font-size:clamp(15px,1.7vw,18px);font-weight:300;color:var(--mid);line-height:1.7;max-width:520px;margin:0 auto 52px}
+.scroll-cue{display:flex;flex-direction:column;align-items:center;gap:9px;color:var(--dim);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.scroll-cue-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--ac),transparent);animation:scueline 2.2s ease-in-out infinite}
+@keyframes scueline{0%,100%{transform:scaleY(1);opacity:.5}50%{transform:scaleY(.55);opacity:.9}}
+
+/* ─── ERAS — CONTINUOUS CANVAS ───────────────────────────────────────────── */
+.eras-zone{height:560vh;position:relative;contain:layout paint}
+.eras-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;will-change:transform}
+
+/* Each era: full sticky viewport, stacked, JS drives opacity */
+.era-layer{position:absolute;inset:0;opacity:0;pointer-events:none;
+  display:flex;align-items:center;justify-content:center;padding:80px 40px 190px}
+.era-layer-bg{position:absolute;inset:0;pointer-events:none;z-index:0}
+.era-layer svg{width:100%;max-width:960px;height:auto;overflow:visible;position:relative;z-index:1}
+
+/* Label stack: all 5 sit at bottom, only one `.vis` at a time */
+.era-labels{position:absolute;bottom:0;left:0;right:0;z-index:10;pointer-events:none}
+.era-lbl{position:absolute;bottom:0;left:0;right:0;text-align:center;padding:0 24px 68px;
+  opacity:0;transform:translateY(14px);
+  transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1)}
+.era-lbl.vis{opacity:1;transform:translateY(0)}
+.era-epoch{font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:10px}
+.era-h{font-family:'Syne',sans-serif;font-size:clamp(28px,3.8vw,52px);font-weight:500;line-height:1.1;letter-spacing:-.03em;margin-bottom:12px}
+.era-h em{font-style:normal}
+.era-p{font-size:14px;font-weight:300;color:var(--mid);max-width:420px;margin:0 auto;line-height:1.7}
+
+/* Progress dots */
+.era-dots{position:absolute;bottom:22px;left:0;right:0;display:flex;
+  justify-content:center;align-items:center;gap:8px;z-index:11;pointer-events:none}
+.era-dot{width:5px;height:5px;border-radius:50%;
+  background:rgba(226,234,248,.18);
+  transition:background .4s,transform .4s,box-shadow .4s}
+.era-dot.act{background:var(--ac);transform:scale(1.5);
+  box-shadow:0 0 8px rgba(79,168,255,.45)}
+
+/* ─── CONCLUSION ─────────────────────────────────────────────────────────── */
+.conclusion-zone{height:340vh;position:relative}
+.conclusion{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;border-top:1px solid var(--line);will-change:transform}
+.conclusion::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 90%,rgba(79,168,255,.08) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 40% at 50% 50%,rgba(79,168,255,.05) 0%,transparent 60%),
+    var(--bg);
+}
+.conclusion::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(circle,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:38px 38px;
+  mask-image:radial-gradient(ellipse 70% 70% at 50% 60%,black 5%,transparent 100%);
+}
+.pulse-rings{position:absolute;inset:0;z-index:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.pr{position:absolute;border-radius:50%;border:1px solid rgba(79,168,255,.18);opacity:0}
+.pr-1{width:320px;height:320px}
+.pr-2{width:560px;height:560px}
+.pr-3{width:780px;height:780px}
+@keyframes ring-expand{
+  0%  {transform:scale(.12);opacity:0}
+  15% {opacity:1}
+  70% {opacity:.35}
+  100%{transform:scale(1);opacity:0}
+}
+.conclusion.active .pr-1{animation:ring-expand 3.6s cubic-bezier(.16,1,.3,1) infinite}
+.conclusion.active .pr-2{animation:ring-expand 3.6s cubic-bezier(.16,1,.3,1) 1.2s infinite}
+.conclusion.active .pr-3{animation:ring-expand 3.6s cubic-bezier(.16,1,.3,1) 2.4s infinite}
+.conclusion-inner{position:relative;z-index:1;max-width:700px;text-align:center;padding:0 24px}
+.cl{font-family:'Syne',sans-serif;font-weight:500;letter-spacing:-.025em;line-height:1.25;
+  opacity:0;transform:translateY(18px);filter:blur(10px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1);
+  margin-bottom:10px}
+.cl.vis{opacity:1;transform:translateY(0);filter:blur(0)}
+.cl-1,.cl-2,.cl-3{font-size:clamp(18px,2.6vw,34px);color:var(--mid)}
+.cl-4{font-size:clamp(22px,3.2vw,44px);color:var(--text);margin-bottom:0}
+.cl-4 em{font-style:normal;color:var(--ac);text-shadow:0 0 32px rgba(79,168,255,.35)}
+.cl-gap{height:28px}
+.cta-wrap{opacity:0;transform:translateY(12px);filter:blur(6px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1);
+  margin-top:52px}
+.cta-wrap.vis{opacity:1;transform:translateY(0);filter:blur(0)}
+.btn-a{display:inline-flex;align-items:center;gap:10px;padding:14px 30px;background:var(--ac);color:#020a14;border-radius:7px;font-size:14px;font-weight:500;border:none;cursor:pointer;text-decoration:none;transition:opacity .2s,transform .2s,box-shadow .2s;box-shadow:0 0 32px rgba(79,168,255,.22)}
+.btn-a:hover{opacity:.87;transform:translateY(-1px);box-shadow:0 0 52px rgba(79,168,255,.38)}
+
+/* ─── MOBILE ─────────────────────────────────────────────────────────────── */
+@media (max-width:640px){
+  .inv-hero{padding:88px 20px 44px;min-height:100svh;min-height:100vh}
+  .inv-hero h1{font-size:clamp(32px,8.8vw,50px);line-height:1.08;margin-bottom:16px}
+  .inv-badge{margin-bottom:20px}
+  .eras-zone{height:300vh}
+  .era-layer{padding:50px 14px 170px}
+  .era-lbl{padding:0 20px 58px}
+  .era-h{font-size:clamp(22px,6vw,34px);letter-spacing:-.02em;margin-bottom:8px}
+  .era-p{font-size:13px;max-width:none;line-height:1.6}
+  .era-epoch{margin-bottom:6px}
+  .era-dot{width:4px;height:4px}
+  .conclusion-zone{height:180vh}
+  .pr-1{width:190px;height:190px}
+  .pr-2{width:310px;height:310px}
+  .pr-3{width:420px;height:420px}
+  .cl-1,.cl-2,.cl-3{font-size:clamp(15px,4.4vw,21px)}
+  .cl-4{font-size:clamp(19px,5.4vw,27px)}
+  .cl-gap{height:12px}
+  .conclusion-inner{padding:0 20px}
+  .cta-wrap{margin-top:28px}
+  .btn-a{padding:12px 22px;font-size:13px}
+}
+</style>
+</head>
+<body>
+<script src="assets/atrya-nav.js?v=5"></script>
+
+<!-- ── HERO ───────────────────────────────────────────────────────────────── -->
+<section class="inv-hero">
+  <div class="inv-hero-inner">
+    <div class="inv-badge">
+      <span class="inv-badge-dot"></span>
+      Investor Information
+    </div>
+    <h1>Every era needs<br><em>new infrastructure.</em></h1>
+    <div class="scroll-cue">
+      <span>Scroll to explore</span>
+      <div class="scroll-cue-line"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ERAS — ONE CONTINUOUS CANVAS ─────────────────────────────────────── -->
+<div class="eras-zone" id="eras-zone">
+  <div class="eras-pin" id="eras-pin">
+
+    <!-- Era 1 · Railroad ──────────────────────────────────────────────────── -->
+    <div class="era-layer" id="el1">
+      <div class="era-layer-bg" style="background:radial-gradient(ellipse 80% 55% at 50% 55%,rgba(200,168,110,.05) 0%,transparent 60%)"></div>
+      <svg id="svg1" viewBox="0 0 960 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g transform="translate(0,60)">
+        <g id="ties1"></g>
+        <path id="r1a" d="M 0,148 L 960,148" stroke="rgba(200,168,110,.6)" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="960" stroke-dashoffset="960"/>
+        <path id="r1b" d="M 0,168 L 960,168" stroke="rgba(200,168,110,.6)" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="960" stroke-dashoffset="960"/>
+        <g id="loco1">
+          <ellipse id="s3" cx="-48" cy="82" rx="14" ry="9" fill="rgba(200,168,110,.07)"/>
+          <ellipse id="s2" cx="-30" cy="68" rx="10" ry="7" fill="rgba(200,168,110,.11)"/>
+          <ellipse id="s1" cx="-14" cy="57" rx="7.5" ry="5.5" fill="rgba(200,168,110,.17)"/>
+          <polygon points="2,146 20,158 20,146" fill="rgba(200,168,110,.55)"/>
+          <rect x="20" y="116" width="96" height="40" rx="4" fill="rgba(200,168,110,.12)" stroke="rgba(200,168,110,.55)" stroke-width="1.5"/>
+          <ellipse cx="72" cy="116" rx="16" ry="8" fill="rgba(200,168,110,.18)" stroke="rgba(200,168,110,.45)" stroke-width="1.2"/>
+          <rect x="26" y="104" width="11" height="14" rx="2" fill="rgba(200,168,110,.55)"/>
+          <rect x="23" y="104" width="17" height="4" rx="1" fill="rgba(200,168,110,.7)"/>
+          <rect x="116" y="105" width="40" height="51" rx="3" fill="rgba(200,168,110,.12)" stroke="rgba(200,168,110,.55)" stroke-width="1.5"/>
+          <rect x="123" y="112" width="12" height="10" rx="2" fill="rgba(200,168,110,.45)"/>
+          <rect x="139" y="112" width="12" height="10" rx="2" fill="rgba(200,168,110,.45)"/>
+          <circle cx="10" cy="136" r="4.5" fill="rgba(200,168,110,.95)"/>
+          <circle cx="10" cy="136" r="8" fill="rgba(200,168,110,.12)"/>
+          <circle cx="55" cy="162" r="16" fill="none" stroke="rgba(200,168,110,.65)" stroke-width="2"/>
+          <circle cx="55" cy="162" r="3" fill="rgba(200,168,110,.5)"/>
+          <line x1="55" y1="146" x2="55" y2="178" stroke="rgba(200,168,110,.3)" stroke-width="1.2"/>
+          <line x1="39" y1="162" x2="71" y2="162" stroke="rgba(200,168,110,.3)" stroke-width="1.2"/>
+          <line x1="44" y1="151" x2="66" y2="173" stroke="rgba(200,168,110,.2)" stroke-width="1.2"/>
+          <line x1="66" y1="151" x2="44" y2="173" stroke="rgba(200,168,110,.2)" stroke-width="1.2"/>
+          <circle cx="95" cy="162" r="16" fill="none" stroke="rgba(200,168,110,.65)" stroke-width="2"/>
+          <circle cx="95" cy="162" r="3" fill="rgba(200,168,110,.5)"/>
+          <line x1="95" y1="146" x2="95" y2="178" stroke="rgba(200,168,110,.3)" stroke-width="1.2"/>
+          <line x1="79" y1="162" x2="111" y2="162" stroke="rgba(200,168,110,.3)" stroke-width="1.2"/>
+          <line x1="84" y1="151" x2="106" y2="173" stroke="rgba(200,168,110,.2)" stroke-width="1.2"/>
+          <line x1="106" y1="151" x2="84" y2="173" stroke="rgba(200,168,110,.2)" stroke-width="1.2"/>
+          <circle cx="26" cy="162" r="9" fill="none" stroke="rgba(200,168,110,.55)" stroke-width="1.5"/>
+          <line x1="26" y1="158" x2="95" y2="158" stroke="rgba(200,168,110,.28)" stroke-width="2.5"/>
+          <rect x="162" y="120" width="60" height="42" rx="3" fill="rgba(200,168,110,.08)" stroke="rgba(200,168,110,.35)" stroke-width="1.2"/>
+          <circle cx="175" cy="166" r="9" fill="none" stroke="rgba(200,168,110,.45)" stroke-width="1.5"/>
+          <circle cx="209" cy="166" r="9" fill="none" stroke="rgba(200,168,110,.45)" stroke-width="1.5"/>
+        </g>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Era 2 · Payments ──────────────────────────────────────────────────── -->
+    <div class="era-layer" id="el2">
+      <div class="era-layer-bg" style="background:radial-gradient(ellipse 80% 55% at 50% 50%,rgba(240,196,64,.05) 0%,transparent 60%)"></div>
+      <svg id="svg2" viewBox="0 0 960 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="480" cy="190" r="170" stroke="rgba(240,196,64,.14)" stroke-width="1.5" fill="none"/>
+        <ellipse cx="480" cy="190" rx="170" ry="58" stroke="rgba(240,196,64,.08)" stroke-width="1" fill="none"/>
+        <ellipse cx="480" cy="190" rx="170" ry="115" stroke="rgba(240,196,64,.06)" stroke-width="1" fill="none"/>
+        <ellipse cx="480" cy="190" rx="57" ry="170" stroke="rgba(240,196,64,.08)" stroke-width="1" fill="none"/>
+        <ellipse cx="480" cy="190" rx="115" ry="170" stroke="rgba(240,196,64,.06)" stroke-width="1" fill="none"/>
+        <g id="cnodes2">
+          <circle id="cn-nyc" cx="340" cy="168" r="5.5" fill="rgba(240,196,64,.0)"/>
+          <circle id="cn-ldn" cx="455" cy="145" r="5.5" fill="rgba(240,196,64,.0)"/>
+          <circle id="cn-fra" cx="488" cy="152" r="4"   fill="rgba(240,196,64,.0)"/>
+          <circle id="cn-dxb" cx="548" cy="182" r="5"   fill="rgba(240,196,64,.0)"/>
+          <circle id="cn-sg"  cx="602" cy="220" r="5"   fill="rgba(240,196,64,.0)"/>
+          <circle id="cn-tok" cx="632" cy="168" r="5"   fill="rgba(240,196,64,.0)"/>
+          <circle cx="340" cy="168" r="13" stroke="rgba(240,196,64,.0)" stroke-width="1" fill="none" id="cr-nyc"/>
+          <circle cx="455" cy="145" r="13" stroke="rgba(240,196,64,.0)" stroke-width="1" fill="none" id="cr-ldn"/>
+          <circle cx="548" cy="182" r="13" stroke="rgba(240,196,64,.0)" stroke-width="1" fill="none" id="cr-dxb"/>
+          <circle cx="602" cy="220" r="13" stroke="rgba(240,196,64,.0)" stroke-width="1" fill="none" id="cr-sg"/>
+          <circle cx="632" cy="168" r="13" stroke="rgba(240,196,64,.0)" stroke-width="1" fill="none" id="cr-tok"/>
+        </g>
+        <path id="pr1" d="M340,168 Q395,125 455,145" stroke="rgba(240,196,64,.5)" stroke-width="1.8" fill="none" stroke-dasharray="190" stroke-dashoffset="190"/>
+        <path id="pr2" d="M455,145 Q498,155 548,182" stroke="rgba(240,196,64,.5)" stroke-width="1.8" fill="none" stroke-dasharray="135" stroke-dashoffset="135"/>
+        <path id="pr3" d="M548,182 Q572,198 602,220" stroke="rgba(240,196,64,.5)" stroke-width="1.8" fill="none" stroke-dasharray="95"  stroke-dashoffset="95"/>
+        <path id="pr4" d="M548,182 Q588,172 632,168" stroke="rgba(240,196,64,.5)" stroke-width="1.8" fill="none" stroke-dasharray="115" stroke-dashoffset="115"/>
+        <path id="pr5" d="M340,168 Q360,245 430,265" stroke="rgba(240,196,64,.25)" stroke-width="1.5" fill="none" stroke-dasharray="210" stroke-dashoffset="210"/>
+        <circle id="pdot" cx="340" cy="168" r="5" fill="#f0c840"/>
+        <circle id="pdot-glow" cx="340" cy="168" r="10" fill="rgba(240,196,64,.2)"/>
+      </svg>
+    </div>
+
+    <!-- Era 3 · Web ───────────────────────────────────────────────────────── -->
+    <div class="era-layer" id="el3">
+      <div class="era-layer-bg" style="background:radial-gradient(ellipse 80% 55% at 50% 50%,rgba(64,217,176,.04) 0%,transparent 60%)"></div>
+      <svg id="svg3" viewBox="0 0 960 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g id="web-edges3"></g>
+        <g id="web-nodes3"></g>
+        <g id="web-packets3"></g>
+      </svg>
+    </div>
+
+    <!-- Era 4 · Cloud ─────────────────────────────────────────────────────── -->
+    <div class="era-layer" id="el4">
+      <div class="era-layer-bg" style="background:radial-gradient(ellipse 80% 55% at 50% 50%,rgba(155,125,255,.04) 0%,transparent 60%)"></div>
+      <svg id="svg4" viewBox="0 0 960 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path id="cloud4" d="M320,280 Q265,280 265,232 Q265,200 292,190 Q284,132 340,120 Q366,82 412,93 Q433,62 476,68 Q530,52 562,94 Q605,87 626,122 Q668,122 668,164 Q695,170 695,208 Q695,250 652,262 Q658,280 604,280 Z" stroke="rgba(155,125,255,.7)" stroke-width="2" fill="rgba(155,125,255,.03)" stroke-dasharray="1400" stroke-dashoffset="1400"/>
+        <g id="uploads4" opacity="0">
+          <line x1="390" y1="340" x2="390" y2="284" stroke="rgba(155,125,255,.5)" stroke-width="1.8" stroke-dasharray="8 5"/>
+          <polygon points="390,278 385,290 395,290" fill="rgba(155,125,255,.6)"/>
+          <line x1="480" y1="350" x2="480" y2="284" stroke="rgba(155,125,255,.5)" stroke-width="1.8" stroke-dasharray="8 5"/>
+          <polygon points="480,278 475,290 485,290" fill="rgba(155,125,255,.6)"/>
+          <line x1="570" y1="340" x2="570" y2="278" stroke="rgba(155,125,255,.5)" stroke-width="1.8" stroke-dasharray="8 5"/>
+          <polygon points="570,272 565,284 575,284" fill="rgba(155,125,255,.6)"/>
+        </g>
+        <g id="boxes4" opacity="0">
+          <rect x="340" y="158" width="54" height="38" rx="7" fill="rgba(155,125,255,.1)" stroke="rgba(155,125,255,.4)" stroke-width="1.5"/>
+          <text x="367" y="182" fill="rgba(155,125,255,.75)" font-family="'SF Mono',Fira Mono,monospace" font-size="9.5" text-anchor="middle">API</text>
+          <rect x="418" y="148" width="54" height="38" rx="7" fill="rgba(155,125,255,.1)" stroke="rgba(155,125,255,.4)" stroke-width="1.5"/>
+          <text x="445" y="172" fill="rgba(155,125,255,.75)" font-family="'SF Mono',Fira Mono,monospace" font-size="9.5" text-anchor="middle">SaaS</text>
+          <rect x="496" y="156" width="54" height="38" rx="7" fill="rgba(155,125,255,.1)" stroke="rgba(155,125,255,.4)" stroke-width="1.5"/>
+          <text x="523" y="180" fill="rgba(155,125,255,.75)" font-family="'SF Mono',Fira Mono,monospace" font-size="9.5" text-anchor="middle">DB</text>
+          <rect x="376" y="206" width="54" height="38" rx="7" fill="rgba(155,125,255,.1)" stroke="rgba(155,125,255,.4)" stroke-width="1.5"/>
+          <text x="403" y="230" fill="rgba(155,125,255,.75)" font-family="'SF Mono',Fira Mono,monospace" font-size="9.5" text-anchor="middle">SDK</text>
+          <rect x="456" y="210" width="54" height="38" rx="7" fill="rgba(155,125,255,.1)" stroke="rgba(155,125,255,.4)" stroke-width="1.5"/>
+          <text x="483" y="234" fill="rgba(155,125,255,.75)" font-family="'SF Mono',Fira Mono,monospace" font-size="9.5" text-anchor="middle">ML</text>
+          <rect x="453" y="348" width="54" height="36" rx="3" fill="rgba(155,125,255,.07)" stroke="rgba(155,125,255,.28)" stroke-width="1.2"/>
+          <line x1="453" y1="360" x2="507" y2="360" stroke="rgba(155,125,255,.18)" stroke-width="1"/>
+          <line x1="453" y1="372" x2="507" y2="372" stroke="rgba(155,125,255,.18)" stroke-width="1"/>
+          <circle cx="464" cy="358" r="2" fill="rgba(155,125,255,.55)"/>
+          <circle cx="464" cy="370" r="2" fill="rgba(155,125,255,.55)"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Era 5 · Programmable Money ────────────────────────────────────────── -->
+    <div class="era-layer" id="el5">
+      <div class="era-layer-bg" style="background:radial-gradient(ellipse 80% 55% at 50% 50%,rgba(79,168,255,.06) 0%,transparent 60%)"></div>
+      <svg id="svg5" viewBox="0 0 960 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g id="srcs5" opacity="0">
+          <rect x="108" y="108" width="44" height="52" rx="5" fill="rgba(79,168,255,.07)" stroke="rgba(79,168,255,.28)" stroke-width="1.5"/>
+          <rect x="117" y="116" width="10" height="10" rx="2" fill="rgba(79,168,255,.38)"/>
+          <rect x="131" y="116" width="10" height="10" rx="2" fill="rgba(79,168,255,.38)"/>
+          <rect x="119" y="135" width="14" height="18" rx="2" fill="rgba(79,168,255,.28)"/>
+          <rect x="108" y="174" width="44" height="52" rx="5" fill="rgba(79,168,255,.07)" stroke="rgba(79,168,255,.28)" stroke-width="1.5"/>
+          <rect x="117" y="182" width="10" height="10" rx="2" fill="rgba(79,168,255,.38)"/>
+          <rect x="131" y="182" width="10" height="10" rx="2" fill="rgba(79,168,255,.38)"/>
+          <rect x="119" y="201" width="14" height="18" rx="2" fill="rgba(79,168,255,.28)"/>
+          <rect x="108" y="240" width="44" height="52" rx="5" fill="rgba(79,168,255,.07)" stroke="rgba(79,168,255,.28)" stroke-width="1.5"/>
+          <rect x="117" y="248" width="10" height="10" rx="2" fill="rgba(79,168,255,.38)"/>
+          <rect x="131" y="248" width="10" height="10" rx="2" fill="rgba(79,168,255,.38)"/>
+          <rect x="119" y="267" width="14" height="18" rx="2" fill="rgba(79,168,255,.28)"/>
+        </g>
+        <path id="fl1" d="M152,134 Q310,134 436,184" stroke="rgba(79,168,255,.35)" stroke-width="1.6" fill="none" stroke-dasharray="320" stroke-dashoffset="320"/>
+        <path id="fl2" d="M152,200 Q310,200 420,200" stroke="rgba(79,168,255,.35)" stroke-width="1.6" fill="none" stroke-dasharray="268" stroke-dashoffset="268"/>
+        <path id="fl3" d="M152,266 Q310,266 436,216" stroke="rgba(79,168,255,.35)" stroke-width="1.6" fill="none" stroke-dasharray="320" stroke-dashoffset="320"/>
+        <circle cx="480" cy="200" r="62" stroke="rgba(79,168,255,.06)" stroke-width="1.5" fill="none"/>
+        <circle id="hub5-r2" cx="480" cy="200" r="44" stroke="rgba(79,168,255,.1)" stroke-width="1.5" fill="none"/>
+        <circle id="hub5-r1" cx="480" cy="200" r="30" stroke="rgba(79,168,255,.22)" stroke-width="1.5" fill="none"/>
+        <circle id="hub5-c"  cx="480" cy="200" r="18" stroke="rgba(79,168,255,.55)" stroke-width="2" fill="rgba(79,168,255,.1)"/>
+        <path d="M472,197 L472,193 Q472,191 474,190 L479,187 Q480,186.5 481,187 L486,190 Q488,191 488,193 L488,197 C484.5,197 481.5,192.5 480,192.5 C478.5,192.5 475.5,197 472,197Z" fill="rgba(79,168,255,.85)"/>
+        <path d="M472,203 L472,207 Q472,209 474,210 L479,213 Q480,213.5 481,213 L486,210 Q488,209 488,207 L488,203 C484.5,203 481.5,207.5 480,207.5 C478.5,207.5 475.5,203 472,203Z" fill="rgba(79,168,255,.85)"/>
+        <path id="fr1" d="M524,184 Q650,134 808,114" stroke="rgba(79,168,255,.35)" stroke-width="1.6" fill="none" stroke-dasharray="320" stroke-dashoffset="320"/>
+        <path id="fr2" d="M524,200 Q650,200 808,200" stroke="rgba(79,168,255,.35)" stroke-width="1.6" fill="none" stroke-dasharray="268" stroke-dashoffset="268"/>
+        <path id="fr3" d="M524,216 Q650,266 808,286" stroke="rgba(79,168,255,.35)" stroke-width="1.6" fill="none" stroke-dasharray="320" stroke-dashoffset="320"/>
+        <g id="dsts5" opacity="0">
+          <rect x="808" y="94"  width="44" height="40" rx="5" fill="rgba(79,168,255,.07)" stroke="rgba(79,168,255,.28)" stroke-width="1.5"/>
+          <rect x="816" y="104" width="28" height="18" rx="3" stroke="rgba(79,168,255,.4)" stroke-width="1.2" fill="none"/>
+          <circle cx="830" cy="113" r="3" fill="rgba(79,168,255,.5)"/>
+          <rect x="808" y="180" width="44" height="40" rx="5" fill="rgba(79,168,255,.07)" stroke="rgba(79,168,255,.28)" stroke-width="1.5"/>
+          <rect x="816" y="190" width="28" height="18" rx="3" stroke="rgba(79,168,255,.4)" stroke-width="1.2" fill="none"/>
+          <circle cx="830" cy="199" r="3" fill="rgba(79,168,255,.5)"/>
+          <rect x="808" y="266" width="44" height="40" rx="5" fill="rgba(79,168,255,.07)" stroke="rgba(79,168,255,.28)" stroke-width="1.5"/>
+          <rect x="816" y="276" width="28" height="18" rx="3" stroke="rgba(79,168,255,.4)" stroke-width="1.2" fill="none"/>
+          <circle cx="830" cy="285" r="3" fill="rgba(79,168,255,.5)"/>
+        </g>
+        <g id="tokens5"></g>
+      </svg>
+    </div>
+
+    <!-- Label stack ───────────────────────────────────────────────────────── -->
+    <div class="era-labels">
+      <div class="era-lbl" id="elbl1">
+        <span class="era-epoch">1850s — United States</span>
+        <h2 class="era-h" style="color:#d4aa6a">Railroads moved <em style="color:#f0c882">goods.</em></h2>
+        <p class="era-p">Physical infrastructure turned isolated towns into continental markets. For the first time, value moved at industrial scale.</p>
+      </div>
+      <div class="era-lbl" id="elbl2">
+        <span class="era-epoch">1958 — San Francisco</span>
+        <h2 class="era-h" style="color:#d4a824">Visa moved <em style="color:#ffd84d">payments.</em></h2>
+        <p class="era-p">Card networks wired global commerce — any merchant, any currency, any buyer, anywhere. Value crossed borders in milliseconds.</p>
+      </div>
+      <div class="era-lbl" id="elbl3">
+        <span class="era-epoch">1991 — Geneva</span>
+        <h2 class="era-h" style="color:#2ec9a0">The web moved <em style="color:#5dffd8">information.</em></h2>
+        <p class="era-p">Open protocols turned isolated computers into a universal network. Information became instantly available to everyone, everywhere.</p>
+      </div>
+      <div class="era-lbl" id="elbl4">
+        <span class="era-epoch">2006 — Seattle</span>
+        <h2 class="era-h" style="color:#9b7dff">Cloud moved <em style="color:#b89fff">software.</em></h2>
+        <p class="era-p">Computing became utility. Any team anywhere could deploy global-scale software overnight, without owning a single server.</p>
+      </div>
+      <div class="era-lbl" id="elbl5">
+        <span class="era-epoch">Now</span>
+        <h2 class="era-h" style="color:var(--ac)">Programmable money moves <em>value itself.</em></h2>
+        <p class="era-p">For the first time, money is native to software — moving, splitting, and settling automatically, without intermediaries, at programmable speed.</p>
+      </div>
+    </div>
+
+    <!-- Progress dots ─────────────────────────────────────────────────────── -->
+    <div class="era-dots">
+      <span class="era-dot" id="edot1"></span>
+      <span class="era-dot" id="edot2"></span>
+      <span class="era-dot" id="edot3"></span>
+      <span class="era-dot" id="edot4"></span>
+      <span class="era-dot" id="edot5"></span>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── CONCLUSION ─────────────────────────────────────────────────────────── -->
+<div class="conclusion-zone" id="conclusion-zone">
+<section class="conclusion" id="conclusion">
+  <div class="pulse-rings">
+    <div class="pr pr-1"></div>
+    <div class="pr pr-2"></div>
+    <div class="pr pr-3"></div>
+  </div>
+  <div class="conclusion-inner">
+    <div class="cl cl-1" id="cl1">We are entering a new era of payments.</div>
+    <div class="cl cl-2" id="cl2">Digital money turns payments into programmable infrastructure.</div>
+    <div class="cl cl-3" id="cl3">This is creating a new generation of native PSPs.</div>
+    <div class="cl-gap"></div>
+    <div class="cl cl-4" id="cl4">We are building <em>one of them.</em></div>
+    <div class="cta-wrap" id="ctawrap">
+      <a href="mailto:investors@atrya.io?subject=Pitchdeck%20Request" class="btn-a">
+        Request Pitchdeck
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+</div>
+
+<script src="assets/atrya-footer.js"></script>
+
+<script>
+(function(){
+'use strict';
+
+/* ── helpers ── */
+function lerp(a,b,t){return a+(b-a)*t}
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v))}
+function easeOut3(t){return 1-Math.pow(1-t,3)}
+function easeInOut3(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
+function easeOut2(t){return 1-(1-t)*(1-t)}
+
+function zoneProgress(id){
+  var el=document.getElementById(id);
+  if(!el) return 0;
+  var rect=el.getBoundingClientRect();
+  var zone=el.offsetHeight-window.innerHeight;
+  return clamp(-rect.top/zone,0,1);
+}
+
+/* ── ERA 1 · RAILROAD init ── */
+var RAIL_W=960,TIE_GAP=46;
+var tieCount=Math.floor(RAIL_W/TIE_GAP);
+var tiesG=document.getElementById('ties1');
+for(var i=0;i<tieCount;i++){
+  var x=i*TIE_GAP+22;
+  var t=document.createElementNS('http://www.w3.org/2000/svg','line');
+  t.setAttribute('x1',x);t.setAttribute('y1',142);
+  t.setAttribute('x2',x);t.setAttribute('y2',174);
+  t.setAttribute('stroke','rgba(200,168,110,.5)');
+  t.setAttribute('stroke-width','6');
+  t.setAttribute('stroke-linecap','round');
+  t.style.opacity='0';
+  tiesG.appendChild(t);
+}
+
+/* ── ERA 3 · WEB init ── */
+var WN=[
+  {x:90,y:88},{x:230,y:60},{x:380,y:75},{x:530,y:65},{x:690,y:88},{x:830,y:72},
+  {x:70,y:190},{x:210,y:210},{x:370,y:175},{x:510,y:200},{x:660,y:185},{x:800,y:205},{x:900,y:180},
+  {x:160,y:310},{x:320,y:330},{x:470,y:295},{x:630,y:318},{x:770,y:300},{x:880,y:285}
+];
+var WE=[
+  [0,1],[1,2],[2,3],[3,4],[4,5],[0,6],[1,7],[2,8],[3,9],[4,10],[5,11],
+  [6,7],[7,8],[8,9],[9,10],[10,11],[11,12],[6,13],[7,14],[8,15],[9,16],[10,17],[11,18],
+  [13,14],[14,15],[15,16],[16,17],[17,18],[2,8],[4,10],[1,7],[9,16]
+];
+var edgesG3=document.getElementById('web-edges3');
+var nodesG3=document.getElementById('web-nodes3');
+var packetsG3=document.getElementById('web-packets3');
+WE.forEach(function(e){
+  var n1=WN[e[0]],n2=WN[e[1]];
+  var dx=n2.x-n1.x,dy=n2.y-n1.y,len=Math.sqrt(dx*dx+dy*dy);
+  var l=document.createElementNS('http://www.w3.org/2000/svg','line');
+  l.setAttribute('x1',n1.x);l.setAttribute('y1',n1.y);
+  l.setAttribute('x2',n2.x);l.setAttribute('y2',n2.y);
+  l.setAttribute('stroke','rgba(64,217,176,.22)');l.setAttribute('stroke-width','1');
+  l.setAttribute('stroke-dasharray',len);l.setAttribute('stroke-dashoffset',len);
+  edgesG3.appendChild(l);
+});
+WN.forEach(function(n){
+  var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  c.setAttribute('cx',n.x);c.setAttribute('cy',n.y);c.setAttribute('r','4');
+  c.setAttribute('fill','rgba(64,217,176,.7)');c.style.opacity='0';
+  nodesG3.appendChild(c);
+});
+
+/* ── ERA ANIMATION FUNCTIONS (no label management — handled by updateEras) ── */
+var nodeIds=['nyc','ldn','fra','dxb','sg','tok'];
+
+/* ── RAIL→GLOBE MORPH PATHS ────────────────────────────────────────────────
+   Group has translate(0,60), so local y = viewport y − 60.
+   Viewport equatorial ellipse: cx=480 cy=190 rx=170 ry=58
+   Endpoints at y=190 → local 130. Arc peaks at y=132 → local 72 (top), y=248 → local 188 (bot).
+   Bezier cy for peak at t=0.5:  (1/4)*130 + (3/4)*cy = 72  →  cy=53 (top)
+                                  (1/4)*130 + (3/4)*cy = 188 →  cy=207 (bot)         ── */
+var RT_A={x1:0,  y1:148,cx1:320,cy1:148,cx2:640,cy2:148,x2:960,y2:148};
+var RT_B={x1:310,y1:130,cx1:380,cy1:53, cx2:580,cy2:53, x2:650,y2:130};
+var RB_A={x1:0,  y1:168,cx1:320,cy1:168,cx2:640,cy2:168,x2:960,y2:168};
+var RB_B={x1:310,y1:130,cx1:380,cy1:207,cx2:580,cy2:207,x2:650,y2:130};
+function mkPath(p){return 'M '+p.x1+','+p.y1+' C '+p.cx1+','+p.cy1+' '+p.cx2+','+p.cy2+' '+p.x2+','+p.y2;}
+function lerpPts(t,a,b){return{x1:lerp(a.x1,b.x1,t),y1:lerp(a.y1,b.y1,t),cx1:lerp(a.cx1,b.cx1,t),cy1:lerp(a.cy1,b.cy1,t),cx2:lerp(a.cx2,b.cx2,t),cy2:lerp(a.cy2,b.cy2,t),x2:lerp(a.x2,b.x2,t),y2:lerp(a.y2,b.y2,t)};}
+
+function updateEra1(p){
+  if(p<=0) return;
+  var rail1=document.getElementById('r1a');
+  var rail2=document.getElementById('r1b');
+  var loco=document.getElementById('loco1');
+  /* morph starts at local p=0.68, finishes at p=1.0 */
+  var morphT=easeInOut3(clamp((p-0.68)/0.32,0,1));
+  if(morphT>0){
+    /* MORPH PHASE: rails physically curve into globe equatorial ellipse */
+    var pts1=lerpPts(morphT,RT_A,RT_B);
+    var pts2=lerpPts(morphT,RB_A,RB_B);
+    rail1.setAttribute('d',mkPath(pts1));
+    rail2.setAttribute('d',mkPath(pts2));
+    rail1.setAttribute('stroke-dasharray','2000');rail1.setAttribute('stroke-dashoffset','0');
+    rail2.setAttribute('stroke-dasharray','2000');rail2.setAttribute('stroke-dashoffset','0');
+    /* stroke: shift warm gold → globe yellow, fade opacity 0.6→0.14, thin 3.5→1 */
+    var r=Math.round(lerp(200,240,morphT));
+    var g=Math.round(lerp(168,196,morphT));
+    var b=Math.round(lerp(110,64,morphT));
+    var a=lerp(0.6,0.14,morphT).toFixed(2);
+    var sc='rgba('+r+','+g+','+b+','+a+')';
+    var sw=lerp(3.5,1,morphT).toFixed(2);
+    rail1.setAttribute('stroke',sc);rail2.setAttribute('stroke',sc);
+    rail1.setAttribute('stroke-width',sw);rail2.setAttribute('stroke-width',sw);
+    tiesG.style.opacity=(1-easeOut3(morphT)).toFixed(3);
+    if(loco) loco.style.opacity=(1-easeOut3(Math.min(morphT*2,1))).toFixed(3);
+  } else {
+    /* DRAW PHASE: rails reveal left→right, ties + loco animate in */
+    rail1.setAttribute('d','M 0,148 L 960,148');
+    rail2.setAttribute('d','M 0,168 L 960,168');
+    rail1.setAttribute('stroke','rgba(200,168,110,.6)');rail2.setAttribute('stroke','rgba(200,168,110,.6)');
+    rail1.setAttribute('stroke-width','3.5');rail2.setAttribute('stroke-width','3.5');
+    var railP=clamp(p/0.55,0,1);
+    var off=RAIL_W*(1-easeOut3(railP));
+    rail1.setAttribute('stroke-dasharray',RAIL_W);rail1.setAttribute('stroke-dashoffset',off);
+    rail2.setAttribute('stroke-dasharray',RAIL_W);rail2.setAttribute('stroke-dashoffset',off);
+    var vis=Math.floor(easeOut3(railP)*tieCount);
+    var ties=tiesG.children;
+    for(var i=0;i<tieCount;i++) ties[i].style.opacity=i<vis?'1':'0';
+    tiesG.style.opacity='1';
+    var trainP=clamp((p-0.12)/0.82,0,1);
+    var T=lerp(-230,730,easeInOut3(trainP))+222;
+    if(loco){loco.setAttribute('transform','translate('+T+',0) scale(-1,1)');loco.style.opacity='1';}
+  }
+}
+
+function updateEra2(p){
+  if(p<=0) return;
+  var tp=clamp(p*1.5,0,1);
+  nodeIds.forEach(function(id,i){
+    var np=clamp((tp-i*.12)/.2,0,1);
+    var c=document.getElementById('cn-'+id);
+    var r=document.getElementById('cr-'+id);
+    if(c) c.setAttribute('fill','rgba(240,196,64,'+easeOut2(np)*0.85+')');
+    if(r) r.setAttribute('stroke','rgba(240,196,64,'+easeOut2(np)*0.18+')');
+  });
+  var routes=[{id:'pr1',len:190},{id:'pr2',len:135},{id:'pr3',len:95},{id:'pr4',len:115},{id:'pr5',len:210}];
+  routes.forEach(function(r,i){
+    var rp=clamp((tp-.05-i*.13)/.28,0,1);
+    var el=document.getElementById(r.id);
+    if(el) el.setAttribute('stroke-dashoffset',r.len*(1-easeOut3(rp)));
+  });
+  var dt=(tp*1.3)%1;
+  var dot=document.getElementById('pdot');
+  var dotg=document.getElementById('pdot-glow');
+  if(dot){
+    var dx,dy;
+    if(dt<.33){var tt=dt/.33;dx=lerp(340,455,easeInOut3(tt));dy=lerp(168,145,easeInOut3(tt))-Math.sin(Math.PI*tt)*18;}
+    else if(dt<.6){var tt2=(dt-.33)/.27;dx=lerp(455,548,easeInOut3(tt2));dy=lerp(145,182,easeInOut3(tt2));}
+    else{var tt3=(dt-.6)/.4;dx=lerp(548,632,easeInOut3(tt3));dy=lerp(182,168,easeInOut3(tt3));}
+    dot.setAttribute('cx',dx);dot.setAttribute('cy',dy);
+    if(dotg){dotg.setAttribute('cx',dx);dotg.setAttribute('cy',dy);}
+  }
+}
+
+var pkt3t=0;
+function updateEra3(p){
+  if(p<=0) return;
+  var tp=clamp(p*1.5,0,1);
+  var nc=nodesG3.children,ec=edgesG3.children;
+  WN.forEach(function(_,i){
+    nc[i].style.opacity=easeOut2(clamp((tp-i*.035)/.18,0,1));
+  });
+  WE.forEach(function(e,i){
+    var n1=WN[e[0]],n2=WN[e[1]];
+    var dx=n2.x-n1.x,dy=n2.y-n1.y,len=Math.sqrt(dx*dx+dy*dy);
+    var rp=easeOut3(clamp((tp-.08-i*.022)/.22,0,1));
+    ec[i].setAttribute('stroke-dashoffset',len*(1-rp));
+  });
+  if(tp>.5){
+    pkt3t+=.006;
+    packetsG3.innerHTML='';
+    var pEdges=[[0,1],[2,3],[4,5],[7,8],[9,10],[13,14],[15,16]];
+    pEdges.forEach(function(e,i){
+      var t2=((pkt3t+i*.18)%1);
+      if(t2>.85) return;
+      var n1=WN[e[0]],n2=WN[e[1]];
+      var cx=lerp(n1.x,n2.x,easeInOut3(t2/.85));
+      var cy=lerp(n1.y,n2.y,easeInOut3(t2/.85));
+      var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('cx',cx);c.setAttribute('cy',cy);c.setAttribute('r','3.5');
+      c.setAttribute('fill','rgba(64,217,176,.9)');
+      var g=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      g.setAttribute('cx',cx);g.setAttribute('cy',cy);g.setAttribute('r','7');
+      g.setAttribute('fill','rgba(64,217,176,.15)');
+      packetsG3.appendChild(g);packetsG3.appendChild(c);
+    });
+  }
+}
+
+function updateEra4(p){
+  if(p<=0) return;
+  var tp=clamp(p*1.5,0,1);
+  var cp=document.getElementById('cloud4');
+  if(cp){
+    var len=cp.getTotalLength?cp.getTotalLength():1400;
+    cp.setAttribute('stroke-dasharray',len);
+    cp.setAttribute('stroke-dashoffset',len*(1-easeOut3(clamp(tp*2,0,1))));
+  }
+  var up=document.getElementById('uploads4');
+  if(up) up.style.opacity=easeOut3(clamp((tp-.3)/.35,0,1));
+  var bx=document.getElementById('boxes4');
+  if(bx) bx.style.opacity=easeOut3(clamp((tp-.52)/.35,0,1));
+}
+
+var tok5t=0;
+var FLOW5=[
+  {from:[152,134],to:[436,184],len:320},{from:[152,200],to:[420,200],len:268},{from:[152,266],to:[436,216],len:320},
+  {from:[524,184],to:[808,114],len:320},{from:[524,200],to:[808,200],len:268},{from:[524,216],to:[808,286],len:320}
+];
+function updateEra5(p){
+  if(p<=0) return;
+  var tp=clamp(p*1.5,0,1);
+  var flowIds=['fl1','fl2','fl3','fr1','fr2','fr3'];
+  flowIds.forEach(function(id,i){
+    var el=document.getElementById(id);
+    if(!el) return;
+    var fp=easeOut3(clamp((tp-i*.09)/.32,0,1));
+    el.setAttribute('stroke-dashoffset',FLOW5[i].len*(1-fp));
+  });
+  document.getElementById('srcs5').style.opacity=easeOut2(clamp((tp-.08)/.3,0,1));
+  document.getElementById('dsts5').style.opacity=easeOut2(clamp((tp-.38)/.3,0,1));
+  var now=Date.now()/1000;
+  var hc=document.getElementById('hub5-c');
+  var hr=document.getElementById('hub5-r1');
+  if(tp>.3&&hc){
+    var pulse=.5+.5*Math.sin(now*2.2);
+    hc.setAttribute('r',18+pulse*2);
+    hr.setAttribute('stroke','rgba(79,168,255,'+(0.22+pulse*.14)+')');
+  }
+  if(tp>.4){
+    tok5t+=.007;
+    var tg=document.getElementById('tokens5');
+    tg.innerHTML='';
+    FLOW5.forEach(function(f,i){
+      var t2=((tok5t+i*.22)%1);
+      if(t2>.88) return;
+      var cx=lerp(f.from[0],f.to[0],easeInOut3(t2/.88));
+      var cy=lerp(f.from[1],f.to[1],easeInOut3(t2/.88));
+      var g=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      g.setAttribute('cx',cx);g.setAttribute('cy',cy);g.setAttribute('r','8');
+      g.setAttribute('fill','rgba(79,168,255,.15)');
+      var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      c.setAttribute('cx',cx);c.setAttribute('cy',cy);c.setAttribute('r','4.5');
+      c.setAttribute('fill','rgba(79,168,255,.95)');
+      tg.appendChild(g);tg.appendChild(c);
+    });
+  }
+}
+
+/* ── ERA BOUNDARIES: [enter, full, exit, done] (normalized 0-1 over eras-zone) ── */
+/* Each era occupies ~0.20 of total progress; 0.04 overlap for blur-dissolve   */
+var EB=[
+  [0.00, 0.04, 0.18, 0.24],  // Era 1 · Rails
+  [0.20, 0.24, 0.38, 0.44],  // Era 2 · Payments
+  [0.40, 0.44, 0.58, 0.64],  // Era 3 · Web
+  [0.60, 0.64, 0.78, 0.84],  // Era 4 · Cloud
+  [0.80, 0.84, 1.00, 1.01],  // Era 5 · Prog. Money (stays through zone end)
+];
+
+function eraAlpha(p,b){
+  var fi=clamp((p-b[0])/Math.max(b[1]-b[0],0.001),0,1);
+  var fo=b[2]<1?clamp((p-b[2])/Math.max(b[3]-b[2],0.001),0,1):0;
+  return easeOut3(fi)*(1-easeOut3(fo));
+}
+
+/* Local p: maps global p from era enter→exit → 0→1 (drives internal animations) */
+function eraLocalP(p,b){
+  return clamp((p-b[0])/Math.max(b[2]-b[0],0.001),0,1);
+}
+
+function updateEras(){
+  var p=zoneProgress('eras-zone');
+
+  for(var i=0;i<5;i++){
+    var b=EB[i];
+    var alpha=eraAlpha(p,b);
+    var lp=eraLocalP(p,b);
+
+    /* Layer opacity + blur-dissolve (crystallizes in, dissolves out) */
+    var layer=document.getElementById('el'+(i+1));
+    if(layer){
+      layer.style.opacity=alpha;
+      var bl=alpha<0.75?(1-alpha/0.75)*5.5:0;
+      layer.style.filter=bl>0.3?'blur('+bl.toFixed(1)+'px)':'';
+    }
+
+    /* Label: visible once era is well-established and animation has started */
+    var lbl=document.getElementById('elbl'+(i+1));
+    if(lbl) lbl.classList.toggle('vis', alpha>0.62&&lp>0.28);
+
+    /* Progress dot */
+    var dot=document.getElementById('edot'+(i+1));
+    if(dot) dot.classList.toggle('act', alpha>0.28);
+  }
+
+  /* Drive each era's internal SVG animation */
+  updateEra1(eraLocalP(p,EB[0]));
+  updateEra2(eraLocalP(p,EB[1]));
+  updateEra3(eraLocalP(p,EB[2]));
+  updateEra4(eraLocalP(p,EB[3]));
+  updateEra5(eraLocalP(p,EB[4]));
+}
+
+/* ── CONCLUSION ── */
+function updateConclusion(){
+  var p=zoneProgress('conclusion-zone');
+  var conc=document.getElementById('conclusion');
+  if(p>0.04&&conc) conc.classList.add('active');
+  var thresholds=[0.08,0.28,0.48,0.66];
+  thresholds.forEach(function(th,i){
+    var ce=document.getElementById('cl'+(i+1));
+    if(ce&&p>th) ce.classList.add('vis');
+  });
+  var cta=document.getElementById('ctawrap');
+  if(cta&&p>0.85) cta.classList.add('vis');
+}
+
+/* ── RAF LOOP ── */
+function tick(){
+  updateEras();
+  updateConclusion();
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+
+})();
+</script>
+</body>
+</html>
