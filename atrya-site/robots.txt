@@ -2,5 +2,6 @@ User-agent: *
 Allow: /
 
 Disallow: /atrya-brand/
+Disallow: /internal-829163047258/
 
 Sitemap: https://atrya.io/sitemap.xml

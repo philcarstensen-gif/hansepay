@@ -51,17 +51,7 @@
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:22px 56px;display:flex;align-items:center;justify-content:space-between;background:rgba(4,6,14,.72);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
-nav.up{background:rgba(4,6,14,.88)}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:'Syne',sans-serif;font-size:30px;font-weight:600;color:var(--text);letter-spacing:-.025em}
-.logo svg{width:36px;height:36px}
-.nav-r{display:flex;align-items:center;gap:34px}
-.nav-links{display:flex;gap:30px;list-style:none}
-.nav-links a{font-size:13.5px;color:var(--dim);text-decoration:none;transition:color .2s}
-.nav-links a:hover{color:var(--text)}
-.nav-btn{padding:8px 18px;border:1px solid var(--line);border-radius:6px;font-size:13.5px;color:var(--text);text-decoration:none;transition:border-color .2s,background .2s}
-.nav-btn:hover{border-color:rgba(79,168,255,.4);background:var(--acg)}
+/* NAV — styles injected by assets/atrya-nav.js */
 
 /* HERO-PANEL inside scroll section */
 .hero-inner{position:relative;z-index:2;padding:150px 56px 110px;max-width:560px}
@@ -157,22 +147,11 @@ h1{font-family:'Syne',sans-serif;font-size:clamp(46px,5.2vw,74px);font-weight:50
 .gc-meta-row{display:flex;gap:11px;align-items:flex-start}
 .gc-meta-label{flex-shrink:0;font-size:9.5px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:rgba(79,168,255,.65);background:rgba(79,168,255,.08);border:1px solid rgba(79,168,255,.14);padding:3px 9px;border-radius:5px;line-height:1.65;margin-top:1px}
 .gc-meta-value{font-size:12.5px;font-weight:400;color:var(--dim);line-height:1.65}
+a.gc{text-decoration:none;color:inherit;cursor:pointer}
+.gc-learn{display:flex;align-items:center;gap:7px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(79,168,255,.07);font-size:12.5px;font-weight:500;letter-spacing:.01em;color:var(--ac);opacity:.6;transition:opacity .25s,gap .2s}
+a.gc:hover .gc-learn{opacity:1;gap:11px}
 
 /* HOW IT WORKS */
-.hiw{padding:90px 56px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
-  background:radial-gradient(ellipse 55% 70% at 50% 80%,rgba(8,26,110,.07) 0%,transparent 65%)}
-.hiw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:60px;position:relative}
-.hiw-grid::before{content:'';position:absolute;top:28px;left:28px;right:calc(33.33% - 28px);height:1px;background:linear-gradient(90deg,rgba(79,168,255,.5),rgba(79,168,255,.2) 50%,rgba(79,168,255,.5));opacity:.35}
-.hiw-step{padding:0 32px 0 0;position:relative}
-.hiw-step:last-child{padding-right:0}
-.hiw-n{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,rgba(79,168,255,.12),rgba(79,168,255,.04));
-  border:1px solid rgba(79,168,255,.22);
-  font-family:'Syne',sans-serif;font-size:16px;font-weight:500;color:var(--ac);
-  margin-bottom:22px;position:relative;z-index:1}
-.hiw-t{font-family:'Syne',sans-serif;font-size:17px;font-weight:500;letter-spacing:-.02em;color:var(--text);margin-bottom:10px}
-.hiw-b{font-size:13.5px;font-weight:300;color:var(--mid);line-height:1.72}
-@media(max-width:800px){.hiw-grid{grid-template-columns:1fr;gap:40px}.hiw-grid::before{display:none}}
 
 /* VISION */
 .vision{
@@ -278,18 +257,13 @@ footer{border-top:1px solid var(--line);padding:40px 56px;display:grid;grid-temp
 .ft-bottom{grid-column:1/-1;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .ft-copy{font-size:11.5px;color:var(--faint)}
 
-/* ─── THEME TOGGLE ────────────────────────────────── */
-.theme-toggle{width:34px;height:34px;border-radius:8px;border:1px solid var(--line);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--dim);flex-shrink:0;transition:color .2s,border-color .2s,background .2s}
-.theme-toggle:hover{color:var(--text);border-color:var(--lineb);background:var(--acg)}
-.theme-toggle svg{width:16px;height:16px}
-.icon-sun{display:none}.icon-moon{display:block}
-[data-theme="light"] .icon-sun{display:block}[data-theme="light"] .icon-moon{display:none}
+/* ─── THEME TOGGLE — injected by assets/atrya-nav.js ─────────────── */
 
 /* ─── SMOOTH TRANSITIONS ──────────────────────────── */
-body,nav,.hero,.stats,.stat,.arch-section,.an-box,.gc,.hiw,.vision,.cta-section,footer,
-.rule,.partners,.usecases,.section-header,.hiw-step{transition:background .35s,background-color .35s,border-color .35s}
+body,nav,.hero,.stats,.stat,.arch-section,.an-box,.gc,.vision,.cta-section,footer,
+.rule,.partners,.usecases,.section-header{transition:background .35s,background-color .35s,border-color .35s}
 .logo,.nav-links a,.nav-btn,.pill,.sub,.btns,.stat-n,.stat-l,.sh-title,.sh-sub,.sh-tag,
-.feat-title,.feat-body,.feat-num,.gc-title,.gc-body,.hiw-t,.hiw-b,.vt,.vp,.cta-title,.cta-sub,
+.feat-title,.feat-body,.feat-num,.gc-title,.gc-body,.vt,.vp,.cta-title,.cta-sub,
 .fl,.fc,.ft-copy,.an-label,.an-chip,.tn,.gw-node,.gw-cap,.ey-n,.ey-t{transition:color .35s}
 
 /* ─── LIGHT MODE ──────────────────────────────────── */
@@ -301,9 +275,7 @@ body,nav,.hero,.stats,.stat,.arch-section,.an-box,.gc,.hiw,.vision,.cta-section,
   --logo-g1:#0c1628; --logo-g2:#0c1628; --logo-g3:#0c1628;
 }
 [data-theme="light"] body{background:var(--bg);color:var(--text)}
-/* Nav */
-[data-theme="light"] nav{background:rgba(240,244,252,.78);border-color:rgba(12,22,40,.09)}
-[data-theme="light"] nav.up{background:rgba(240,244,252,.94)}
+/* Nav light mode — injected by assets/atrya-nav.js */
 /* Hero / scroll section */
 [data-theme="light"] #scroll-sticky{
   background:
@@ -364,10 +336,6 @@ body,nav,.hero,.stats,.stat,.arch-section,.an-box,.gc,.hiw,.vision,.cta-section,
 [data-theme="light"] .gc::before{background:linear-gradient(90deg,transparent,rgba(26,142,224,.42) 35%,rgba(100,180,255,.25) 65%,transparent)}
 [data-theme="light"] .gc-icon{background:rgba(26,142,224,.07);border-color:rgba(26,142,224,.15)}
 [data-theme="light"] .gc-tag{color:rgba(10,80,190,.70);background:rgba(26,142,224,.06);border-color:rgba(26,142,224,.14)}
-/* How it works */
-[data-theme="light"] .hiw{background:radial-gradient(ellipse 55% 70% at 50% 80%,rgba(26,142,224,.05) 0%,transparent 65%);border-color:rgba(12,22,40,.08)}
-[data-theme="light"] .hiw-grid::before{opacity:.18}
-[data-theme="light"] .hiw-n{background:linear-gradient(135deg,rgba(26,142,224,.10),rgba(26,142,224,.04));border-color:rgba(26,142,224,.22)}
 /* Vision */
 [data-theme="light"] .vision{background:radial-gradient(ellipse 50% 70% at 100% 60%,rgba(26,142,224,.05) 0%,transparent 60%);border-color:rgba(12,22,40,.08)}
 [data-theme="light"] .ey-n{color:var(--ac)}
@@ -448,7 +416,6 @@ body,nav,.hero,.stats,.stat,.arch-section,.an-box,.gc,.hiw,.vision,.cta-section,
   [data-theme="light"] .nav-links li{border-color:rgba(12,22,40,.08)}
 
   .usecases{padding:60px 20px}
-  .hiw{padding:60px 20px}
   .traction{padding:60px 20px}
   .cta-section{padding:80px 20px}
   .vision{padding:60px 20px}
@@ -470,9 +437,6 @@ body,nav,.hero,.stats,.stat,.arch-section,.an-box,.gc,.hiw,.vision,.cta-section,
     background:linear-gradient(to bottom,rgba(79,168,255,.45),rgba(79,168,255,.15));
     position:relative;
   }
-
-  .hiw-grid::before{display:none}
-  .hiw-step{padding-right:0}
 
   .team-inner{grid-template-columns:1fr;gap:32px}
   .team-photo-wrap{order:-1;aspect-ratio:16/9}
@@ -617,49 +581,7 @@ body,nav,.hero,.stats,.stat,.arch-section,.an-box,.gc,.hiw,.vision,.cta-section,
 </script>
 </head>
 <body>
-<!-- shared gradient for the Atrya logo mark — referenced by all inline logo SVGs -->
-<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true">
-  <defs>
-    <linearGradient id="atrya-lg" x1="10" y1="6" x2="90" y2="94" gradientUnits="userSpaceOnUse">
-      <stop offset="0%"   stop-color="var(--logo-g1)"/>
-      <stop offset="52%"  stop-color="var(--logo-g2)"/>
-      <stop offset="100%" stop-color="var(--logo-g3)"/>
-    </linearGradient>
-  </defs>
-</svg>
-
-<nav id="nav">
-  <a class="logo" href="#">
-    <svg viewBox="0 0 100 100" fill="none" style="flex-shrink:0">
-      <path fill="url(#atrya-lg)" d="M11.9,47 L11.9,33 Q11.9,28 16.2,25.5 L45.7,8.5 Q50,6 54.3,8.5 L83.8,25.5 Q88.1,28 88.1,33 L88.1,47 C74,47 63,22 50,22 C37,22 26,47 11.9,47Z"/>
-      <path fill="url(#atrya-lg)" d="M11.9,53 L11.9,67 Q11.9,72 16.2,74.5 L45.7,91.5 Q50,94 54.3,91.5 L83.8,74.5 Q88.1,72 88.1,67 L88.1,53 C74,53 63,78 50,78 C37,78 26,53 11.9,53Z"/>
-    </svg>
-    Atrya
-  </a>
-  <div class="nav-r">
-    <ul class="nav-links">
-      <li><a href="#features">Features</a></li>
-      <li><a href="#usecases">Use Cases</a></li>
-      <li><a href="#vision">Vision</a></li>
-      <li><a href="#about">About</a></li>
-    </ul>
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 009.79 9.79z"/>
-      </svg>
-      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-      </svg>
-    </button>
-    <a class="nav-btn" href="waitlist.html">Join Beta</a>
-    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
+<script src="assets/atrya-nav.js?v=7"></script>
 
 <!-- SINGLE SECTION: hero + features scroll, one chain -->
 <section id="scroll-section" style="margin-top:0">
@@ -793,7 +715,7 @@ body,nav,.hero,.stats,.stat,.arch-section,.an-box,.gc,.hiw,.vision,.cta-section,
     </div>
   </div>
   <div class="uc-grid">
-    <div class="gc">
+    <a class="gc" href="cross-border.html">
       <div class="gc-top">
         <div class="gc-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -807,7 +729,11 @@ body,nav,.hero,.stats,.stat,.arch-section,.an-box,.gc,.hiw,.vision,.cta-section,
         <div class="gc-meta-row"><span class="gc-meta-label">Replaces</span><span class="gc-meta-value">SWIFT correspondent banking, multi-PSP corridor stitching, T+2 settlement.</span></div>
         <div class="gc-meta-row"><span class="gc-meta-label">Built&nbsp;for</span><span class="gc-meta-value">PSPs, fintechs, marketplaces, and finance teams paying suppliers and contractors across borders.</span></div>
       </div>
-    </div>
+      <div class="gc-learn">
+        Learn more
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
     <div class="gc">
       <div class="gc-top">
         <div class="gc-icon">
@@ -823,7 +749,7 @@ body,nav,.hero,.stats,.stat,.arch-section,.an-box,.gc,.hiw,.vision,.cta-section,
         <div class="gc-meta-row"><span class="gc-meta-label">Built&nbsp;for</span><span class="gc-meta-value">Fintech platforms, ERP and treasury software, payment orchestrators, marketplaces, and regulated FIs.</span></div>
       </div>
     </div>
-    <div class="gc">
+    <a class="gc" href="agentic.html">
       <div class="gc-top">
         <div class="gc-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
@@ -837,38 +763,17 @@ body,nav,.hero,.stats,.stat,.arch-section,.an-box,.gc,.hiw,.vision,.cta-section,
         <div class="gc-meta-row"><span class="gc-meta-label">Replaces</span><span class="gc-meta-value">Human accounts, API key juggling, virtual cards adapted for AI workflows.</span></div>
         <div class="gc-meta-row"><span class="gc-meta-label">Built&nbsp;for</span><span class="gc-meta-value">AI platforms, agent frameworks, and autonomous procurement systems.</span></div>
       </div>
-    </div>
+      <div class="gc-learn">
+        Learn more
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
   </div>
 </section>
 
 <div class="rule"></div>
 
 <!-- HOW IT WORKS -->
-<section class="hiw" id="howitworks">
-  <div class="section-header">
-    <div class="sh-left">
-      <span class="sh-tag">How it works</span>
-      <h2 class="sh-title">Three steps to programmable money</h2>
-    </div>
-  </div>
-  <div class="hiw-grid">
-    <div class="hiw-step">
-      <div class="hiw-n">01</div>
-      <div class="hiw-t">Connect via API</div>
-      <div class="hiw-b">Integrate Atrya's REST APIs into your existing stack. SDKs available for all major languages. Go live in a single sprint.</div>
-    </div>
-    <div class="hiw-step">
-      <div class="hiw-n">02</div>
-      <div class="hiw-t">Issue &amp; manage tokens</div>
-      <div class="hiw-b">Create regulated e-money token wallets for your users, agents, or treasury. Full lifecycle management — issuance, transfers, redemption.</div>
-    </div>
-    <div class="hiw-step">
-      <div class="hiw-n">03</div>
-      <div class="hiw-t">Automate your flows</div>
-      <div class="hiw-b">Build programmable payment logic — triggers, multi-party splits, escrow, cross-border routing. All compliant, all real time.</div>
-    </div>
-  </div>
-</section>
 
 <!-- VISION -->
 <div class="vision" id="vision">
@@ -938,115 +843,13 @@ body,nav,.hero,.stats,.stat,.arch-section,.an-box,.gc,.hiw,.vision,.cta-section,
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer id="about">
-  <div class="ft-brand">
-    <svg viewBox="0 0 100 100" fill="none" width="52" height="52" aria-hidden="true" style="margin-bottom:4px">
-      <path fill="url(#atrya-lg)" d="M11.9,47 L11.9,33 Q11.9,28 16.2,25.5 L45.7,8.5 Q50,6 54.3,8.5 L83.8,25.5 Q88.1,28 88.1,33 L88.1,47 C74,47 63,22 50,22 C37,22 26,47 11.9,47Z"/>
-      <path fill="url(#atrya-lg)" d="M11.9,53 L11.9,67 Q11.9,72 16.2,74.5 L45.7,91.5 Q50,94 54.3,91.5 L83.8,74.5 Q88.1,72 88.1,67 L88.1,53 C74,53 63,78 50,78 C37,78 26,53 11.9,53Z"/>
-    </svg>
-    <span class="fl">Atrya</span>
-    <span class="fc">Europe's first regulated on-chain FX facility.<br>Building programmable money infrastructure.</span>
-  </div>
-  <div class="ft-col">
-    <span class="ft-col-label">Product</span>
-    <div class="flinks">
-      <a href="#usecases">Use Cases</a>
-      <a href="#platform">Platform</a>
-    </div>
-  </div>
-  <div class="ft-col">
-    <span class="ft-col-label">Company</span>
-    <div class="flinks">
-      <a href="#vision">Vision</a>
-      <a href="#team">About</a>
-      <a href="imprint.html">Imprint</a>
-    </div>
-  </div>
-  <div class="ft-col ft-get-in-touch">
-    <span class="ft-col-label">Get In Touch</span>
-    <div class="flinks">
-      <a href="mailto:hello@atrya.io" style="color:var(--dim)">hello@atrya.io</a>
-      <a href="https://www.linkedin.com/company/atrya-infrastructure" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    </div>
-    <span class="fc" style="margin-top:14px;display:block">Caplend Technologies GmbH<br>c/o Factory Works GmbH<br>Stadtdeich 2-4<br>20097 Hamburg<br>Germany</span>
-  </div>
-  <div class="ft-bottom">
-    <span class="ft-copy">© 2026 Caplend Technologies GmbH · HRB 185277 Amtsgericht Hamburg</span>
-    <div class="flinks" style="flex-direction:row;gap:20px"><a href="cookie-policy.html">Cookies</a><a href="imprint.html">Imprint</a></div>
-  </div>
-</footer>
-
-<!-- COOKIE BANNER -->
-<div class="cookie-banner" id="cookie-banner">
-  <span>We use cookies to remember your theme preference. Fonts are loaded via <a href="https://fonts.google.com" target="_blank" rel="noopener">Google Fonts</a>. See our <a href="cookie-policy.html">Cookie Policy</a>.</span>
-  <button class="cookie-btn" id="cookie-accept">Accept</button>
-</div>
+<script src="assets/atrya-footer.js"></script>
 
 <script>
 const lerp = (a,b,t) => a+(b-a)*t;
 const clamp = (v,lo,hi) => Math.max(lo,Math.min(hi,v));
 const smoothstep = (e0,e1,x) => { const t=clamp((x-e0)/(e1-e0),0,1); return t*t*(3-2*t); };
 
-/* THEME TOGGLE */
-(()=>{
-  const root=document.documentElement;
-  const btn=document.getElementById('theme-toggle');
-  const saved=localStorage.getItem('atrya-theme');
-  const prefersDark=window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if(saved==='light'||(saved===null&&!prefersDark)) root.setAttribute('data-theme','light');
-
-  btn.addEventListener('click',()=>{
-    const isLight=root.getAttribute('data-theme')==='light';
-    if(isLight){root.removeAttribute('data-theme');localStorage.setItem('atrya-theme','dark');}
-    else{root.setAttribute('data-theme','light');localStorage.setItem('atrya-theme','light');}
-    window.dispatchEvent(new CustomEvent('themechange',{detail:{light:!isLight}}));
-  });
-})();
-
-/* COOKIE BANNER */
-(()=>{
-  const banner=document.getElementById('cookie-banner');
-  const btn=document.getElementById('cookie-accept');
-  if(localStorage.getItem('atrya-cookies')) banner.classList.add('hidden');
-  btn.addEventListener('click',()=>{
-    localStorage.setItem('atrya-cookies','1');
-    banner.classList.add('hidden');
-  });
-})();
-
-/* NAV */
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('up',scrollY>10),{passive:true});
-
-/* NAV HAMBURGER — portal fix: backdrop-filter on nav makes position:fixed children
-   relative to nav, not viewport. Moving ul to <body> when open breaks out of that. */
-(()=>{
-  const btn=document.getElementById('nav-hamburger');
-  const links=document.querySelector('.nav-links');
-  const navR=document.querySelector('.nav-r');
-  if(!btn||!links||!navR) return;
-
-  function close(){
-    if(!navR.contains(links)) navR.insertBefore(links,navR.firstChild);
-    btn.classList.remove('open');
-    links.classList.remove('open');
-    document.body.style.overflow='';
-  }
-
-  btn.addEventListener('click',()=>{
-    const open=btn.classList.toggle('open');
-    if(open){
-      document.body.appendChild(links);
-      links.classList.add('open');
-      document.body.style.overflow='hidden';
-    } else {
-      close();
-    }
-  });
-
-  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
-})();
 
 /* ══════════════════════════════════════════
    SINGLE CHAIN  —  8 links, hero + scroll-driven features

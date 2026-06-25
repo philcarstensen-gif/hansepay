@@ -76,7 +76,7 @@ a{color:inherit;text-decoration:none}
 @keyframes scueline{0%,100%{transform:scaleY(1);opacity:.5}50%{transform:scaleY(.55);opacity:.9}}
 
 /* ─── ERAS — CONTINUOUS CANVAS ───────────────────────────────────────────── */
-.eras-zone{height:560vh;position:relative;contain:layout paint}
+.eras-zone{height:800vh;position:relative;contain:layout paint}
 .eras-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;will-change:transform}
 
 /* Each era: full sticky viewport, stacked, JS drives opacity */
@@ -88,9 +88,9 @@ a{color:inherit;text-decoration:none}
 /* Label stack: all 5 sit at bottom, only one `.vis` at a time */
 .era-labels{position:absolute;bottom:0;left:0;right:0;z-index:10;pointer-events:none}
 .era-lbl{position:absolute;bottom:0;left:0;right:0;text-align:center;padding:0 24px 68px;
-  opacity:0;transform:translateY(14px);
-  transition:opacity .55s cubic-bezier(.16,1,.3,1),transform .55s cubic-bezier(.16,1,.3,1)}
-.era-lbl.vis{opacity:1;transform:translateY(0)}
+  opacity:0;transform:translateY(14px);filter:blur(5px);
+  transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1),filter .75s cubic-bezier(.16,1,.3,1)}
+.era-lbl.vis{opacity:1;transform:translateY(0);filter:blur(0)}
 .era-epoch{font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);display:block;margin-bottom:10px}
 .era-h{font-family:'Syne',sans-serif;font-size:clamp(28px,3.8vw,52px);font-weight:500;line-height:1.1;letter-spacing:-.03em;margin-bottom:12px}
 .era-h em{font-style:normal}
@@ -152,12 +152,36 @@ a{color:inherit;text-decoration:none}
 .btn-a{display:inline-flex;align-items:center;gap:10px;padding:14px 30px;background:var(--ac);color:#020a14;border-radius:7px;font-size:14px;font-weight:500;border:none;cursor:pointer;text-decoration:none;transition:opacity .2s,transform .2s,box-shadow .2s;box-shadow:0 0 32px rgba(79,168,255,.22)}
 .btn-a:hover{opacity:.87;transform:translateY(-1px);box-shadow:0 0 52px rgba(79,168,255,.38)}
 
+/* ─── FOOTER ─────────────────────────────────────────────────────────────── */
+footer{border-top:1px solid var(--line);padding:40px 56px;display:grid;grid-template-columns:1.2fr 1fr 1fr 1.4fr;align-items:start;gap:40px}
+@media(max-width:900px){footer{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){footer{grid-template-columns:1fr}}
+.ft-brand{display:flex;flex-direction:column;gap:8px}
+.fl{font-family:'Syne',sans-serif;font-size:18px;font-weight:600;letter-spacing:-.01em}
+.fc{font-size:12px;color:var(--dim);line-height:1.6;max-width:200px}
+.ft-col{display:flex;flex-direction:column;gap:10px}
+.ft-col-label{font-size:10px;font-weight:500;color:var(--ac);letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px}
+.flinks{display:flex;flex-direction:column;gap:8px}
+.flinks a{font-size:13px;color:var(--dim);transition:color .2s}
+.flinks a:hover{color:var(--text)}
+.ft-bottom{grid-column:1/-1;padding-top:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.ft-copy{font-size:11.5px;color:var(--faint)}
+.cookie-banner{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:600;width:calc(100% - 48px);max-width:560px;
+  background:rgba(9,13,28,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid var(--lineb);border-radius:12px;padding:14px 18px;
+  display:flex;align-items:center;gap:16px;font-size:12.5px;color:var(--mid);transition:opacity .3s,transform .3s}
+.cookie-banner.hidden{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(8px)}
+.cookie-btn{flex-shrink:0;padding:7px 18px;background:var(--ac);color:#020a14;border:none;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer}
+[data-theme="light"] footer{border-color:rgba(12,22,40,.08)}
+[data-theme="light"] .ft-bottom{border-color:rgba(12,22,40,.08)}
+[data-theme="light"] .cookie-banner{background:rgba(240,244,252,.92);border-color:rgba(12,22,40,.12)}
+
 /* ─── MOBILE ─────────────────────────────────────────────────────────────── */
 @media (max-width:640px){
   .inv-hero{padding:88px 20px 44px;min-height:100svh;min-height:100vh}
   .inv-hero h1{font-size:clamp(32px,8.8vw,50px);line-height:1.08;margin-bottom:16px}
   .inv-badge{margin-bottom:20px}
-  .eras-zone{height:300vh}
+  .eras-zone{height:500vh}
   .era-layer{padding:50px 14px 170px}
   .era-lbl{padding:0 20px 58px}
   .era-h{font-size:clamp(22px,6vw,34px);letter-spacing:-.02em;margin-bottom:8px}
@@ -178,7 +202,7 @@ a{color:inherit;text-decoration:none}
 </style>
 </head>
 <body>
-<script src="assets/atrya-nav.js?v=5"></script>
+<script src="assets/atrya-nav.js?v=7"></script>
 
 <!-- ── HERO ───────────────────────────────────────────────────────────────── -->
 <section class="inv-hero">
@@ -208,36 +232,84 @@ a{color:inherit;text-decoration:none}
         <path id="r1a" d="M 0,148 L 960,148" stroke="rgba(200,168,110,.6)" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="960" stroke-dashoffset="960"/>
         <path id="r1b" d="M 0,168 L 960,168" stroke="rgba(200,168,110,.6)" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="960" stroke-dashoffset="960"/>
         <g id="loco1">
-          <ellipse id="s3" cx="-48" cy="82" rx="14" ry="9" fill="rgba(200,168,110,.07)"/>
-          <ellipse id="s2" cx="-30" cy="68" rx="10" ry="7" fill="rgba(200,168,110,.11)"/>
-          <ellipse id="s1" cx="-14" cy="57" rx="7.5" ry="5.5" fill="rgba(200,168,110,.17)"/>
-          <polygon points="2,146 20,158 20,146" fill="rgba(200,168,110,.55)"/>
-          <rect x="20" y="116" width="96" height="40" rx="4" fill="rgba(200,168,110,.12)" stroke="rgba(200,168,110,.55)" stroke-width="1.5"/>
-          <ellipse cx="72" cy="116" rx="16" ry="8" fill="rgba(200,168,110,.18)" stroke="rgba(200,168,110,.45)" stroke-width="1.2"/>
-          <rect x="26" y="104" width="11" height="14" rx="2" fill="rgba(200,168,110,.55)"/>
-          <rect x="23" y="104" width="17" height="4" rx="1" fill="rgba(200,168,110,.7)"/>
-          <rect x="116" y="105" width="40" height="51" rx="3" fill="rgba(200,168,110,.12)" stroke="rgba(200,168,110,.55)" stroke-width="1.5"/>
-          <rect x="123" y="112" width="12" height="10" rx="2" fill="rgba(200,168,110,.45)"/>
-          <rect x="139" y="112" width="12" height="10" rx="2" fill="rgba(200,168,110,.45)"/>
-          <circle cx="10" cy="136" r="4.5" fill="rgba(200,168,110,.95)"/>
-          <circle cx="10" cy="136" r="8" fill="rgba(200,168,110,.12)"/>
-          <circle cx="55" cy="162" r="16" fill="none" stroke="rgba(200,168,110,.65)" stroke-width="2"/>
-          <circle cx="55" cy="162" r="3" fill="rgba(200,168,110,.5)"/>
-          <line x1="55" y1="146" x2="55" y2="178" stroke="rgba(200,168,110,.3)" stroke-width="1.2"/>
-          <line x1="39" y1="162" x2="71" y2="162" stroke="rgba(200,168,110,.3)" stroke-width="1.2"/>
-          <line x1="44" y1="151" x2="66" y2="173" stroke="rgba(200,168,110,.2)" stroke-width="1.2"/>
-          <line x1="66" y1="151" x2="44" y2="173" stroke="rgba(200,168,110,.2)" stroke-width="1.2"/>
-          <circle cx="95" cy="162" r="16" fill="none" stroke="rgba(200,168,110,.65)" stroke-width="2"/>
-          <circle cx="95" cy="162" r="3" fill="rgba(200,168,110,.5)"/>
-          <line x1="95" y1="146" x2="95" y2="178" stroke="rgba(200,168,110,.3)" stroke-width="1.2"/>
-          <line x1="79" y1="162" x2="111" y2="162" stroke="rgba(200,168,110,.3)" stroke-width="1.2"/>
-          <line x1="84" y1="151" x2="106" y2="173" stroke="rgba(200,168,110,.2)" stroke-width="1.2"/>
-          <line x1="106" y1="151" x2="84" y2="173" stroke="rgba(200,168,110,.2)" stroke-width="1.2"/>
-          <circle cx="26" cy="162" r="9" fill="none" stroke="rgba(200,168,110,.55)" stroke-width="1.5"/>
-          <line x1="26" y1="158" x2="95" y2="158" stroke="rgba(200,168,110,.28)" stroke-width="2.5"/>
-          <rect x="162" y="120" width="60" height="42" rx="3" fill="rgba(200,168,110,.08)" stroke="rgba(200,168,110,.35)" stroke-width="1.2"/>
-          <circle cx="175" cy="166" r="9" fill="none" stroke="rgba(200,168,110,.45)" stroke-width="1.5"/>
-          <circle cx="209" cy="166" r="9" fill="none" stroke="rgba(200,168,110,.45)" stroke-width="1.5"/>
+          <!-- Steam trail — 5 puffs driven by JS (scroll-speed) -->
+          <ellipse id="sp0" cx="28" cy="85" rx="8"  ry="6"  fill="rgba(200,168,110,0)"/>
+          <ellipse id="sp1" cx="42" cy="74" rx="11" ry="8"  fill="rgba(200,168,110,0)"/>
+          <ellipse id="sp2" cx="57" cy="64" rx="14" ry="10" fill="rgba(200,168,110,0)"/>
+          <ellipse id="sp3" cx="74" cy="56" rx="17" ry="12" fill="rgba(200,168,110,0)"/>
+          <ellipse id="sp4" cx="93" cy="49" rx="20" ry="13" fill="rgba(200,168,110,0)"/>
+          <!-- TENDER -->
+          <rect x="177" y="122" width="60" height="42" rx="3" fill="rgba(200,168,110,.09)" stroke="rgba(200,168,110,.40)" stroke-width="1.3"/>
+          <line x1="197" y1="122" x2="197" y2="164" stroke="rgba(200,168,110,.15)" stroke-width="1"/>
+          <line x1="216" y1="122" x2="216" y2="164" stroke="rgba(200,168,110,.15)" stroke-width="1"/>
+          <rect x="182" y="125" width="50" height="7" rx="1.5" fill="rgba(200,168,110,.06)" stroke="rgba(200,168,110,.18)" stroke-width="1"/>
+          <circle cx="191" cy="162" r="12" fill="none" stroke="rgba(200,168,110,.46)" stroke-width="1.5"/>
+          <circle cx="191" cy="162" r="2.5" fill="rgba(200,168,110,.46)"/>
+          <line x1="191" y1="150" x2="191" y2="174" stroke="rgba(200,168,110,.18)" stroke-width="1"/>
+          <line x1="179" y1="162" x2="203" y2="162" stroke="rgba(200,168,110,.18)" stroke-width="1"/>
+          <circle cx="219" cy="162" r="12" fill="none" stroke="rgba(200,168,110,.46)" stroke-width="1.5"/>
+          <circle cx="219" cy="162" r="2.5" fill="rgba(200,168,110,.46)"/>
+          <line x1="219" y1="150" x2="219" y2="174" stroke="rgba(200,168,110,.18)" stroke-width="1"/>
+          <line x1="207" y1="162" x2="231" y2="162" stroke="rgba(200,168,110,.18)" stroke-width="1"/>
+          <!-- Coupling -->
+          <rect x="166" y="149" width="13" height="6" rx="2" fill="rgba(200,168,110,.28)"/>
+          <!-- CAB -->
+          <rect x="120" y="100" width="55" height="64" rx="3" fill="rgba(200,168,110,.11)" stroke="rgba(200,168,110,.54)" stroke-width="1.5"/>
+          <rect x="116" y="96" width="63" height="7" rx="2" fill="rgba(200,168,110,.44)"/>
+          <rect x="126" y="109" width="14" height="12" rx="2" fill="rgba(200,168,110,.28)" stroke="rgba(200,168,110,.40)" stroke-width="1"/>
+          <rect x="146" y="109" width="14" height="12" rx="2" fill="rgba(200,168,110,.28)" stroke="rgba(200,168,110,.40)" stroke-width="1"/>
+          <line x1="120" y1="158" x2="175" y2="158" stroke="rgba(200,168,110,.16)" stroke-width="1"/>
+          <!-- BOILER -->
+          <rect x="26" y="114" width="96" height="50" rx="6" fill="rgba(200,168,110,.12)" stroke="rgba(200,168,110,.54)" stroke-width="1.5"/>
+          <line x1="50"  y1="114" x2="50"  y2="164" stroke="rgba(200,168,110,.16)" stroke-width="1"/>
+          <line x1="74"  y1="114" x2="74"  y2="164" stroke="rgba(200,168,110,.16)" stroke-width="1"/>
+          <line x1="98"  y1="114" x2="98"  y2="164" stroke="rgba(200,168,110,.16)" stroke-width="1"/>
+          <!-- Smokebox (round boiler front) -->
+          <ellipse cx="26" cy="139" rx="9" ry="25" fill="rgba(200,168,110,.15)" stroke="rgba(200,168,110,.40)" stroke-width="1.2"/>
+          <!-- Steam dome -->
+          <ellipse cx="80" cy="114" rx="14" ry="6.5" fill="rgba(200,168,110,.22)" stroke="rgba(200,168,110,.50)" stroke-width="1.2"/>
+          <!-- Safety valve -->
+          <rect x="79" y="106" width="3" height="9" rx="1" fill="rgba(200,168,110,.58)"/>
+          <rect x="77" y="104" width="7" height="3" rx="1" fill="rgba(200,168,110,.68)"/>
+          <!-- Sandbox dome -->
+          <ellipse cx="101" cy="114" rx="8" ry="4.5" fill="rgba(200,168,110,.18)" stroke="rgba(200,168,110,.36)" stroke-width="1"/>
+          <!-- SMOKESTACK -->
+          <rect x="24" y="93" width="9" height="22" rx="1.5" fill="rgba(200,168,110,.54)"/>
+          <rect x="19" y="88" width="19" height="7"  rx="2"   fill="rgba(200,168,110,.64)"/>
+          <rect x="23" y="113" width="11" height="3" rx="1"   fill="rgba(200,168,110,.40)"/>
+          <!-- HEADLIGHT -->
+          <circle cx="9" cy="130" r="14" fill="rgba(200,168,110,.05)"/>
+          <circle cx="9" cy="130" r="9.5" fill="rgba(200,168,110,.11)" stroke="rgba(200,168,110,.28)" stroke-width="1"/>
+          <circle cx="9" cy="130" r="5.5" fill="rgba(200,168,110,.92)"/>
+          <!-- COWCATCHER -->
+          <polygon points="1,149 20,161 20,149" fill="rgba(200,168,110,.52)"/>
+          <line x1="6" y1="153" x2="20" y2="159" stroke="rgba(200,168,110,.28)" stroke-width="1.5"/>
+          <!-- PILOT WHEEL -->
+          <circle cx="28" cy="162" r="11" fill="none" stroke="rgba(200,168,110,.46)" stroke-width="1.5"/>
+          <circle cx="28" cy="162" r="2.5" fill="rgba(200,168,110,.46)"/>
+          <line x1="28" y1="151" x2="28" y2="173" stroke="rgba(200,168,110,.18)" stroke-width="1"/>
+          <line x1="17" y1="162" x2="39" y2="162" stroke="rgba(200,168,110,.18)" stroke-width="1"/>
+          <!-- DRIVE WHEEL 1 -->
+          <circle cx="57" cy="162" r="19" fill="none" stroke="rgba(200,168,110,.60)" stroke-width="2"/>
+          <circle cx="57" cy="162" r="11" fill="none" stroke="rgba(200,168,110,.16)" stroke-width="1"/>
+          <circle cx="57" cy="162" r="4"  fill="rgba(200,168,110,.55)"/>
+          <line x1="57" y1="143" x2="57" y2="181" stroke="rgba(200,168,110,.28)" stroke-width="1.5"/>
+          <line x1="38" y1="162" x2="76" y2="162" stroke="rgba(200,168,110,.28)" stroke-width="1.5"/>
+          <line x1="43.5" y1="148.5" x2="70.5" y2="175.5" stroke="rgba(200,168,110,.18)" stroke-width="1.2"/>
+          <line x1="70.5" y1="148.5" x2="43.5" y2="175.5" stroke="rgba(200,168,110,.18)" stroke-width="1.2"/>
+          <!-- DRIVE WHEEL 2 -->
+          <circle cx="98" cy="162" r="19" fill="none" stroke="rgba(200,168,110,.60)" stroke-width="2"/>
+          <circle cx="98" cy="162" r="11" fill="none" stroke="rgba(200,168,110,.16)" stroke-width="1"/>
+          <circle cx="98" cy="162" r="4"  fill="rgba(200,168,110,.55)"/>
+          <line x1="98" y1="143" x2="98" y2="181" stroke="rgba(200,168,110,.28)" stroke-width="1.5"/>
+          <line x1="79" y1="162" x2="117" y2="162" stroke="rgba(200,168,110,.28)" stroke-width="1.5"/>
+          <line x1="84.5" y1="148.5" x2="111.5" y2="175.5" stroke="rgba(200,168,110,.18)" stroke-width="1.2"/>
+          <line x1="111.5" y1="148.5" x2="84.5" y2="175.5" stroke="rgba(200,168,110,.18)" stroke-width="1.2"/>
+          <!-- CONNECTING ROD -->
+          <rect x="57" y="159" width="41" height="6" rx="3" fill="rgba(200,168,110,.26)" stroke="rgba(200,168,110,.42)" stroke-width="1"/>
+          <!-- PISTON CYLINDER + ROD -->
+          <rect x="14" y="144" width="16" height="11" rx="3" fill="rgba(200,168,110,.18)" stroke="rgba(200,168,110,.38)" stroke-width="1"/>
+          <line x1="27" y1="149" x2="57" y2="158" stroke="rgba(200,168,110,.32)" stroke-width="1.8"/>
         </g>
         </g>
       </svg>
@@ -441,12 +513,23 @@ function easeOut3(t){return 1-Math.pow(1-t,3)}
 function easeInOut3(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2}
 function easeOut2(t){return 1-(1-t)*(1-t)}
 
+/* Zone cache — offsetTop/offsetHeight measured once, refreshed on resize */
+var zoneCache={};
+function cacheZones(){
+  ['eras-zone','conclusion-zone'].forEach(function(id){
+    var el=document.getElementById(id);
+    if(!el) return;
+    zoneCache[id]={top:el.offsetTop,h:el.offsetHeight};
+  });
+}
+cacheZones();
+window.addEventListener('resize',cacheZones,{passive:true});
+
 function zoneProgress(id){
-  var el=document.getElementById(id);
-  if(!el) return 0;
-  var rect=el.getBoundingClientRect();
-  var zone=el.offsetHeight-window.innerHeight;
-  return clamp(-rect.top/zone,0,1);
+  var c=zoneCache[id];
+  if(!c) return 0;
+  var zone=c.h-window.innerHeight;
+  return clamp((window.scrollY-c.top)/zone,0,1);
 }
 
 /* ── ERA 1 · RAILROAD init ── */
@@ -496,6 +579,18 @@ WN.forEach(function(n){
   nodesG3.appendChild(c);
 });
 
+/* ── Pre-allocated packet pool for era3 (7 packet edges × glow+dot) ── */
+var PKT_EDGES=[[0,1],[2,3],[4,5],[7,8],[9,10],[13,14],[15,16]];
+var pktPool=[];
+PKT_EDGES.forEach(function(_,i){
+  var g=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  g.setAttribute('r','7');g.setAttribute('fill','rgba(64,217,176,.15)');g.style.display='none';
+  var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  c.setAttribute('r','3.5');c.setAttribute('fill','rgba(64,217,176,.9)');c.style.display='none';
+  packetsG3.appendChild(g);packetsG3.appendChild(c);
+  pktPool.push({g:g,c:c});
+});
+
 /* ── ERA ANIMATION FUNCTIONS (no label management — handled by updateEras) ── */
 var nodeIds=['nyc','ldn','fra','dxb','sg','tok'];
 
@@ -538,6 +633,11 @@ function updateEra1(p){
     rail1.setAttribute('stroke-width',sw);rail2.setAttribute('stroke-width',sw);
     tiesG.style.opacity=(1-easeOut3(morphT)).toFixed(3);
     if(loco) loco.style.opacity=(1-easeOut3(Math.min(morphT*2,1))).toFixed(3);
+    /* Kill steam during morph */
+    ['sp0','sp1','sp2','sp3','sp4'].forEach(function(id){
+      var el=document.getElementById(id);
+      if(el) el.setAttribute('fill','rgba(200,168,110,0)');
+    });
   } else {
     /* DRAW PHASE: rails reveal left→right, ties + loco animate in */
     rail1.setAttribute('d','M 0,148 L 960,148');
@@ -555,93 +655,202 @@ function updateEra1(p){
     var trainP=clamp((p-0.12)/0.82,0,1);
     var T=lerp(-230,730,easeInOut3(trainP))+222;
     if(loco){loco.setAttribute('transform','translate('+T+',0) scale(-1,1)');loco.style.opacity='1';}
+    /* Scroll-driven steam: puffs trail behind smokestack, rise, fade */
+    var steamI=easeOut3(clamp((trainP-.08)/.6,0,1));
+    var sp=[
+      document.getElementById('sp0'),document.getElementById('sp1'),
+      document.getElementById('sp2'),document.getElementById('sp3'),
+      document.getElementById('sp4')
+    ];
+    /* Each puff: age 0=fresh/small/near-stack, age 1=old/large/far-behind */
+    /* In loco local coords (pre-mirror): stack at cx≈28; puffs drift toward higher x (which is behind train) */
+    var puffDefs=[
+      {age:0.0,rxBase:7, ryBase:5, cxOff:0,  cyOff:0 },
+      {age:0.22,rxBase:10,ryBase:7, cxOff:14, cyOff:-12},
+      {age:0.44,rxBase:13,ryBase:9, cxOff:30, cyOff:-24},
+      {age:0.66,rxBase:16,ryBase:11,cxOff:48, cyOff:-36},
+      {age:0.88,rxBase:19,ryBase:13,cxOff:68, cyOff:-48}
+    ];
+    sp.forEach(function(el,i){
+      if(!el) return;
+      var d=puffDefs[i];
+      var puffA=Math.max(0,steamI-d.age*0.4);
+      var fade=puffA*(1-d.age*0.6);
+      el.setAttribute('cx',28+d.cxOff);
+      el.setAttribute('cy',88+d.cyOff);
+      el.setAttribute('rx',d.rxBase);
+      el.setAttribute('ry',d.ryBase);
+      el.setAttribute('fill','rgba(200,168,110,'+Math.min(fade*0.22,0.22)+')');
+    });
   }
 }
 
-function updateEra2(p){
+/* City node home positions for era2 scatter exit */
+var ERA2_NODES={nyc:{x:340,y:168},ldn:{x:455,y:145},fra:{x:488,y:152},dxb:{x:548,y:182},sg:{x:602,y:220},tok:{x:632,y:168}};
+/* Scatter targets match WN positions so city nodes visually BECOME web nodes */
+var ERA2_SCATTER={nyc:{x:70,y:190},ldn:{x:230,y:60},fra:{x:370,y:175},dxb:{x:510,y:200},sg:{x:660,y:185},tok:{x:830,y:72}};
+
+function updateEra2(p, gp){
   if(p<=0) return;
   var tp=clamp(p*1.5,0,1);
+  /* EXIT: scatter starts gp=0.37, nodes arrive at WN positions by gp=0.47 (era3 enters at 0.40) */
+  var exitT=easeInOut3(clamp((gp-0.37)/0.10,0,1));
+  var routes=[{id:'pr1',len:190},{id:'pr2',len:135},{id:'pr3',len:95},{id:'pr4',len:115},{id:'pr5',len:210}];
   nodeIds.forEach(function(id,i){
     var np=clamp((tp-i*.12)/.2,0,1);
     var c=document.getElementById('cn-'+id);
     var r=document.getElementById('cr-'+id);
-    if(c) c.setAttribute('fill','rgba(240,196,64,'+easeOut2(np)*0.85+')');
-    if(r) r.setAttribute('stroke','rgba(240,196,64,'+easeOut2(np)*0.18+')');
+    var lbl=document.getElementById('cl-'+id);
+    /* Color morph gold→teal as nodes scatter to web-node positions */
+    var cr=Math.round(lerp(240,64,exitT));
+    var cg=Math.round(lerp(196,217,exitT));
+    var cb=Math.round(lerp(64,176,exitT));
+    /* Nodes stay vivid during scatter, fade only in last 20% of travel */
+    var nodeFade=exitT>0.8?1-(exitT-0.8)/0.2:1;
+    if(exitT>0){
+      var home=ERA2_NODES[id]; var target=ERA2_SCATTER[id];
+      var ex=lerp(home.x,target.x,exitT);
+      var ey=lerp(home.y,target.y,exitT);
+      if(c){c.setAttribute('cx',ex);c.setAttribute('cy',ey);c.setAttribute('fill','rgba('+cr+','+cg+','+cb+','+(easeOut2(np)*0.85*nodeFade).toFixed(3)+')');}
+      if(r){r.setAttribute('cx',ex);r.setAttribute('cy',ey);r.setAttribute('stroke','rgba('+cr+','+cg+','+cb+','+(easeOut2(np)*0.22*nodeFade).toFixed(3)+')');}
+      if(lbl){lbl.setAttribute('x',ex);lbl.setAttribute('y',ey-18);lbl.style.opacity=(Math.max(0,1-exitT*3)).toFixed(3);}
+    } else {
+      if(c){c.setAttribute('cx',ERA2_NODES[id].x);c.setAttribute('cy',ERA2_NODES[id].y);c.setAttribute('fill','rgba(240,196,64,'+easeOut2(np)*0.85+')');}
+      if(r){r.setAttribute('cx',ERA2_NODES[id].x);r.setAttribute('cy',ERA2_NODES[id].y);r.setAttribute('stroke','rgba(240,196,64,'+easeOut2(np)*0.18+')');}
+      if(lbl){lbl.setAttribute('x',ERA2_NODES[id].x);lbl.setAttribute('y',ERA2_NODES[id].y-18);lbl.style.opacity=easeOut2(np).toFixed(3);}
+    }
   });
-  var routes=[{id:'pr1',len:190},{id:'pr2',len:135},{id:'pr3',len:95},{id:'pr4',len:115},{id:'pr5',len:210}];
   routes.forEach(function(r,i){
     var rp=clamp((tp-.05-i*.13)/.28,0,1);
     var el=document.getElementById(r.id);
-    if(el) el.setAttribute('stroke-dashoffset',r.len*(1-easeOut3(rp)));
+    if(el){
+      el.setAttribute('stroke-dashoffset',r.len*(1-easeOut3(rp)));
+      el.style.opacity=(1-exitT*1.5).toFixed(3);
+    }
   });
-  var dt=(tp*1.3)%1;
   var dot=document.getElementById('pdot');
   var dotg=document.getElementById('pdot-glow');
   if(dot){
-    var dx,dy;
-    if(dt<.33){var tt=dt/.33;dx=lerp(340,455,easeInOut3(tt));dy=lerp(168,145,easeInOut3(tt))-Math.sin(Math.PI*tt)*18;}
-    else if(dt<.6){var tt2=(dt-.33)/.27;dx=lerp(455,548,easeInOut3(tt2));dy=lerp(145,182,easeInOut3(tt2));}
-    else{var tt3=(dt-.6)/.4;dx=lerp(548,632,easeInOut3(tt3));dy=lerp(182,168,easeInOut3(tt3));}
-    dot.setAttribute('cx',dx);dot.setAttribute('cy',dy);
-    if(dotg){dotg.setAttribute('cx',dx);dotg.setAttribute('cy',dy);}
+    if(exitT>0){
+      dot.setAttribute('r',(5*(1-exitT)).toFixed(2));
+      if(dotg) dotg.setAttribute('r',(10*(1-exitT)).toFixed(2));
+    } else {
+      dot.setAttribute('r','5');
+      if(dotg) dotg.setAttribute('r','10');
+      var dt=(tp*1.3)%1;
+      var dx,dy;
+      if(dt<.33){var tt=dt/.33;dx=lerp(340,455,easeInOut3(tt));dy=lerp(168,145,easeInOut3(tt))-Math.sin(Math.PI*tt)*18;}
+      else if(dt<.6){var tt2=(dt-.33)/.27;dx=lerp(455,548,easeInOut3(tt2));dy=lerp(145,182,easeInOut3(tt2));}
+      else{var tt3=(dt-.6)/.4;dx=lerp(548,632,easeInOut3(tt3));dy=lerp(182,168,easeInOut3(tt3));}
+      dot.setAttribute('cx',dx);dot.setAttribute('cy',dy);
+      if(dotg){dotg.setAttribute('cx',dx);dotg.setAttribute('cy',dy);}
+    }
   }
 }
 
 var pkt3t=0;
-function updateEra3(p){
+var GCX=480,GCY=190; /* Globe center — contraction target */
+function updateEra3(p, gp){
   if(p<=0) return;
   var tp=clamp(p*1.5,0,1);
   var nc=nodesG3.children,ec=edgesG3.children;
-  WN.forEach(function(_,i){
-    nc[i].style.opacity=easeOut2(clamp((tp-i*.035)/.18,0,1));
+  /* CONTRACT starts gp=0.57, finishes gp=0.67 (era4 enters at 0.60) */
+  var contractT=easeInOut3(clamp((gp-0.57)/0.10,0,1));
+  WN.forEach(function(n,i){
+    var drawA=easeOut2(clamp((tp-i*.035)/.18,0,1));
+    var ex=lerp(n.x,GCX,contractT);
+    var ey=lerp(n.y,GCY,contractT);
+    nc[i].setAttribute('cx',ex);
+    nc[i].setAttribute('cy',ey);
+    nc[i].setAttribute('r',(4*(1-contractT*0.9)).toFixed(2));
+    /* Stay vivid until 75% contracted, then flash out quickly */
+    var visFactor=contractT>0.75?1-(contractT-0.75)/0.25:1;
+    nc[i].style.opacity=(drawA*visFactor).toFixed(3);
   });
   WE.forEach(function(e,i){
     var n1=WN[e[0]],n2=WN[e[1]];
     var dx=n2.x-n1.x,dy=n2.y-n1.y,len=Math.sqrt(dx*dx+dy*dy);
     var rp=easeOut3(clamp((tp-.08-i*.022)/.22,0,1));
-    ec[i].setAttribute('stroke-dashoffset',len*(1-rp));
+    if(contractT>0){
+      var ex1=lerp(n1.x,GCX,contractT),ey1=lerp(n1.y,GCY,contractT);
+      var ex2=lerp(n2.x,GCX,contractT),ey2=lerp(n2.y,GCY,contractT);
+      ec[i].setAttribute('x1',ex1);ec[i].setAttribute('y1',ey1);
+      ec[i].setAttribute('x2',ex2);ec[i].setAttribute('y2',ey2);
+      var newLen=Math.sqrt((ex2-ex1)*(ex2-ex1)+(ey2-ey1)*(ey2-ey1));
+      ec[i].setAttribute('stroke-dasharray',newLen);
+      ec[i].setAttribute('stroke-dashoffset','0');
+      ec[i].setAttribute('stroke','rgba(64,217,176,'+(0.22*(1-contractT)).toFixed(3)+')');
+    } else {
+      ec[i].setAttribute('x1',n1.x);ec[i].setAttribute('y1',n1.y);
+      ec[i].setAttribute('x2',n2.x);ec[i].setAttribute('y2',n2.y);
+      ec[i].setAttribute('stroke-dasharray',len);
+      ec[i].setAttribute('stroke-dashoffset',len*(1-rp));
+      ec[i].setAttribute('stroke','rgba(64,217,176,.22)');
+    }
   });
+  if(contractT>.4){
+    pktPool.forEach(function(p){p.g.style.display='none';p.c.style.display='none';});
+    return;
+  }
   if(tp>.5){
     pkt3t+=.006;
-    packetsG3.innerHTML='';
-    var pEdges=[[0,1],[2,3],[4,5],[7,8],[9,10],[13,14],[15,16]];
-    pEdges.forEach(function(e,i){
+    PKT_EDGES.forEach(function(e,i){
+      var pk=pktPool[i];
       var t2=((pkt3t+i*.18)%1);
-      if(t2>.85) return;
+      if(t2>.85){pk.g.style.display='none';pk.c.style.display='none';return;}
       var n1=WN[e[0]],n2=WN[e[1]];
       var cx=lerp(n1.x,n2.x,easeInOut3(t2/.85));
       var cy=lerp(n1.y,n2.y,easeInOut3(t2/.85));
-      var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
-      c.setAttribute('cx',cx);c.setAttribute('cy',cy);c.setAttribute('r','3.5');
-      c.setAttribute('fill','rgba(64,217,176,.9)');
-      var g=document.createElementNS('http://www.w3.org/2000/svg','circle');
-      g.setAttribute('cx',cx);g.setAttribute('cy',cy);g.setAttribute('r','7');
-      g.setAttribute('fill','rgba(64,217,176,.15)');
-      packetsG3.appendChild(g);packetsG3.appendChild(c);
+      pk.g.setAttribute('cx',cx);pk.g.setAttribute('cy',cy);pk.g.style.display='';
+      pk.c.setAttribute('cx',cx);pk.c.setAttribute('cy',cy);pk.c.style.display='';
     });
+  } else {
+    pktPool.forEach(function(p){p.g.style.display='none';p.c.style.display='none';});
   }
 }
 
-function updateEra4(p){
+function updateEra4(p, gp){
   if(p<=0) return;
   var tp=clamp(p*1.5,0,1);
+  /* RISE starts gp=0.75, finishes gp=0.85 (era5 enters at 0.78) */
+  var exitT=easeInOut3(clamp((gp-0.75)/0.10,0,1));
   var cp=document.getElementById('cloud4');
   if(cp){
     var len=cp.getTotalLength?cp.getTotalLength():1400;
     cp.setAttribute('stroke-dasharray',len);
     cp.setAttribute('stroke-dashoffset',len*(1-easeOut3(clamp(tp*2,0,1))));
+    cp.style.opacity=(1-exitT).toFixed(3);
+    cp.style.transform='translateY('+(exitT*-40).toFixed(1)+'px)';
   }
   var up=document.getElementById('uploads4');
-  if(up) up.style.opacity=easeOut3(clamp((tp-.3)/.35,0,1));
+  if(up){
+    up.style.opacity=(easeOut3(clamp((tp-.3)/.35,0,1))*(1-exitT*1.4)).toFixed(3);
+    up.style.transform='translateY('+(exitT*-28).toFixed(1)+'px)';
+  }
   var bx=document.getElementById('boxes4');
-  if(bx) bx.style.opacity=easeOut3(clamp((tp-.52)/.35,0,1));
+  if(bx){
+    bx.style.opacity=(easeOut3(clamp((tp-.52)/.35,0,1))*(1-exitT*1.6)).toFixed(3);
+    bx.style.transform='translateY('+(exitT*-55).toFixed(1)+'px)';
+  }
 }
 
-var tok5t=0;
+var tok5t=0,tok5Pool=[];
 var FLOW5=[
   {from:[152,134],to:[436,184],len:320},{from:[152,200],to:[420,200],len:268},{from:[152,266],to:[436,216],len:320},
   {from:[524,184],to:[808,114],len:320},{from:[524,200],to:[808,200],len:268},{from:[524,216],to:[808,286],len:320}
 ];
+/* Pre-allocate token pool for era5 — eliminates innerHTML='' per frame */
+(function(){
+  var tg=document.getElementById('tokens5');
+  FLOW5.forEach(function(){
+    var g=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    g.setAttribute('r','8');g.setAttribute('fill','rgba(79,168,255,.15)');g.style.display='none';
+    var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('r','4.5');c.setAttribute('fill','rgba(79,168,255,.95)');c.style.display='none';
+    tg.appendChild(g);tg.appendChild(c);
+    tok5Pool.push({g:g,c:c});
+  });
+})();
 function updateEra5(p){
   if(p<=0) return;
   var tp=clamp(p*1.5,0,1);
@@ -664,32 +873,28 @@ function updateEra5(p){
   }
   if(tp>.4){
     tok5t+=.007;
-    var tg=document.getElementById('tokens5');
-    tg.innerHTML='';
     FLOW5.forEach(function(f,i){
+      var pk=tok5Pool[i];
       var t2=((tok5t+i*.22)%1);
-      if(t2>.88) return;
+      if(t2>.88){pk.g.style.display='none';pk.c.style.display='none';return;}
       var cx=lerp(f.from[0],f.to[0],easeInOut3(t2/.88));
       var cy=lerp(f.from[1],f.to[1],easeInOut3(t2/.88));
-      var g=document.createElementNS('http://www.w3.org/2000/svg','circle');
-      g.setAttribute('cx',cx);g.setAttribute('cy',cy);g.setAttribute('r','8');
-      g.setAttribute('fill','rgba(79,168,255,.15)');
-      var c=document.createElementNS('http://www.w3.org/2000/svg','circle');
-      c.setAttribute('cx',cx);c.setAttribute('cy',cy);c.setAttribute('r','4.5');
-      c.setAttribute('fill','rgba(79,168,255,.95)');
-      tg.appendChild(g);tg.appendChild(c);
+      pk.g.setAttribute('cx',cx);pk.g.setAttribute('cy',cy);pk.g.style.display='';
+      pk.c.setAttribute('cx',cx);pk.c.setAttribute('cy',cy);pk.c.style.display='';
     });
+  } else {
+    tok5Pool.forEach(function(pk){pk.g.style.display='none';pk.c.style.display='none';});
   }
 }
 
 /* ── ERA BOUNDARIES: [enter, full, exit, done] (normalized 0-1 over eras-zone) ── */
-/* Each era occupies ~0.20 of total progress; 0.04 overlap for blur-dissolve   */
+/* Overlap is 0.10-0.12 so geometric morphs are visible while both eras are live */
 var EB=[
-  [0.00, 0.04, 0.18, 0.24],  // Era 1 · Rails
-  [0.20, 0.24, 0.38, 0.44],  // Era 2 · Payments
-  [0.40, 0.44, 0.58, 0.64],  // Era 3 · Web
-  [0.60, 0.64, 0.78, 0.84],  // Era 4 · Cloud
-  [0.80, 0.84, 1.00, 1.01],  // Era 5 · Prog. Money (stays through zone end)
+  [0.00, 0.04, 0.22, 0.32],  // Era 1 · Rails
+  [0.20, 0.26, 0.44, 0.54],  // Era 2 · Payments  (overlap 0.12)
+  [0.40, 0.46, 0.64, 0.74],  // Era 3 · Web       (overlap 0.14)
+  [0.60, 0.66, 0.82, 0.92],  // Era 4 · Cloud     (overlap 0.14)
+  [0.78, 0.84, 1.00, 1.01],  // Era 5 · Prog. Money (overlap 0.14)
 ];
 
 function eraAlpha(p,b){
@@ -711,13 +916,9 @@ function updateEras(){
     var alpha=eraAlpha(p,b);
     var lp=eraLocalP(p,b);
 
-    /* Layer opacity + blur-dissolve (crystallizes in, dissolves out) */
+    /* Layer opacity only — no blur so geometric morphs stay crisp during overlap */
     var layer=document.getElementById('el'+(i+1));
-    if(layer){
-      layer.style.opacity=alpha;
-      var bl=alpha<0.75?(1-alpha/0.75)*5.5:0;
-      layer.style.filter=bl>0.3?'blur('+bl.toFixed(1)+'px)':'';
-    }
+    if(layer) layer.style.opacity=alpha;
 
     /* Label: visible once era is well-established and animation has started */
     var lbl=document.getElementById('elbl'+(i+1));
@@ -728,11 +929,11 @@ function updateEras(){
     if(dot) dot.classList.toggle('act', alpha>0.28);
   }
 
-  /* Drive each era's internal SVG animation */
+  /* Drive each era's internal SVG animation (gp = global 0-1 for exit timing) */
   updateEra1(eraLocalP(p,EB[0]));
-  updateEra2(eraLocalP(p,EB[1]));
-  updateEra3(eraLocalP(p,EB[2]));
-  updateEra4(eraLocalP(p,EB[3]));
+  updateEra2(eraLocalP(p,EB[1]), p);
+  updateEra3(eraLocalP(p,EB[2]), p);
+  updateEra4(eraLocalP(p,EB[3]), p);
   updateEra5(eraLocalP(p,EB[4]));
 }
 
@@ -750,13 +951,48 @@ function updateConclusion(){
   if(cta&&p>0.85) cta.classList.add('vis');
 }
 
-/* ── RAF LOOP ── */
+/* ── RAF LOOP — scroll-driven updates only fire when scrollY changes ── */
+var lastScrollY=-1;
+var rafPending=false;
 function tick(){
+  rafPending=false;
+  var sy=window.scrollY;
+  if(sy===lastScrollY) return;
+  lastScrollY=sy;
   updateEras();
   updateConclusion();
-  requestAnimationFrame(tick);
 }
-requestAnimationFrame(tick);
+function onScroll(){
+  if(!rafPending){rafPending=true;requestAnimationFrame(tick);}
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+requestAnimationFrame(tick); /* initial paint */
+
+/* ── Packet-only ticker — runs always so era3 dots fly when user is parked ── */
+function pktTick(){
+  var p=zoneProgress('eras-zone');
+  var era3alpha=eraAlpha(p,EB[2]);
+  if(era3alpha>0.1){
+    var lp=eraLocalP(p,EB[2]);
+    var tp=clamp(lp*1.5,0,1);
+    var contractT=easeInOut3(clamp((p-0.56)/0.06,0,1));
+    if(tp>.5 && contractT<.4){
+      pkt3t+=.006;
+      PKT_EDGES.forEach(function(e,i){
+        var pk=pktPool[i];
+        var t2=((pkt3t+i*.18)%1);
+        if(t2>.85){pk.g.style.display='none';pk.c.style.display='none';return;}
+        var n1=WN[e[0]],n2=WN[e[1]];
+        var cx=lerp(n1.x,n2.x,easeInOut3(t2/.85));
+        var cy=lerp(n1.y,n2.y,easeInOut3(t2/.85));
+        pk.g.setAttribute('cx',cx);pk.g.setAttribute('cy',cy);pk.g.style.display='';
+        pk.c.setAttribute('cx',cx);pk.c.setAttribute('cy',cy);pk.c.style.display='';
+      });
+    }
+  }
+  requestAnimationFrame(pktTick);
+}
+requestAnimationFrame(pktTick);
 
 })();
 </script>

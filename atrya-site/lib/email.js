@@ -23,10 +23,9 @@ try {
 
 // ─── Transporter ─────────────────────────────────────────────────────────────
 
-function isGmailOAuth() {
-  return !!(process.env.GOOGLE_CLIENT_ID &&
-    process.env.GOOGLE_CLIENT_SECRET &&
-    process.env.GOOGLE_REFRESH_TOKEN);
+function isGmailOAuth(interviewer) {
+  const rt = interviewer?.refreshToken || process.env.GOOGLE_REFRESH_TOKEN;
+  return !!(process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET && rt);
 }
 
 function isSmtpConfigured() {
@@ -37,35 +36,42 @@ function isEmailConfigured() {
   return !!(nodemailer && (isGmailOAuth() || isSmtpConfigured()));
 }
 
-function getTransporter() {
+function getTransporter(interviewer) {
   if (!nodemailer) return null;
-  if (isGmailOAuth()) {
+  if (isGmailOAuth(interviewer)) {
+    const refreshToken = interviewer?.refreshToken || process.env.GOOGLE_REFRESH_TOKEN;
+    const user = interviewer?.email || process.env.MAIL_FROM_ADDRESS || process.env.CALENDAR_OWNER_EMAIL;
     return nodemailer.createTransport({
       service: 'gmail',
       auth: {
         type:         'OAuth2',
-        user:         process.env.MAIL_FROM_ADDRESS || process.env.CALENDAR_OWNER_EMAIL,
+        user,
         clientId:     process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+        refreshToken,
       },
     });
   }
-  return nodemailer.createTransport({
-    host:   process.env.SMTP_HOST,
-    port:   parseInt(process.env.SMTP_PORT || '587', 10),
-    secure: process.env.SMTP_PORT === '465',
-    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
-  });
+  if (isSmtpConfigured()) {
+    return nodemailer.createTransport({
+      host:   process.env.SMTP_HOST,
+      port:   parseInt(process.env.SMTP_PORT || '587', 10),
+      secure: process.env.SMTP_PORT === '465',
+      auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+    });
+  }
+  return null;
 }
 
-async function sendMail({ to, subject, html, from }) {
-  const transporter = getTransporter();
+async function sendMail({ to, subject, html, from, interviewer }) {
+  const transporter = getTransporter(interviewer);
   if (!transporter) {
     console.warn('[email] not configured — would have sent to', to, ':', subject);
     return { skipped: true };
   }
-  const fromAddr = from || process.env.MAIL_FROM || 'Atrya Recruiting <hello@atrya.io>';
+  const senderName = interviewer?.name ? `${interviewer.name} · Atrya` : (process.env.MAIL_FROM || 'Atrya Recruiting');
+  const senderAddr = interviewer?.email || process.env.MAIL_FROM_ADDRESS || process.env.SMTP_USER || 'hello@atrya.io';
+  const fromAddr   = from || `${senderName} <${senderAddr}>`;
   await transporter.sendMail({ from: fromAddr, to, subject, html });
   return { sent: true };
 }

@@ -34,12 +34,12 @@ const MIN_NOTICE = () => parseInt(process.env.BOOKING_MIN_NOTICE_HOURS || '24', 
 
 // ─── Auth ─────────────────────────────────────────────────────────────────────
 
-function isOAuthConfigured() {
+function isOAuthConfigured(interviewer) {
+  const hasToken = !!(interviewer?.refreshToken) || !!process.env.GOOGLE_REFRESH_TOKEN;
   return !!(google &&
     process.env.GOOGLE_CLIENT_ID &&
     process.env.GOOGLE_CLIENT_SECRET &&
-    process.env.GOOGLE_REFRESH_TOKEN &&
-    process.env.CALENDAR_OWNER_EMAIL);
+    hasToken);
 }
 
 function isServiceAccountConfigured() {
@@ -49,18 +49,21 @@ function isServiceAccountConfigured() {
     process.env.CALENDAR_OWNER_EMAIL);
 }
 
-function isConfigured() {
-  return isOAuthConfigured() || isServiceAccountConfigured();
+function isConfigured(interviewer) {
+  return isOAuthConfigured(interviewer) || isServiceAccountConfigured();
 }
 
-function getAuth() {
+// Returns an OAuth2 client using the interviewer's own token if available,
+// otherwise falls back to the global GOOGLE_REFRESH_TOKEN env var.
+function getAuth(interviewer) {
   if (!google) return null;
-  if (isOAuthConfigured()) {
+  const refreshToken = interviewer?.refreshToken || process.env.GOOGLE_REFRESH_TOKEN;
+  if (refreshToken && process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
     const c = new google.auth.OAuth2(
       process.env.GOOGLE_CLIENT_ID,
       process.env.GOOGLE_CLIENT_SECRET,
     );
-    c.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });
+    c.setCredentials({ refresh_token: refreshToken });
     return c;
   }
   if (isServiceAccountConfigured()) {
@@ -78,7 +81,7 @@ function getAuth() {
 
 // ─── OAuth helpers ────────────────────────────────────────────────────────────
 
-function getOAuthUrl(redirectUri) {
+function getOAuthUrl(redirectUri, state) {
   if (!google) throw new Error('googleapis not installed');
   const c = new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID,
@@ -88,9 +91,11 @@ function getOAuthUrl(redirectUri) {
   return c.generateAuthUrl({
     access_type: 'offline',
     prompt:      'consent',
+    state:       state || '',
     scope: [
       'https://www.googleapis.com/auth/calendar.readonly',
       'https://www.googleapis.com/auth/calendar.events',
+      'https://www.googleapis.com/auth/gmail.send',
     ],
   });
 }
@@ -130,15 +135,16 @@ function localToUTC(dateStr, h, m, tzOffset) {
 
 /**
  * Returns array of available time slots for a given date.
- * @param {string} dateStr   YYYY-MM-DD
+ * @param {string} dateStr       YYYY-MM-DD
  * @param {number} durationMins  Slot duration in minutes (e.g. 30, 45, 60)
- * @param {string|null} calendarId  Override calendar ID (null = use CALENDAR_OWNER_EMAIL)
+ * @param {object|null} interviewer  Interviewer object (uses refreshToken + calendarId if set)
  */
-async function getAvailableSlots(dateStr, durationMins = 30, calendarId = null) {
+async function getAvailableSlots(dateStr, durationMins = 30, interviewer = null) {
   const tz     = TZ();
   const start  = DAY_START();
   const end    = DAY_END();
-  const calId  = calendarId || process.env.CALENDAR_OWNER_EMAIL;
+  const calId  = interviewer?.calendarId || interviewer?.email || process.env.CALENDAR_OWNER_EMAIL;
+  const minNoticeHours = interviewer?.minNotice ?? MIN_NOTICE();
 
   const refDate  = new Date(dateStr + 'T12:00:00Z');
   const tzOffset = getTzOffsetHours(refDate, tz);
@@ -146,11 +152,11 @@ async function getAvailableSlots(dateStr, durationMins = 30, calendarId = null) 
   const queryStart = localToUTC(dateStr, start, 0, tzOffset);
   const queryEnd   = localToUTC(dateStr, end,   0, tzOffset);
 
-  if (!isConfigured() || !calId) {
-    return generateSlots(dateStr, start, end, tzOffset, [], durationMins);
+  if (!isConfigured(interviewer) || !calId) {
+    return generateSlots(dateStr, start, end, tzOffset, [], durationMins, minNoticeHours);
   }
 
-  const auth     = getAuth();
+  const auth     = getAuth(interviewer);
   const calendar = google.calendar({ version: 'v3', auth });
 
   const fbRes = await calendar.freebusy.query({
@@ -167,11 +173,11 @@ async function getAvailableSlots(dateStr, durationMins = 30, calendarId = null) 
     end:   new Date(b.end),
   }));
 
-  return generateSlots(dateStr, start, end, tzOffset, busy, durationMins);
+  return generateSlots(dateStr, start, end, tzOffset, busy, durationMins, minNoticeHours);
 }
 
-function generateSlots(dateStr, start, end, tzOffset, busy, durationMins) {
-  const minNotice = MIN_NOTICE();
+function generateSlots(dateStr, start, end, tzOffset, busy, durationMins, minNoticeHours) {
+  const minNotice = minNoticeHours ?? MIN_NOTICE();
   const now       = new Date();
   const minStart  = new Date(now.getTime() + minNotice * 60 * 60 * 1000);
 
@@ -226,7 +232,7 @@ async function createBookingEvent(slot, candidate, interviewer) {
     };
   }
 
-  const auth     = getAuth();
+  const auth     = getAuth(interviewer);
   const calendar = google.calendar({ version: 'v3', auth });
   const tz       = TZ();
 
@@ -301,12 +307,12 @@ async function createBookingEvent(slot, candidate, interviewer) {
 
 // ─── cancelBookingEvent ───────────────────────────────────────────────────────
 
-async function cancelBookingEvent(eventId, calendarId) {
+async function cancelBookingEvent(eventId, interviewer) {
   if (!eventId || eventId.startsWith('mock_')) return { cancelled: false, reason: 'mock' };
-  if (!isConfigured()) return { cancelled: false, reason: 'not_configured' };
+  if (!isConfigured(interviewer)) return { cancelled: false, reason: 'not_configured' };
 
-  const calId = calendarId || process.env.CALENDAR_OWNER_EMAIL;
-  const auth     = getAuth();
+  const calId = interviewer?.calendarId || interviewer?.email || process.env.CALENDAR_OWNER_EMAIL;
+  const auth     = getAuth(interviewer);
   const calendar = google.calendar({ version: 'v3', auth });
 
   await calendar.events.delete({

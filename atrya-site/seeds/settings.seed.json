@@ -1,0 +1,10 @@
+{
+  "timezone": "Europe/Berlin",
+  "workingHoursStart": 9,
+  "workingHoursEnd": 18,
+  "daysAhead": 21,
+  "minNoticeHours": 24,
+  "companyName": "Atrya",
+  "companyEmail": "hello@atrya.io",
+  "baseUrl": "https://atrya.io"
+}

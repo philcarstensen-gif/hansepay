@@ -53,6 +53,7 @@ const JWT_EXPIRY = '7d';
 
 // ─── Middleware ───────────────────────────────────────────────────────────────
 
+app.set('trust proxy', 1); // Railway runs behind a reverse proxy — needed for req.protocol to return https
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -150,12 +151,11 @@ app.get('/api/schedule/slots', async (req, res) => {
     ? interviewer.bookingTypes?.find(t => t.id === type)
     : interviewer.bookingTypes?.[0];
 
-  const duration   = bookingType?.duration || 30;
-  const calendarId = interviewer.calendarId || null;
+  const duration = bookingType?.duration || 30;
 
   try {
     const slots = cal
-      ? await cal.getAvailableSlots(dateStr, duration, calendarId)
+      ? await cal.getAvailableSlots(dateStr, duration, interviewer)
       : [];
     res.json({ slots, duration, date: dateStr });
   } catch (err) {
@@ -239,9 +239,10 @@ app.post('/api/schedule/book', async (req, res) => {
         tz,
       });
       await email.sendMail({
-        to:      candidate.email,
-        subject: `Interview confirmed: ${bookingType?.label || 'Interview'} with ${interviewer.name} at Atrya`,
+        to:          candidate.email,
+        subject:     `Interview confirmed: ${bookingType?.label || 'Interview'} with ${interviewer.name} at Atrya`,
         html,
+        interviewer,
       });
     }
   } catch (err) {
@@ -261,9 +262,10 @@ app.post('/api/schedule/book', async (req, res) => {
         tz,
       });
       await email.sendMail({
-        to:      interviewer.email,
-        subject: `New ${bookingType?.label || 'interview'} booked — ${candidate.firstName} ${candidate.lastName || ''}`.trim(),
+        to:          interviewer.email,
+        subject:     `New ${bookingType?.label || 'interview'} booked — ${candidate.firstName} ${candidate.lastName || ''}`.trim(),
         html,
+        interviewer,
       });
     }
   } catch (err) {
@@ -320,7 +322,7 @@ app.post('/api/schedule/cancel', async (req, res) => {
     if (cal && booking.calEventId) {
       const interviewers = readData('interviewers') || [];
       const interviewer  = interviewers.find(i => i.id === booking.interviewerId);
-      await cal.cancelBookingEvent(booking.calEventId, interviewer?.calendarId || null);
+      await cal.cancelBookingEvent(booking.calEventId, interviewer || null);
     }
   } catch (err) {
     console.error('[cancel] calendar error:', err.message);
@@ -341,9 +343,10 @@ app.post('/api/schedule/cancel', async (req, res) => {
         tz,
       });
       await email.sendMail({
-        to:      booking.candidate.email,
-        subject: `Interview cancelled — ${booking.bookingType?.label || 'Interview'} with ${interviewer.name}`,
+        to:          booking.candidate.email,
+        subject:     `Interview cancelled — ${booking.bookingType?.label || 'Interview'} with ${interviewer.name}`,
         html,
+        interviewer,
       });
     }
   } catch (err) {
@@ -435,7 +438,7 @@ app.delete('/api/admin/bookings/:id', requireAuth, async (req, res) => {
     try {
       const interviewers = readData('interviewers') || [];
       const interviewer  = interviewers.find(i => i.id === booking.interviewerId);
-      await cal.cancelBookingEvent(booking.calEventId, interviewer?.calendarId || null);
+      await cal.cancelBookingEvent(booking.calEventId, interviewer || null);
     } catch (err) {
       console.error('[delete booking] calendar error:', err.message);
     }
@@ -451,7 +454,7 @@ app.get('/api/admin/interviewers', requireAuth, (req, res) => {
 });
 
 app.post('/api/admin/interviewers', requireAuth, (req, res) => {
-  const { name, title, bio, email, photo, bookingTypes, calendarId } = req.body;
+  const { name, title, bio, email, photo, bookingTypes, calendarId, minNotice } = req.body;
   if (!name) return res.status(400).json({ error: 'name is required' });
 
   const interviewers = readData('interviewers') || [];
@@ -470,6 +473,7 @@ app.post('/api/admin/interviewers', requireAuth, (req, res) => {
     email:     email     || '',
     photo:     photo     || '',
     calendarId: calendarId || null,
+    minNotice:  minNotice != null ? Number(minNotice) : 2,
     active:    true,
     bookingTypes: bookingTypes || [
       { id: 'intro', label: 'Intro Call', duration: 30, description: '' },
@@ -485,7 +489,7 @@ app.put('/api/admin/interviewers/:id', requireAuth, (req, res) => {
   const idx          = interviewers.findIndex(i => i.id === req.params.id);
   if (idx === -1) return res.status(404).json({ error: 'Not found' });
 
-  const allowed = ['name', 'firstName', 'title', 'bio', 'email', 'photo', 'active', 'bookingTypes', 'calendarId'];
+  const allowed = ['name', 'firstName', 'title', 'bio', 'email', 'photo', 'active', 'bookingTypes', 'calendarId', 'minNotice'];
   const update  = {};
   allowed.forEach(k => { if (req.body[k] !== undefined) update[k] = req.body[k]; });
   // Keep firstName in sync when name changes
@@ -520,37 +524,122 @@ app.put('/api/admin/settings', requireAuth, (req, res) => {
   res.json({ settings });
 });
 
+// ─── Test email ──────────────────────────────────────────────────────────────
+
+app.post('/api/admin/test-email', requireAuth, async (req, res) => {
+  if (!email) return res.status(503).json({ error: 'Email library not loaded' });
+  if (!email.isEmailConfigured()) return res.status(503).json({ error: 'SMTP not configured — add SMTP_HOST, SMTP_USER, SMTP_PASS to env vars' });
+  const to = req.body.to || process.env.SMTP_USER;
+  if (!to) return res.status(400).json({ error: 'No recipient — pass { to: "email@example.com" } or set SMTP_USER' });
+  try {
+    await email.sendMail({
+      to,
+      subject: 'Atrya email test ✓',
+      html: `<div style="font-family:Inter,sans-serif;max-width:480px;margin:0 auto;padding:32px;background:#04060e;color:#e2eaf8;border-radius:12px;">
+        <div style="font-size:22px;font-weight:600;margin-bottom:12px;">Email is working ✓</div>
+        <p style="color:rgba(226,234,248,.6);margin:0;">This test was sent from the Atrya admin panel at ${new Date().toISOString()}.</p>
+        <p style="color:rgba(226,234,248,.6);margin-top:12px 0 0;">SMTP host: <code>${process.env.SMTP_HOST}</code></p>
+      </div>`,
+    });
+    res.json({ ok: true, to });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // ─── Google Calendar OAuth ────────────────────────────────────────────────────
 
-app.get('/api/booking/auth', requireAuth, (req, res) => {
+app.get('/api/booking/auth', (req, res) => {
   if (!cal) return res.status(500).json({ error: 'Calendar lib not available' });
   try {
-    const redirectUri = `${req.protocol}://${req.get('host')}/api/booking/auth/callback`;
-    const url = cal.getOAuthUrl(redirectUri);
+    const base = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+    const redirectUri = `${base}/api/booking/auth/callback`;
+    const state = req.query.interviewer || '';
+    const url = cal.getOAuthUrl(redirectUri, state);
     res.redirect(url);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-app.get('/api/booking/auth/callback', (req, res) => {
+app.get('/api/booking/auth/callback', async (req, res) => {
   const { code, error } = req.query;
-  if (error) return res.send(`<h1>Auth error: ${error}</h1>`);
-  if (!code)  return res.send('<h1>No code received</h1>');
+  const style = `<style>*{box-sizing:border-box;}body{font-family:sans-serif;padding:48px 40px;background:#04060e;color:#e2eaf8;max-width:640px;margin:0 auto;}
+    h1{font-size:24px;margin:0 0 8px;}p{color:#9aaac0;font-size:14px;margin:0 0 16px;line-height:1.6;}
+    .token{background:#0d1f3c;border:1px solid rgba(79,168,255,.25);padding:16px 20px;border-radius:10px;
+      word-break:break-all;font-family:monospace;font-size:13px;color:#7dd3fc;margin:16px 0;cursor:pointer;position:relative;}
+    .token:hover{border-color:rgba(79,168,255,.5);}
+    .copy-hint{font-size:11px;color:rgba(79,168,255,.5);margin-top:6px;}
+    .step{background:#111827;border:1px solid rgba(226,234,248,.07);border-radius:8px;padding:14px 18px;margin-bottom:10px;font-size:13px;}
+    .step strong{color:#e2eaf8;}
+    .err{color:#f87171;background:#1f0a0a;border:1px solid rgba(248,113,113,.2);padding:14px 18px;border-radius:8px;font-size:13px;}
+  </style>`;
 
-  res.send(`<!DOCTYPE html>
-<html><head><title>Atrya Calendar Auth</title>
-<style>body{font-family:sans-serif;padding:40px;background:#04060e;color:#e2eaf8;}
-code{background:#1a2744;padding:12px 20px;border-radius:8px;display:block;margin:16px 0;word-break:break-all;font-size:13px;}
-.note{color:#9aaac0;font-size:14px;}</style></head>
-<body>
-<h1 style="color:#4FA8FF">Google Calendar authorised</h1>
-<p>Exchange this code for a refresh token by running:</p>
-<code>POST /api/booking/auth/exchange</code>
-<p>Or set this as an env var <strong>GOOGLE_AUTH_CODE</strong> and restart — the server will auto-exchange on startup.</p>
-<p class="note">Code (save this): <code>${code}</code></p>
-<p class="note">Redirect URI used: <code>${req.protocol}://${req.get('host')}/api/booking/auth/callback</code></p>
-</body></html>`);
+  if (error) return res.send(`<!DOCTYPE html><html><head><title>Auth Error</title>${style}</head><body>
+    <h1 style="color:#f87171">Auth error</h1><div class="err">${error}: ${req.query.error_description || ''}</div>
+    <p style="margin-top:16px;"><a href="/api/booking/auth" style="color:#4FA8FF;">Try again</a></p>
+  </body></html>`);
+
+  if (!code) return res.send(`<!DOCTYPE html><html><head><title>No Code</title>${style}</head><body>
+    <h1 style="color:#f87171">No code received</h1><p>Google did not return an auth code. <a href="/api/booking/auth" style="color:#4FA8FF;">Try again</a></p>
+  </body></html>`);
+
+  // Auto-exchange the code for tokens right here
+  const interviewerId = req.query.state || '';
+  try {
+    const base   = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+    const redir  = `${base}/api/booking/auth/callback`;
+    const tokens = await cal.exchangeCodeForTokens(code, redir);
+    const rt     = tokens.refresh_token;
+
+    if (!rt) return res.send(`<!DOCTYPE html><html><head><title>No Refresh Token</title>${style}</head><body>
+      <h1 style="color:#f87171">No refresh token returned</h1>
+      <p>Google only returns a refresh token on the <strong>first</strong> authorisation. Go to
+      <a href="https://myaccount.google.com/permissions" target="_blank" style="color:#4FA8FF;">myaccount.google.com/permissions</a>,
+      revoke Atrya's access, then <a href="/api/booking/auth${interviewerId ? '?interviewer=' + interviewerId : ''}" style="color:#4FA8FF;">try again</a>.</p>
+    </body></html>`);
+
+    // Save token to interviewer record if this was a per-interviewer connect
+    let savedFor = null;
+    if (interviewerId) {
+      const ivs = readData('interviewers') || [];
+      const idx = ivs.findIndex(iv => iv.id === interviewerId);
+      if (idx >= 0) {
+        ivs[idx].refreshToken = rt;
+        writeData('interviewers', ivs);
+        savedFor = ivs[idx].name;
+        console.log(`[calendar] token saved for interviewer: ${interviewerId}`);
+      }
+    } else {
+      console.log('[calendar] refresh token obtained (global):', rt);
+    }
+
+    const successMsg = savedFor
+      ? `<h1 style="color:#4FA8FF">&#10003; ${savedFor}'s calendar connected</h1><p>Token saved automatically — no further steps needed.</p>`
+      : `<h1 style="color:#4FA8FF">&#10003; Google Calendar connected</h1>
+         <p>Copy the refresh token below and add it to Railway as <strong>GOOGLE_REFRESH_TOKEN</strong>.</p>
+         <div class="token" onclick="navigator.clipboard.writeText(this.dataset.v);this.style.borderColor='#22c55e';this.querySelector('.copy-hint').textContent='Copied!'" data-v="${rt}">${rt}<div class="copy-hint">Click to copy</div></div>
+         <div class="step"><strong>1.</strong> Go to Railway → your service → Variables</div>
+         <div class="step"><strong>2.</strong> Add <strong>GOOGLE_REFRESH_TOKEN</strong> = <em>the value above</em></div>
+         <div class="step"><strong>3.</strong> Railway will redeploy automatically — calendar sync is live</div>`;
+
+    res.send(`<!DOCTYPE html><html><head><title>Calendar Connected</title>${style}</head><body>
+      ${successMsg}
+      <p style="margin-top:24px;"><a href="/internal-829163047258/" style="color:#4FA8FF;">← Back to admin</a></p>
+    </body></html>`);
+  } catch (err) {
+    const detail = err.response?.data ? JSON.stringify(err.response.data, null, 2) : err.message;
+    const clientIdHint = (process.env.GOOGLE_CLIENT_ID || '').slice(0, 24) + '...';
+    const redirectUsed = `${process.env.BASE_URL || req.protocol + '://' + req.get('host')}/api/booking/auth/callback`;
+    console.error('[calendar] exchange error:', detail);
+    res.send(`<!DOCTYPE html><html><head><title>Exchange Failed</title>${style}</head><body>
+      <h1 style="color:#f87171">Token exchange failed</h1>
+      <div class="err" style="white-space:pre-wrap">${detail}</div>
+      <p style="margin-top:16px;color:#9aaac0;font-size:13px;">Client ID prefix: <code style="color:#e2eaf8">${clientIdHint}</code></p>
+      <p style="color:#9aaac0;font-size:13px;">Redirect URI used: <code style="color:#e2eaf8">${redirectUsed}</code></p>
+      <p style="margin-top:16px;"><a href="/api/booking/auth" style="color:#4FA8FF;">Try again</a></p>
+    </body></html>`);
+  }
 });
 
 app.post('/api/booking/auth/exchange', requireAuth, async (req, res) => {
@@ -558,7 +647,8 @@ app.post('/api/booking/auth/exchange', requireAuth, async (req, res) => {
   if (!code) return res.status(400).json({ error: 'Missing code' });
   if (!cal)  return res.status(500).json({ error: 'Calendar lib not available' });
   try {
-    const redir = redirectUri || `${req.protocol}://${req.get('host')}/api/booking/auth/callback`;
+    const base  = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+    const redir = redirectUri || `${base}/api/booking/auth/callback`;
     const tokens = await cal.exchangeCodeForTokens(code, redir);
     res.json({
       message:       'Set GOOGLE_REFRESH_TOKEN to this value in your Railway env vars',
@@ -598,6 +688,23 @@ ensureDataDir();
     const fresh = JSON.parse(fs.readFileSync(seed, 'utf8'));
     writeData('users', fresh);
     console.log('[atrya] users re-seeded (placeholder hash replaced)');
+  }
+})();
+
+// ── Startup migrations ────────────────────────────────────────────────────────
+(function runMigrations() {
+  try {
+    const ivs = readData('interviewers') || [];
+    let dirty = false;
+    // Correct wrong placeholder photo for Phil
+    const phil = ivs.find(i => i.id === 'phil');
+    if (phil && phil.photo === '/benjamin-james.jpg') {
+      phil.photo = '/phil-carstensen.JPG';
+      dirty = true;
+    }
+    if (dirty) writeData('interviewers', ivs);
+  } catch (e) {
+    console.warn('[atrya] migration warning:', e.message);
   }
 })();
 
