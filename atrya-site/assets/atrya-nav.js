@@ -40,11 +40,9 @@ nav.up{background:rgba(4,6,14,.88)}
 .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 /* ── Dropdown ── */
 .nav-has-dd{position:relative}
-/* Invisible bridge fills the gap so hovering into the dropdown doesn't break the :hover chain */
-.nav-has-dd::after{content:'';position:absolute;top:100%;left:-16px;right:-16px;height:20px}
 .nav-dd-trigger{display:inline-flex!important;align-items:center;gap:4px;cursor:default}
 .nav-dd-chev{transition:transform .22s cubic-bezier(.16,1,.3,1);flex-shrink:0;opacity:.6}
-.nav-has-dd:hover .nav-dd-chev{transform:rotate(180deg);opacity:1}
+.nav-has-dd.dd-open .nav-dd-chev{transform:rotate(180deg);opacity:1}
 .nav-dd{
   position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%) translateY(-8px);
   background:rgba(7,10,22,.96);backdrop-filter:blur(28px) saturate(1.6);-webkit-backdrop-filter:blur(28px) saturate(1.6);
@@ -55,7 +53,7 @@ nav.up{background:rgba(4,6,14,.88)}
   box-shadow:0 16px 48px rgba(0,0,0,.5),0 4px 16px rgba(0,0,0,.3);
   z-index:1100
 }
-.nav-has-dd:hover .nav-dd{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.nav-has-dd.dd-open .nav-dd{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
 [data-theme="light"] .nav-dd{background:rgba(246,249,255,.97);border-color:rgba(12,22,40,.09);box-shadow:0 12px 40px rgba(12,22,80,.12),0 3px 10px rgba(12,22,80,.07)}
 .nav-dd-item{display:flex;align-items:flex-start;gap:11px;padding:10px 11px;border-radius:9px;text-decoration:none;transition:background .15s}
 .nav-dd-item:hover{background:rgba(79,168,255,.07)}
@@ -203,5 +201,14 @@ nav.up{background:rgba(4,6,14,.88)}
     });
 
     links.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
+  })();
+
+  /* DROPDOWN — JS-driven with grace period so gap doesn't close menu */
+  (function () {
+    var has = document.querySelector('.nav-has-dd');
+    if (!has) return;
+    var t;
+    has.addEventListener('mouseenter', function () { clearTimeout(t); has.classList.add('dd-open'); });
+    has.addEventListener('mouseleave', function () { t = setTimeout(function () { has.classList.remove('dd-open'); }, 150); });
   })();
 })();
