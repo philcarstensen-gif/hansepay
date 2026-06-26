@@ -27,8 +27,8 @@
     border-radius:16px;padding:48px 40px;
     box-shadow:0 32px 64px rgba(0,0,0,.5);
   }
-  .login-logo{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:32px;}
-  .login-logo em{color:var(--ac);font-style:normal;}
+  .login-logo{display:flex;align-items:center;gap:9px;font-family:'Syne',sans-serif;font-size:20px;font-weight:600;letter-spacing:-.025em;margin-bottom:32px;color:var(--tx);}
+  .login-logo svg{width:28px;height:28px;flex-shrink:0}
   .login-title{font-family:'Syne',sans-serif;font-size:22px;font-weight:700;margin-bottom:8px;}
   .login-sub{color:var(--sub);font-size:13px;margin-bottom:28px;}
   .field{margin-bottom:16px;}
@@ -58,8 +58,8 @@
     border-right:1px solid var(--bdr);padding:28px 20px;
     display:flex;flex-direction:column;z-index:10;
   }
-  .sidebar-logo{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;margin-bottom:32px;padding:0 4px;}
-  .sidebar-logo em{color:var(--ac);font-style:normal;}
+  .sidebar-logo{display:flex;align-items:center;gap:9px;font-family:'Syne',sans-serif;font-size:17px;font-weight:600;letter-spacing:-.025em;margin-bottom:32px;padding:0 4px;color:var(--tx);}
+  .sidebar-logo svg{width:24px;height:24px;flex-shrink:0}
   .sidebar-label{font-size:10px;font-weight:600;color:var(--sub);text-transform:uppercase;letter-spacing:.08em;padding:0 8px;margin-bottom:6px;}
   .nav-item{
     display:flex;align-items:center;gap:10px;padding:9px 8px;border-radius:8px;
@@ -266,7 +266,7 @@
 <!-- Login screen -->
 <div class="login-wrap" id="loginScreen">
   <div class="login-card">
-    <div class="login-logo">atrya<em>.</em></div>
+    <div class="login-logo"><svg viewBox="0 0 100 100" fill="none"><path fill="var(--ac)" d="M11.9,47 L11.9,33 Q11.9,28 16.2,25.5 L45.7,8.5 Q50,6 54.3,8.5 L83.8,25.5 Q88.1,28 88.1,33 L88.1,47 C74,47 63,22 50,22 C37,22 26,47 11.9,47Z"/><path fill="var(--ac)" d="M11.9,53 L11.9,67 Q11.9,72 16.2,74.5 L45.7,91.5 Q50,94 54.3,91.5 L83.8,74.5 Q88.1,72 88.1,67 L88.1,53 C74,53 63,78 50,78 C37,78 26,53 11.9,53Z"/></svg>Atrya</div>
     <div class="login-title">Recruiting Admin</div>
     <div class="login-sub">Sign in to manage interview schedules</div>
     <div class="field">
@@ -307,7 +307,7 @@
 <!-- App -->
 <div id="app">
   <nav class="sidebar">
-    <div class="sidebar-logo">atrya<em>.</em></div>
+    <div class="sidebar-logo"><svg viewBox="0 0 100 100" fill="none"><path fill="var(--ac)" d="M11.9,47 L11.9,33 Q11.9,28 16.2,25.5 L45.7,8.5 Q50,6 54.3,8.5 L83.8,25.5 Q88.1,28 88.1,33 L88.1,47 C74,47 63,22 50,22 C37,22 26,47 11.9,47Z"/><path fill="var(--ac)" d="M11.9,53 L11.9,67 Q11.9,72 16.2,74.5 L45.7,91.5 Q50,94 54.3,91.5 L83.8,74.5 Q88.1,72 88.1,67 L88.1,53 C74,53 63,78 50,78 C37,78 26,53 11.9,53Z"/></svg>Atrya</div>
     <div class="sidebar-label">Recruiting</div>
     <div class="nav-item active" id="nav-bookings" onclick="showPage('bookings')">
       <svg viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 1.5V4M11 1.5V4M2 7h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
@@ -316,6 +316,11 @@
     <div class="nav-item" id="nav-interviewers" onclick="showPage('interviewers')">
       <svg viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M2 14c0-2.5 2.5-4.5 6-4.5s6 2 6 4.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
       Interviewers
+    </div>
+    <div class="sidebar-label" style="margin-top:20px">Investors</div>
+    <div class="nav-item" id="nav-pitchdeck" onclick="showPage('pitchdeck')">
+      <svg viewBox="0 0 16 16" fill="none"><rect x="3" y="2" width="10" height="12" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 6h6M5 9h4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+      Pitchdeck Requests
     </div>
     <div class="sidebar-spacer"></div>
     <div class="sidebar-signout" onclick="sendTestEmail()" id="testEmailBtn">
@@ -393,6 +398,22 @@
       <div class="iv-cards" id="ivCards">Loading…</div>
     </div>
 
+    <!-- Pitchdeck requests page -->
+    <div class="page" id="page-pitchdeck">
+      <div class="page-header">
+        <div class="page-title">Pitchdeck Requests</div>
+        <div class="page-sub">Investors who requested the pitchdeck via atrya.io/investors</div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr>
+            <th>Name</th><th>Email</th><th>Phone</th><th>Company</th><th>Submitted</th>
+          </tr></thead>
+          <tbody id="pdBody"><tr><td colspan="5" class="empty-state">Loading…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+
   </main>
 </div>
 
@@ -463,6 +484,21 @@
       <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       Add booking type
     </button>
+
+    <div class="section-label" style="margin-top:20px;">Google Calendar</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Calendar ID (usually their Gmail address)</label>
+        <input type="text" id="ef-calendar-id" placeholder="lorian@atrya.io">
+      </div>
+    </div>
+    <div class="form-row full">
+      <div class="form-group">
+        <label>Refresh token</label>
+        <input type="password" id="ef-refresh-token" placeholder="Leave blank to keep existing token" autocomplete="new-password">
+        <div style="font-size:11px;color:var(--sub);margin-top:4px;">Paste a new token to update it. Leave blank to keep the existing one.</div>
+      </div>
+    </div>
 
     <div class="modal-actions" style="margin-top:24px;">
       <button class="btn-primary" onclick="saveInterviewer()" id="editSaveBtn">Save</button>
@@ -603,6 +639,7 @@ function showPage(name) {
   document.getElementById('nav-' + name).classList.add('active');
   if (name === 'bookings') loadBookings();
   if (name === 'interviewers') loadInterviewers();
+  if (name === 'pitchdeck') loadPitchdeckRequests();
 }
 
 // ── Bookings ──────────────────────────────────────────────────────────────────
@@ -848,8 +885,10 @@ function openEditModal(id) {
   document.getElementById('ef-bio').value        = iv?.bio   || '';
   document.getElementById('ef-email').value      = iv?.email || '';
   document.getElementById('ef-photo').value      = iv?.photo || '';
-  document.getElementById('ef-min-notice').value = iv?.minNotice ?? 2;
-  document.getElementById('ef-active').checked   = iv ? iv.active !== false : true;
+  document.getElementById('ef-min-notice').value   = iv?.minNotice ?? 2;
+  document.getElementById('ef-active').checked     = iv ? iv.active !== false : true;
+  document.getElementById('ef-calendar-id').value  = iv?.calendarId || '';
+  document.getElementById('ef-refresh-token').value = '';
 
   // Render existing booking types
   const types = iv?.bookingTypes || [{ id: 'intro', label: 'Intro Call', duration: 30, description: '' }];
@@ -902,7 +941,10 @@ async function saveInterviewer() {
     minNotice:    parseInt(document.getElementById('ef-min-notice').value, 10) || 0,
     active:       document.getElementById('ef-active').checked,
     bookingTypes: getTypesFromForm(),
+    calendarId:   document.getElementById('ef-calendar-id').value.trim() || null,
   };
+  const rt = document.getElementById('ef-refresh-token').value.trim();
+  if (rt) body.refreshToken = rt;
 
   try {
     let r;
@@ -960,6 +1002,39 @@ function showToast(msg, type = '') {
   el.textContent = msg;
   el.className = `toast ${type} show`;
   setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+// ── Pitchdeck requests ────────────────────────────────────────────────────────
+
+async function loadPitchdeckRequests() {
+  const tbody = document.getElementById('pdBody');
+  try {
+    const d = await api('GET', '/api/admin/pitchdeck-requests');
+    const rows = (d.requests || []);
+    if (!rows.length) {
+      tbody.innerHTML = '<tr><td colspan="5" class="empty-state">No requests yet.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = rows.map(function(r) {
+      const date = new Date(r.submittedAt).toLocaleDateString('en-GB', {
+        day: '2-digit', month: 'short', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Berlin',
+      });
+      return `<tr>
+        <td>${esc(r.name)}</td>
+        <td><a href="mailto:${esc(r.email)}" style="color:var(--ac)">${esc(r.email)}</a></td>
+        <td>${esc(r.phone || '—')}</td>
+        <td>${esc(r.company || '—')}</td>
+        <td style="color:var(--sub);font-size:12px">${date}</td>
+      </tr>`;
+    }).join('');
+  } catch(e) {
+    tbody.innerHTML = '<tr><td colspan="5" class="empty-state">Failed to load.</td></tr>';
+  }
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 // ── Test email ────────────────────────────────────────────────────────────────
